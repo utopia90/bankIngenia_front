@@ -1,0 +1,95 @@
+@mixin before {
+  content: "";
+  position: absolute;
+  left: -2rem;
+  width: 26px;
+  height: 15px;
+
+  border-radius: 33px;
+}
+
+.balance-container {
+  position: absolute;
+  left: 19rem;
+  width: 90%;
+
+  &__bottom {
+    display: flex;
+  }
+
+  &__left {
+    width: 50%;
+  }
+  &__right {
+    width: 50%;
+
+    &__txt-container {
+      display: flex;
+      justify-content: space-between;
+      width: 50%;
+      align-self: flex-start;
+
+      span {
+        display: flex;
+        justify-content: space-between;
+
+        img {
+          padding-right: 1.5rem;
+        }
+      }
+    }
+
+    &__graphic-container {
+      display: flex;
+    }
+
+    &__graphic {
+      width: 20%;
+    }
+    &__list-container {
+      width: 30%;
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+
+  &__left__txt-container {
+    font-size: 11px;
+    font-weight: 500;
+    &--green {
+      color: #20f14e;
+    }
+    &--red {
+      color: #ff0f0f;
+    }
+  }
+}
+
+.txt-item {
+  position: relative;
+
+  &:first-child::before {
+    @include before();
+    background-color: #c73874;
+  }
+  &:nth-child(2)::before {
+    @include before();
+    background-color: #7b79e3;
+  }
+  &:nth-child(3)::before {
+    @include before();
+    background-color: #7df1d5;
+  }
+  &:nth-child(4)::before {
+    @include before();
+    background: #73caa5;
+  }
+  &:nth-child(5)::before {
+    @include before();
+    background: #f5d78c;
+  }
+  &:nth-child(6)::before {
+    @include before();
+    background: #ea6d64;
+  }
+}

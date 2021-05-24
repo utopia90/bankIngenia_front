@@ -8,12 +8,12 @@ import clsx from 'clsx'
 
 //Makestyles -> Estilos con material UI y el tema (theme) por defecto
 import { makeStyles } from '@material-ui/core/styles'
-import CssBaseline from '@material-ui/core/CssBaseline'
 import { useHistory } from 'react-router-dom'
 import { AppBar, Badge, Container, Divider, Drawer, Grid, IconButton, List, ListItem, ListItemIcon, 
-    ListItemText, Paper, Toolbar, Typography } from '@material-ui/core'
+    ListItemText, Paper, Toolbar, Typography ,Avatar,CssBaseline } from '@material-ui/core'
 
 //Componentes de Material UI
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 
 //Iconos de Material UI
 import MenuIcon from '@material-ui/icons/Menu'
@@ -21,7 +21,14 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft'
 import NotificationIcon from '@material-ui/icons/Notifications'
 import ExitToAppIcon from '@material-ui/icons/ExitToApp'
 
+import Button from '@material-ui/core/Button';
+import Menu from '@material-ui/core/Menu';
 
+import ClickAwayListener from '@material-ui/core/ClickAwayListener';
+import Grow from '@material-ui/core/Grow';
+import Popper from '@material-ui/core/Popper';
+import MenuItem from '@material-ui/core/MenuItem';
+import MenuList from '@material-ui/core/MenuList';
 
 import DashboardRoutes from '../../Routes/DashboardRoutes';
 import CopyRight from '../CopyRight/CopyRight';
@@ -182,11 +189,39 @@ const handleDrawerOpen = () => {
     setOpen(false)
 }
 
-//Metodo para realizar un Logout y navegar a Login
-const logout = () => {
-    history.push('/login')
-}
 
+
+const [anchorEl, setAnchorEl] = React.useState(null);
+
+const [openLogout, setOpenLogout] = React.useState(false);
+  const anchorRef = React.useRef(null);
+
+  const handleToggle = () => {
+    setOpenLogout((prevOpen) => !prevOpen);
+  };
+
+  const handleClose = (event) => {
+        sessionStorage.removeItem('logged');
+        history.push('/login');
+    setOpenLogout(false);
+  };
+
+  function handleListKeyDown(event) {
+    if (event.key === 'Tab') {
+      event.preventDefault();
+      setOpenLogout(false);
+    }
+  }
+
+  // return focus to the button when we transitioned from !open -> open
+  const prevOpen = React.useRef(openLogout);
+  React.useEffect(() => {
+    if (prevOpen.current === true && openLogout === false) {
+      anchorRef.current.focus();
+    }
+
+    prevOpen.current = openLogout;
+  }, [openLogout]);
 return (
     <div className={classes.root}>         
 
@@ -203,7 +238,7 @@ return (
                     //clsx (clase q se ejecuta si se cumple el open, y sino se usa la otra)
                     className = {clsx (classes.menuButton, open && classes.menuButtonHidden)}
                     edge = 'start'
-                    color = 'white'
+                    color = 'default'
                     aria-label='open drawer'
                     onClick = {handleDrawerOpen}
                 >
@@ -237,10 +272,51 @@ return (
                 >
                     Notificaciones
                 </Typography>
-                {/* Boton para Logout */}
-                <IconButton color = 'inherit' onClick={logout}>                 
+
+
+
+
+                <div>
+        <Button
+          ref={anchorRef}
+          aria-controls={openLogout ? 'menu-list-grow' : undefined}
+          aria-haspopup="true"
+          onClick={handleToggle}
+        >
+          NOMBRE APELLIDO
+          <img src='../../Assets/Svg/expand.svg'/>
+        </Button>
+        <Popper open={openLogout} anchorEl={anchorRef.current} role={undefined} transition disablePortal>
+          {({ TransitionProps, placement }) => (
+            <Grow
+              {...TransitionProps}
+              style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}
+            >
+              <Paper>
+                <ClickAwayListener onClickAway={handleClose}>
+                  <MenuList autoFocusItem={openLogout} id="menu-list-grow" onKeyDown={handleListKeyDown}>
+                    <MenuItem onClick={handleClose}>Desconectar
+                    <IconButton color = 'inherit'>                 
                     <ExitToAppIcon/>                   
-                </IconButton>                    
+                </IconButton> 
+                </MenuItem>  
+                  </MenuList>
+                </ClickAwayListener>
+              </Paper>
+            </Grow>
+          )}
+        </Popper>
+      </div>
+
+
+
+
+
+
+
+
+                {/* Boton para Logout */}
+            
             </Toolbar>
         </AppBar>
         {/* Drawer (Contenido izquierda(nav))*/}

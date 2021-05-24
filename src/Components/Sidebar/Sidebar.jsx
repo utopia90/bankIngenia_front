@@ -200,12 +200,16 @@ const [openLogout, setOpenLogout] = React.useState(false);
     setOpenLogout((prevOpen) => !prevOpen);
   };
 
-  const handleClose = (event) => {
+  const logout = (event) => {
+
         sessionStorage.removeItem('logged');
         history.push('/login');
     setOpenLogout(false);
   };
+  const handleClose = (event) => {
 
+setOpenLogout(false);
+};
   function handleListKeyDown(event) {
     if (event.key === 'Tab') {
       event.preventDefault();
@@ -295,10 +299,15 @@ return (
               <Paper>
                 <ClickAwayListener onClickAway={handleClose}>
                   <MenuList autoFocusItem={openLogout} id="menu-list-grow" onKeyDown={handleListKeyDown}>
-                    <MenuItem onClick={handleClose}>Desconectar
+                    <MenuItem >
+                    <div  onClick={logout}>
+                    Desconectar
                     <IconButton color = 'inherit'>                 
                     <ExitToAppIcon/>                   
                 </IconButton> 
+                    </div>
+           
+
                 </MenuItem>  
                   </MenuList>
                 </ClickAwayListener>

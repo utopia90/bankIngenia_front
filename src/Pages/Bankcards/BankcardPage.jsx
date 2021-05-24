@@ -1,5 +1,5 @@
 import React from 'react';
-import './Bankcards.scss';
+import './BankcardPage.scss';
 
 
 

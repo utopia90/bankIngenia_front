@@ -1,5 +1,5 @@
 import React from 'react';
-import './Register.scss';
+import './RegisterPage.scss';
 
 
 export default function RegisterPage() {

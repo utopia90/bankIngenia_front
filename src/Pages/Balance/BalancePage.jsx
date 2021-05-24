@@ -1,4 +1,5 @@
 import React from 'react'
+import './BalancePage.scss'
 
 export default function BalancePage() {
     return (

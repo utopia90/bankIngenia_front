@@ -1,5 +1,5 @@
 import React from 'react';
-import './Accounts.scss';
+import './AccountPage.scss';
 
 
 

@@ -37,7 +37,11 @@ const useStyles = makeStyles (theme => ({
     },
     //Toolbar del menu lateral
     toolbar: {
-        paddingRight: 24
+        paddingRight: 24,
+        backgroundColor:'white',
+        color:' #171948',
+        fontWeight:500,
+        fontSize:18
     },
     //Iconos del Toolbar
     toolbarIcon: {
@@ -192,13 +196,14 @@ return (
             className = {clsx(classes.appBar, open && classes.appBarShift)}
             position= 'absolute'     
         >
+
             <Toolbar className = { classes.toolbar }>
                 {/* Icono para abrir el drawer */}
                 <IconButton
                     //clsx (clase q se ejecuta si se cumple el open, y sino se usa la otra)
                     className = {clsx (classes.menuButton, open && classes.menuButtonHidden)}
                     edge = 'start'
-                    color = 'inherit'
+                    color = 'white'
                     aria-label='open drawer'
                     onClick = {handleDrawerOpen}
                 >
@@ -213,7 +218,7 @@ return (
                     className={classes.title}
                     noWrap 
                 >
-                    Imagina ReactJS Dashboard
+                    Bienvenido/a a tu banca
                 </Typography>
                 {/* Sección de Notificaciones para el usuario */}
                 <IconButton color = 'inherit'>
@@ -221,6 +226,17 @@ return (
                         <NotificationIcon/>
                     </Badge>
                 </IconButton>
+                <Typography 
+                    component='h1' 
+                    variant='h6' 
+                    color='inherit' 
+                    fontWeight='400'
+                    fontSize='18px'
+                    cursor='pointer'
+                    noWrap 
+                >
+                    Notificaciones
+                </Typography>
                 {/* Boton para Logout */}
                 <IconButton color = 'inherit' onClick={logout}>                 
                     <ExitToAppIcon/>                   

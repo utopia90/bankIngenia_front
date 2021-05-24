@@ -17,6 +17,7 @@ const useStyles = makeStyles({
   });
   
   function createData(name, calories, fat, carbs, protein) {
+
     return { name, calories, fat, carbs, protein };
   }
   
@@ -32,7 +33,8 @@ export default function MovementsPage() {
     const [movements, setMovements] = useState([])
 
     const getMovements = () => {
-        axios.get(`https://projectbankingenia.herokuapp.com/api/movements`)
+        let idUser=1;
+        axios.get(`https://projectbankingenia.herokuapp.com/api/movement/userId/${idUser}`)
         .then(res => {
           const movens = res.data;
           console.log(movens)
@@ -40,34 +42,44 @@ export default function MovementsPage() {
         })
  
     }
-    getMovements()
 
+    useEffect(() => {
+      getMovements()
+    }, []);
     return (
+      <div>
+      <h1>Movimientos</h1>
         <TableContainer component={Paper}>
         <Table className={classes.table} aria-label="simple table">
           <TableHead>
             <TableRow>
-              <TableCell>Dessert (100g serving)</TableCell>
-              <TableCell align="right">Calories</TableCell>
-              <TableCell align="right">Fat&nbsp;(g)</TableCell>
-              <TableCell align="right">Carbs&nbsp;(g)</TableCell>
-              <TableCell align="right">Protein&nbsp;(g)</TableCell>
+
+              <TableCell align="center">IBAN-NºTarjeta</TableCell>
+              <TableCell align="center">Cantidad</TableCell>
+              <TableCell align="center">Concepto</TableCell>
+              <TableCell align="center">Fecha</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {movements.map((row) => (
               <TableRow key={row.id}>
-                <TableCell component="th" scope="row">
-                  {row.name}
-                </TableCell>
-                <TableCell align="right">{row.calories}</TableCell>
-                <TableCell align="right">{row.fat}</TableCell>
-                <TableCell align="right">{row.carbs}</TableCell>
-                <TableCell align="right">{row.protein}</TableCell>
+              { row.paymentType == "ACCOUNT" ?
+
+              <TableCell align="center" >{row.account.iban}</TableCell>
+
+              :
+              <TableCell align="center" >{row.account.cards[0].pan}</TableCell>}
+           
+
+                <TableCell align="center">{row.quantity} €</TableCell>
+                <TableCell align="center">{row.categoryType}</TableCell>
+                <TableCell align="center">{row.date}</TableCell>
               </TableRow>
             ))}
           </TableBody>
         </Table>
       </TableContainer>
+      </div>
+
     )
 }

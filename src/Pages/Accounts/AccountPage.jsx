@@ -33,12 +33,12 @@ const AccountPage = () => {
     let idUser = 1;
     axios
       .get(
-        `https://projectbankingenia.herokuapp.com/api/account-user-id/${idUser}`
+        `https://projectbankingenia.herokuapp.com/api/user/${idUser}`
       )
       .then((res) => {
-        const movens = res.data;
-        console.log(movens);
-        setAccounts(movens);
+        const accoun = res.data.accounts;
+        console.log(accoun);
+        setAccounts(accoun);
       });
   };
 useEffect(() => {
@@ -48,21 +48,18 @@ useEffect(() => {
   return (
     <div>
       <h1>bancard</h1>
-      <Container maxWidth="lg" className={classes.container}>
+
 
       {accounts.map((account, index) => (
         <Grid key={index} container spacing={3}>
           <Grid item xs={3}>
-            <Paper className={classes.paper}>xs=3</Paper>
+            <Paper className={classes.paper}>{account.iban}</Paper>
+            <Paper className={classes.paper}>{account.currentBalance} €</Paper>
           </Grid>
         </Grid>
 
       ))}
 
-
-
-
-      </Container>
     </div>
   );
 };

@@ -1,2 +1,2 @@
 import React from 'react';
-import './Tarjetas.scss';
+import './Home.scss';

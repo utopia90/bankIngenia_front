@@ -50,7 +50,7 @@ const MenuListItems = ({ list }) => {
   return (
     <List>
       {list.map(({ text, path, icon }, index) => (
-        <ListItem key={index} button onClick={() => navegar(path)} className='listItem'>
+        <ListItem key={index} button onClick={() => navegar(path)} >
           <ListItemIcon>
             {/* Llamamos al método getIcon que nos va a devover el 
                             componente Icono que toque */}

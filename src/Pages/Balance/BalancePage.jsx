@@ -16,7 +16,7 @@ export default function BalancePage() {
     let idUser = 1;
     axios
       .get(
-        `https://projectbankingenia.herokuapp.com/api/movement/userId/${idUser}`
+        `https://projectbankingenia.herokuapp.com/api/movements-user-date-operation/userId/${idUser}?startdate=2020-01-13&finishdate=2021-09-20&operation=SUM&categoryType=PAID`
       )
       .then((res) => {
         const movens = res.data;

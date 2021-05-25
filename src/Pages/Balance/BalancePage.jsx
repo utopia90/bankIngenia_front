@@ -9,19 +9,21 @@ export default function BalancePage() {
   const [movements, setMovements] = useState([]);
 
   useEffect(() => {
-    const getMovements = () => {
-      let idUser = 1;
-      axios
-        .get(
-          `https://projectbankingenia.herokuapp.com/api/movement/userId/${idUser}`
-        )
-        .then((res) => {
-          const movens = res.data;
-          console.log(movens);
-          setMovements(movens);
-        });
-    };
+    getMovements()
   }, []);
+
+  const getMovements = () => {
+    let idUser = 1;
+    axios
+      .get(
+        `https://projectbankingenia.herokuapp.com/api/movement/userId/${idUser}`
+      )
+      .then((res) => {
+        const movens = res.data;
+        console.log(movens);
+        setMovements(movens);
+      });
+  };
   return (
     <div>
       <div className="balance-container">

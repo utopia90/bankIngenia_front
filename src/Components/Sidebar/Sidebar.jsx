@@ -58,7 +58,8 @@ import MenuListItems from "./MenuListItems";
 
 import expandIcon from "./../../Assets/Svg/expand.svg";
 import UserIcon from "./../../Assets/Svg/user-icon.svg";
-
+import IngeniaIcon from "./../../Assets/Svg//ingenia-logo.svg";
+import BankLogo from "./../../Assets/Svg/bank-logo.svg";
 //Definicion de estilos
 const drawerWidth = 240;
 
@@ -366,6 +367,10 @@ export default function Sidebar() {
         }}
       >
         <div className={classes.toolbarIcon}>
+        <img src={IngeniaIcon} />
+        <img src={BankLogo} />
+
+
           <IconButton onClick={handleDrawerClose}>
             <ChevronLeftIcon />
           </IconButton>
@@ -391,34 +396,6 @@ export default function Sidebar() {
             <Switch>
               <Route path="/dashboard" component={DashboardRoutes} />
             </Switch>
-
-            {/*  <Switch>
-                            <Route path = '/dashboard/home' component={DashboardContent}/>
-                            <Route path = '/dashboard/shop' component={DashboardContent}/>
-                            <Route path = '/dashboard/contacts' component={DashboardContent}/>
-                            <Route path = '/dashboard/settings' component={DashboardContent}/>
-                        </Switch>  */}
-            {/* <Grid container spacing={3}>  
-                        <Grid item xs = {12} md={4} lg={9}>
-                            <Paper className={fixedHeightPaper}>                                  */}
-            {/* Crear un componente que reciba props.children */}
-            {/*  <Typography>Primera caja</Typography>
-                            </Paper>
-                        </Grid>
-                        
-                        <Grid item xs = {12} md={4} lg={3}>
-                            <Paper className={fixedHeightPaper}> */}
-            {/* Crear un componente que reciba props.children */}
-            {/*      <Typography>Segunda caja</Typography>
-                            </Paper>
-                        </Grid>
-                        <Grid item xs = {12} md={4} lg={12}>
-                            <Paper className={fixedHeightPaper}> */}
-            {/* Crear un componente que reciba props.children */}
-            {/*    <Typography>Tercera caja</Typography>
-                            </Paper>
-                        </Grid>
-                    </Grid>       */}
           </Container>
         </div>
       </main>

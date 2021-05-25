@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-
+import { useLocation, useHistory } from "react-router-dom";
 import axios from 'axios';
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
@@ -33,6 +33,14 @@ const useStyles = makeStyles((theme) => ({
 
   }));
 export default function HomePage() {
+  const location = useLocation();
+  const history = useHistory();
+  const navegar = (ruta) => {
+    history.push(ruta);
+  };
+  const volver = () => {
+    history.goBack();
+  };
     const classes = useStyles();
     const [movements, setMovements] = useState([])
     const [bankCards, setCardsBank] = useState([]);
@@ -70,7 +78,8 @@ export default function HomePage() {
     <h1>Inicio</h1>
       <Grid container spacing={12}>
         <Grid item xs={12} sm={6}>
-          <Paper className={classes.paper}><h1>Tarjetas</h1>        <Grid container spacing={3}>
+          <Paper className={classes.paper}><div className="flexi"><h1>Tarjetas</h1>  <h3 onClick={()=>{navegar('/dashboard/tarjetas')}}>Ver Tarjetas</h3></div>
+                 <Grid container spacing={3}>
           {bankCards.map((card, index) => (
             <Grid
               key={index}
@@ -102,7 +111,8 @@ export default function HomePage() {
           <Paper className={classes.paper}><h1>BalanceTotal</h1></Paper>
         </Grid>
         <Grid item xs={12} sm={6}>
-          <Paper className={classes.paper}><h1>Movimientos</h1>        <TableContainer component={Paper}>
+          <Paper className={classes.paper}><div className="flexi"><h1>Movimientos</h1> <h3 onClick={()=>{navegar('/dashboard/movimientos')}}>Ver Movimientos</h3></div>
+                 <TableContainer component={Paper}>
         <Table className={classes.table} aria-label="simple table">
           <TableHead>
             <TableRow>

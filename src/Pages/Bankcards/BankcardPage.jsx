@@ -58,6 +58,8 @@ const BankcardPage = () => {
 
       <Container>
         <Grid container spacing={3}>
+
+
           {bankCards.map((card, index) => (
             <Grid
               key={index}
@@ -67,17 +69,19 @@ const BankcardPage = () => {
               lg={3}
               className="card-container"
             >
-              <Paper className={fixedHeightPaper}>
+              <Paper>
                 <img src={bbvaIcon} className="bbva-icon" />
+                
                 <Typography fontSize="28px">
                   {card.account.currentCreditCardBalance} €
                 </Typography>
-                <div className="account-container">
+                <Typography fontSize="28px" className='flexi'>
+           
                   <img src={visaIcon} className="bbva-icon" />
-                  <h2 className="account-balance-txt">
-                    {card.pan}
-                  </h2>
-                </div>
+                  <span className="account-balance-txt">
+                    {  card.pan}
+                  </span>
+               </Typography>
               </Paper>
             </Grid>
           ))}

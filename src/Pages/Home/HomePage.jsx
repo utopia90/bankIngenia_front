@@ -8,7 +8,10 @@ import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import {Grid,Paper,Container} from '@material-ui/core';
+import {Grid,Paper,Container,Typography} from '@material-ui/core';
+import visaIcon from "./../../Assets/Svg/visa-icon.svg";
+import bbvaIcon from "./../../Assets/Svg/bbva-icon.svg";
+import { pink } from "@material-ui/core/colors";
 import "./HomePage.scss";
 
 const useStyles = makeStyles((theme) => ({
@@ -67,7 +70,33 @@ export default function HomePage() {
     <h1>Inicio</h1>
       <Grid container spacing={12}>
         <Grid item xs={12} sm={6}>
-          <Paper className={classes.paper}><h1>Tarjetas</h1></Paper>
+          <Paper className={classes.paper}><h1>Tarjetas</h1>        <Grid container spacing={3}>
+          {bankCards.map((card, index) => (
+            <Grid
+              key={index}
+              item
+              xs={12}
+              md={6}
+              lg={6}
+              className="card-container"
+            >
+              <Paper>
+                <img src={bbvaIcon} className="bbva-icon" />
+                <Typography fontSize="28px">
+                  {card.account.currentCreditCardBalance} €
+                </Typography>
+                <Typography fontSize="28px" className='flexi'>
+           
+                  <img src={visaIcon} className="bbva-icon" />
+                  <span className="account-balance-txt">
+                    {  card.pan}
+                  </span>
+               </Typography>
+              </Paper>
+            </Grid>
+          ))}
+        </Grid>
+        </Paper>
         </Grid>
         <Grid item xs={12} sm={6}>
           <Paper className={classes.paper}><h1>BalanceTotal</h1></Paper>

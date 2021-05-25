@@ -3,7 +3,9 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
-import { Container, Grid, Paper } from "@material-ui/core";
+import { Container, Grid, Paper, Typography } from "@material-ui/core";
+//Importr clsx para trabajar con las clases
+import clsx from "clsx";
 import "./AccountPage.scss";
 
 const useStyles = makeStyles((theme) => ({
@@ -21,6 +23,9 @@ const useStyles = makeStyles((theme) => ({
   },
   divider: {
     margin: theme.spacing(2, 0),
+  },  
+  fixedHeight: {
+    height: 240,
   },
 }));
 
@@ -29,6 +34,7 @@ const AccountPage = () => {
 
   const [accounts, setAccounts] = useState([]);
   const classes = useStyles();
+  const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
   const getAcccountsByUserID = () => {
     let idUser = 1;
     axios
@@ -47,18 +53,26 @@ useEffect(() => {
 
   return (
     <div>
-      <h1>bancard</h1>
+      <h1>accounts</h1>
+
+    <Container>
 
 
-      {accounts.map((account, index) => (
-        <Grid key={index} container spacing={3}>
-          <Grid item xs={3}>
-            <Paper className={classes.paper}>{account.iban}</Paper>
-            <Paper className={classes.paper}>{account.currentBalance} €</Paper>
-          </Grid>
-        </Grid>
+          <Grid container spacing={3}>  
+            {accounts.map((account, index) => (
+                <Grid  key={index}item xs = {12} md={3} lg={3}>
+                    <Paper className={fixedHeightPaper}>         
+              
+                        <Typography>{account.currentBalance} €</Typography>
 
-      ))}
+                        <Typography>{account.iban}</Typography>
+                    </Paper>
+                </Grid>
+            ))}
+          </Grid>  
+
+    </Container>
+
 
     </div>
   );

@@ -12,6 +12,7 @@ import MovementsPage from "../Pages/Movements/MovementsPage";
 import RegisterPage from "../Pages/Register/RegisterPage";
 
 
+
 export default function DashboardRoutes() {
   const { path } = useRouteMatch();
   return (

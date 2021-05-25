@@ -42,17 +42,21 @@ const LoginPage = () => {
     const submit =(e) =>{
  
         e.preventDefault();
-        console.log(e.target.value)
-        sessionStorage.setItem("logged",true);
-        history.push('/inicio');
+        let user={
+            email:"borja@diaz",
+            password:"1234"
+        }
+      Login(user)
     }
 
-    const getMovements = () => {
-        let idUser=1;
-        axios.get(`https://projectbankingenia.herokuapp.com/api/movement/userId/${idUser}`)
+    const Login = (user) => {
+
+        axios.post(`https://projectbankingenia.herokuapp.com/auth/login`,user)
         .then(res => {
-          const movens = res.data;
-          console.log(movens)
+          const token = res.data;
+          sessionStorage.setItem("logged",token);
+          console.log(token)
+          history.push('/dashboard/inicio');
     
         })
  

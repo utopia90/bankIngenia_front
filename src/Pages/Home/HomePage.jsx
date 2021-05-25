@@ -2,14 +2,13 @@ import React, {useState, useEffect} from 'react'
 
 import axios from 'axios';
 import { makeStyles } from '@material-ui/core/styles';
-
-import {Grid,Paper,Container} from '@material-ui/core';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
+import {Grid,Paper,Container} from '@material-ui/core';
 import "./HomePage.scss";
 
 const useStyles = makeStyles((theme) => ({
@@ -66,21 +65,15 @@ export default function HomePage() {
     <div className={classes.root}>
 
     <h1>Inicio</h1>
-      <Grid container spacing={3}>
-
-  
+      <Grid container spacing={12}>
         <Grid item xs={12} sm={6}>
-        <Paper className={classes.paper}><h1>Tarjetas</h1></Paper>
+          <Paper className={classes.paper}><h1>Tarjetas</h1></Paper>
         </Grid>
-     
-
         <Grid item xs={12} sm={6}>
           <Paper className={classes.paper}><h1>BalanceTotal</h1></Paper>
         </Grid>
         <Grid item xs={12} sm={6}>
-          <Paper className={classes.paper}><h1>Movimientos</h1>
-          
-          <TableContainer component={Paper}>
+          <Paper className={classes.paper}><h1>Movimientos</h1>        <TableContainer component={Paper}>
         <Table className={classes.table} aria-label="simple table">
           <TableHead>
             <TableRow>
@@ -109,8 +102,7 @@ export default function HomePage() {
             ))}
           </TableBody>
         </Table>
-      </TableContainer>
-          </Paper>
+      </TableContainer></Paper>
         </Grid>
 
       </Grid>

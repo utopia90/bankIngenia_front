@@ -56,23 +56,35 @@ useEffect(() => {
       <h1>accounts</h1>
 
     <Container>
+        <Grid container spacing={3}>
 
 
-          <Grid container spacing={3}>  
-            {accounts.map((account, index) => (
-                <Grid  key={index}item xs = {12} md={3} lg={3}>
-                    <Paper className={fixedHeightPaper}>         
+          {accounts.map((account, index) => (
+            <Grid
+              key={index}
+              item
+              xs={12}
+              md={3}
+              lg={3}
+              className="card-container"
+            >
+              <Paper>
               
-                        <Typography>{account.currentBalance} €</Typography>
-
-                        <Typography>{account.iban}</Typography>
-                    </Paper>
-                </Grid>
-            ))}
-          </Grid>  
-
-    </Container>
-
+                <Typography fontSize="28px">
+                {account.currentBalance}€
+                </Typography>
+                <Typography fontSize="28px" className='flexi'>
+           
+    
+                  <span className="account-balance-txt">
+                  {account.iban}
+                  </span>
+               </Typography>
+              </Paper>
+            </Grid>
+          ))}
+        </Grid>
+      </Container>
 
     </div>
   );

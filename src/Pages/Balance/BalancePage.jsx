@@ -37,7 +37,7 @@ export default function BalancePage() {
     getTotalExpensesServices();
     getTotalExpensesClothes();
     getTotalExpensesPaid();
-    getTotalIncomeData()
+
   }, []);
 
   const getTotalIncome = () => {

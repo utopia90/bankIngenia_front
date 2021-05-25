@@ -1,10 +1,27 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./BalancePage.scss";
+import axios from "axios";
 
 import graphicIcon from "./../../Assets/Svg/circular-graphic-icon.svg";
 import barIcon from "./../../Assets/Svg/bar-graphic-icon.svg";
 
 export default function BalancePage() {
+  const [movements, setMovements] = useState([]);
+
+  useEffect(() => {
+    const getMovements = () => {
+      let idUser = 1;
+      axios
+        .get(
+          `https://projectbankingenia.herokuapp.com/api/movement/userId/${idUser}`
+        )
+        .then((res) => {
+          const movens = res.data;
+          console.log(movens);
+          setMovements(movens);
+        });
+    };
+  }, []);
   return (
     <div>
       <div className="balance-container">
@@ -15,8 +32,12 @@ export default function BalancePage() {
         <div className="balance-container__bottom">
           <div className="balance-container__left">
             <div className="balance-container__left__txt-container">
-              <h4 className="balance-container__left__txt-container--green">Ingresos totales del mes: </h4>
-              <h4 className="balance-container__left__txt-container--red">Gastos totales del mes: </h4>
+              <h4 className="balance-container__left__txt-container--green">
+                Ingresos totales del mes:{" "}
+              </h4>
+              <h4 className="balance-container__left__txt-container--red">
+                Gastos totales del mes:{" "}
+              </h4>
             </div>
             <div className="balance-container__left__graphic-container"></div>
           </div>

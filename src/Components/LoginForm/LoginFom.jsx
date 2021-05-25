@@ -1,8 +1,10 @@
 import React from 'react';
-import {useHistory} from 'react-router-dom';
+import {useHistory,Link} from 'react-router-dom';
 import {makeStyles} from '@material-ui/core/styles';
-import { Avatar, Button, Checkbox, Container, CssBaseline, FormControlLabel, TextField, Typography,Grid,Link, Box } from '@material-ui/core';
+import { Avatar, Button, Checkbox, Container, CssBaseline, FormControlLabel, TextField, Typography,Grid, Box } from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import RegisterPage from '../../Pages/Register/RegisterPage';
+
 const LoginForm = ({submit},classes) => {
 
     return (
@@ -20,7 +22,7 @@ const LoginForm = ({submit},classes) => {
                         <Link href='#' variant='body2'>{'he olvidado la contraseña'}</Link>
                     </Grid>
                     <Grid item xs={12} sm={6}>
-                        <Link href='#' variant='body2'>{'No tengo cuenta'}</Link>
+                        <Link  variant='body2'>{'No tengo cuenta'}</Link>
                     </Grid>
                 </Grid>
             </form>

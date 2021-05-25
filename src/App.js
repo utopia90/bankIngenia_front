@@ -2,12 +2,14 @@ import {BrowserRouter as Router, Switch, Route, Redirect} from 'react-router-dom
 import './App.css';
 import Sidebar from './Components/Sidebar/Sidebar';
 import LoginPage from './Pages/Login/LoginPage';
+import RegisterPage from './Pages/Register/RegisterPage';
 
 function App() {
   //TODO para pruebas 
-  //let loggedIn= sessionStorage.getItem('logged')
-  //Todo false y sale directamente el login true y sale el dashboard
+ // let loggedIn= sessionStorage.getItem('logged')
+  //Todo false y sale directamente el login, true y sale el dashboard
   let loggedIn= true;
+
 
   return (
     
@@ -32,7 +34,11 @@ function App() {
                 :          
                 <Redirect from = '/dashboard' to = '/login'/>
             }
-          </Route>      
+          </Route>  
+          <Route path='/registro'>
+        <RegisterPage/>
+          
+          </Route>     
       </Switch>
    </Router>
   );

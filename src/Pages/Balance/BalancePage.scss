@@ -7,11 +7,30 @@
 
   border-radius: 33px;
 }
-
+input {
+  border: none;
+}
 .balance-container {
   position: absolute;
   left: 19rem;
   width: 90%;
+
+  &__input {
+    border: 1px solid #d01e69;
+    box-sizing: border-box;
+    border-radius: 5px;
+    padding-bottom: 1rem;
+    display: flex;
+    position: relative;
+
+    > img {
+      position: absolute;
+      right: 0;
+    }
+
+    width: 90%;
+    height: 43px;
+  }
 
   &__bottom {
     display: flex;
@@ -19,6 +38,10 @@
 
   &__left {
     width: 50%;
+
+    &__graphic-container {
+      width: 80%;
+    }
   }
   &__right {
     width: 50%;
@@ -41,15 +64,20 @@
 
     &__graphic-container {
       display: flex;
+      justify-content: space-between;
+      width: 80%;
     }
 
     &__graphic {
-      width: 20%;
+      width: 40%;
     }
+
     &__list-container {
       width: 30%;
       display: flex;
       justify-content: space-between;
+
+      align-self: center;
     }
   }
 
@@ -70,22 +98,22 @@
 
   &:first-child::before {
     @include before();
-    background-color: #c73874;
+    background-color: #17becf;
   }
   &:nth-child(2)::before {
     @include before();
-    background-color: #7b79e3;
+    background-color: #a4e649;
   }
   &:nth-child(3)::before {
     @include before();
-    background-color: #7df1d5;
+    background-color: #1b9e77;
   }
   &:nth-child(4)::before {
     @include before();
-    background: #73caa5;
+    background: #e6ab02;
   }
   &:nth-child(5)::before {
     @include before();
-    background: #f5d78c;
+    background: #d95f02;
   }
 }

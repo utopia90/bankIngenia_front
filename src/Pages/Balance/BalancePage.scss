@@ -88,8 +88,4 @@
     @include before();
     background: #f5d78c;
   }
-  &:nth-child(6)::before {
-    @include before();
-    background: #ea6d64;
-  }
 }

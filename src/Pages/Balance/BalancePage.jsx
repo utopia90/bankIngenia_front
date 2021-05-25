@@ -37,7 +37,7 @@ export default function BalancePage() {
     getTotalExpensesServices();
     getTotalExpensesClothes();
     getTotalExpensesPaid();
-
+    getTotalIncomeData()
   }, []);
 
   const getTotalIncome = () => {
@@ -165,7 +165,11 @@ export default function BalancePage() {
   console.log("incomedata:", incomeData);
   return (
     <div>
-      <div className="balance-container">
+
+    {
+      incomeData ===undefined ?
+     <h5>Cargando datos</h5>
+      :  <div className="balance-container">
         <div className="balance-container__top">
           <h2 className="balance-container__title">Balance</h2>
           <input className="balance-container__input" type="text" />
@@ -224,6 +228,8 @@ export default function BalancePage() {
           </div>
         </div>
       </div>
+    }
     </div>
+ 
   );
 }

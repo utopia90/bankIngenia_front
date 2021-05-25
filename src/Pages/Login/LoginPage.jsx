@@ -1,4 +1,5 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react'
+import axios from 'axios';
 import {useHistory} from 'react-router-dom';
 import {makeStyles} from '@material-ui/core/styles';
 import { Avatar, Button, Checkbox, Container, CssBaseline, FormControlLabel, TextField, Typography,Grid,Link, Box } from '@material-ui/core';
@@ -39,10 +40,30 @@ const LoginPage = () => {
     let history = useHistory();
     
     const submit =(e) =>{
+ 
         e.preventDefault();
+        console.log(e.target.value)
         sessionStorage.setItem("logged",true);
         history.push('/inicio');
     }
+
+    const getMovements = () => {
+        let idUser=1;
+        axios.get(`https://projectbankingenia.herokuapp.com/api/movement/userId/${idUser}`)
+        .then(res => {
+          const movens = res.data;
+          console.log(movens)
+    
+        })
+ 
+    }
+
+
+
+
+
+
+
     return (
         <Container component='main' maxWidth='xs'>
         <CssBaseline/>

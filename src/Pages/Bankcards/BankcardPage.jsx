@@ -6,11 +6,11 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Container, Grid, Paper, Typography } from "@material-ui/core";
 //Importr clsx para trabajar con las clases
 import clsx from "clsx";
-import "./BankcardPage.scss";
+
 import visaIcon from "./../../Assets/Svg/visa-icon.svg";
 import bbvaIcon from "./../../Assets/Svg/bbva-icon.svg";
 import { pink } from "@material-ui/core/colors";
-
+import "./BankcardPage.scss";
 const useStyles = makeStyles((theme) => ({
   container: {
     display: "grid",
@@ -71,7 +71,6 @@ const BankcardPage = () => {
             >
               <Paper>
                 <img src={bbvaIcon} className="bbva-icon" />
-                
                 <Typography fontSize="28px">
                   {card.account.currentCreditCardBalance} €
                 </Typography>

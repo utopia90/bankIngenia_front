@@ -34,6 +34,7 @@ input {
 
   &__bottom {
     display: flex;
+    border-bottom: 0.2px solid lightgray;
   }
 
   &__left {
@@ -46,16 +47,18 @@ input {
   &__right {
     width: 50%;
 
+
     &__txt-container {
       display: flex;
       justify-content: space-between;
-      width: 50%;
+      width: 38%;
       align-self: flex-start;
+      cursor: pointer;
 
       span {
         display: flex;
         justify-content: space-between;
-
+        
         img {
           padding-right: 1.5rem;
         }
@@ -116,4 +119,14 @@ input {
     @include before();
     background: #d95f02;
   }
+
+  .graphic-btn{
+    cursor: pointer;
+
+    &:hover {
+      color: #d01e69;
+    }
+  }
 }
+
+

@@ -15,6 +15,8 @@ import graphicIcon from "./../../Assets/Svg/circular-graphic-icon.svg";
 import barIcon from "./../../Assets/Svg/bar-graphic-icon.svg";
 import expandIcon from "./../../Assets/Svg/expand.svg";
 
+import { makeStyles } from "@material-ui/core/styles";
+
 import { object } from "yup";
 
 export default function BalancePage() {
@@ -186,15 +188,25 @@ export default function BalancePage() {
           setExpensesPaid((expensesPaid += quantity));
         }
       });
-  };
+    };
+    
+    const useStyles = makeStyles((theme) => ({
+      chart: {
+        backgroundColor: "transparent",
+        boxShadow:"none"
+      },
+    }));
+    
+    const classes = useStyles();
 
   return (
     <div>
       <div className="balance-container">
         <div className="balance-container__top">
           <h2 className="balance-container__title">Balance</h2>
-         <div className="balance-container__input"><input  type="text"  /> <img src={expandIcon}></img></div>        
-       
+          <div className="balance-container__input">
+            <input type="text" /> <img src={expandIcon}></img>
+          </div>
         </div>
         <div className="balance-container__bottom">
           <div className="balance-container__left">
@@ -219,18 +231,18 @@ export default function BalancePage() {
           </div>
           <div className="balance-container__right">
             <div className="balance-container__right__txt-container">
-              <span>
+              <span className="graphic-btn">
                 <img src={graphicIcon} />
                 <h4>Gráfico circular</h4>
               </span>
-              <span>
+              <span className="graphic-btn">
                 <img src={barIcon} />
                 <h4>Gráfico de barras</h4>
               </span>
             </div>
             <div className="balance-container__right__graphic-container">
               <div className="balance-container__right__graphic">
-                <Paper>
+                <Paper className={classes.chart}>
                   <Chart data={categoryData}>
                     <PieSeries valueField="area" argumentField="category" />
                   </Chart>

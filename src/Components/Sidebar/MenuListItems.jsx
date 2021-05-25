@@ -1,5 +1,5 @@
 import React from "react";
-
+import "./Sidebar.scss";
 import { useHistory } from "react-router-dom";
 import { useRouteMatch } from "react-router-dom";
 
@@ -50,7 +50,7 @@ const MenuListItems = ({ list }) => {
   return (
     <List>
       {list.map(({ text, path, icon }, index) => (
-        <ListItem key={index} button onClick={() => navegar(path)}>
+        <ListItem key={index} button onClick={() => navegar(path)} >
           <ListItemIcon>
             {/* Llamamos al método getIcon que nos va a devover el 
                             componente Icono que toque */}

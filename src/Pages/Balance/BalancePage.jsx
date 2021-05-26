@@ -59,6 +59,8 @@ export default function BalancePage() {
   let [barCategoryData, setBarCategoryData] = useState([]);
 
   let [changeIncomeGraphic, setChangeIncomeGraphic] = useState(false);
+  let [changeLinearGraphic, setChangeLinearGraphic] = useState(true);
+
 
   useEffect(() => {
     getTotalIncome();
@@ -68,13 +70,14 @@ export default function BalancePage() {
     getTotalExpensesServices();
     getTotalExpensesClothes();
     getTotalExpensesPaid();
-    getBarCategoryData();
 
   }, []);
 
   useEffect(() => {
     getTotalIncomeData();
-  }, [income, incomeMovements]);
+    getTotalExpensesData();
+
+  }, [income, incomeMovements, expenses, expensesMovements]);
 
   useEffect(() => {
     getTotalCategoryData();
@@ -265,7 +268,9 @@ export default function BalancePage() {
 
   const classes = useStyles();
 
-  console.log("barcategorydata", barCategoryData);
+  console.log("expensesData", expensesData);
+  console.log("expensesmovements", expensesMovements);
+
 
   return (
     <div>
@@ -282,14 +287,16 @@ export default function BalancePage() {
           <div className="balance-container__bottom">
             <div className="balance-container__left">
               <div className="balance-container__left__txt-container">
-                <h4 className="balance-container__left__txt-container--green">
-                  Ingresos totales del mes: {income}
+                <h4 onClick={() => setChangeLinearGraphic(true)} className="balance-container__left__txt-container--green">
+                  Ingresos totales del mes: {income}  
                 </h4>
-                <h4 className="balance-container__left__txt-container--red">
+                <h4 onClick={() => setChangeLinearGraphic(false)} className="balance-container__left__txt-container--red">
                   Gastos totales del mes: {expenses}
                 </h4>
               </div>
               <div className="balance-container__left__graphic-container">
+              {changeLinearGraphic ? (
+
                 <Paper>
                   <Chart data={incomeData}>
                     <ArgumentAxis className={classes.lineSeries} />
@@ -298,6 +305,16 @@ export default function BalancePage() {
                     <LineSeries valueField="value" argumentField="argument" />
                   </Chart>
                 </Paper>
+              ):(
+                <Paper>
+                  <Chart data={expensesData}>
+                    <ArgumentAxis className={classes.lineSeries} />
+                    <ValueAxis />
+
+                    <LineSeries valueField="value" argumentField="argument" />
+                  </Chart>
+                </Paper>
+              )}
               </div>
             </div>
             <div className="balance-container__right">

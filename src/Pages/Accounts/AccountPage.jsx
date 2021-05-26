@@ -53,7 +53,7 @@ useEffect(() => {
 
   return (
     <div>
-      <h1>accounts</h1>
+      <h1>Accounts</h1>
 
 
     <Container>

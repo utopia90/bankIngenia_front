@@ -45,10 +45,10 @@ export default function MovementsPage() {
           <TableHead>
             <TableRow>
 
-              <TableCell align="center">IBAN-NºTarjeta</TableCell>
-              <TableCell align="center">Cantidad</TableCell>
-              <TableCell align="center">Concepto</TableCell>
-              <TableCell align="center">Fecha</TableCell>
+              <TableCell align="center"><span className="colorGris">IBAN-NºTarjeta</span></TableCell>
+              <TableCell align="center"><span className="colorGris">Cantidad</span></TableCell>
+              <TableCell align="center"><span className="colorGris">Concepto</span></TableCell>
+              <TableCell align="center"><span className="colorGris">Fecha</span></TableCell>
             </TableRow>
           </TableHead>
           <TableBody>

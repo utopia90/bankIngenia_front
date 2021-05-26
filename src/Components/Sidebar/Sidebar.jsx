@@ -369,7 +369,10 @@ export default function Sidebar() {
         <div className={classes.toolbarIcon}>
         <img src={IngeniaIcon} />
         <img src={BankLogo} />
-
+        
+        <IconButton onClick={handleDrawerClose}>
+            <ChevronLeftIcon />
+          </IconButton>
         </div>
         {/* Divider para separar los elementos del menú */}
         <Divider />

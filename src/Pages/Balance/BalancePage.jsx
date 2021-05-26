@@ -211,7 +211,7 @@ export default function BalancePage() {
         <div className="balance-container__bottom">
           <div className="balance-container__left">
             <div className="balance-container__left__txt-container">
-              <h4 className="balance-container__left__txt-container--green">
+              <h4 className="balance-container__left__txt-container--green" onClick="toggleLinearGrafic">
                 Ingresos totales del mes: {income}
               </h4>
               <h4 className="balance-container__left__txt-container--red">

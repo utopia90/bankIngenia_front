@@ -10,6 +10,8 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 
+import GreenIcon from "./../../Assets/Svg/movement-green-down.svg";
+import RedIcon from "./../../Assets/Svg/movement-red.svg";
 const useStyles = makeStyles({
     table: {
       minWidth: 650,
@@ -52,12 +54,24 @@ export default function MovementsPage() {
           <TableBody>
             {movements.map((row) => (
               <TableRow key={row.id}>
+
+
+
               { row.paymentType == "ACCOUNT" ?
 
-              <TableCell align="center" >{row.account.iban}</TableCell>
+              <TableCell align="center" >
+              
+               {row.operationType=='REST' ? <img src={RedIcon}/>:<img src={GreenIcon}/>}
+              
+              {row.account.iban}</TableCell>
 
               :
-              <TableCell align="center" >{row.account.cards[0].pan}</TableCell>}
+              <TableCell align="center" >
+              
+              
+              {row.operationType=='REST' ? <img src={RedIcon}/>:<img src={GreenIcon}/>}
+              {row.account.cards[0].pan}
+            </TableCell>}
            
 
                 <TableCell align="center">{row.quantity} €</TableCell>

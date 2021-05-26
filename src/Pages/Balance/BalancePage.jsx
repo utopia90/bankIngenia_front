@@ -8,10 +8,15 @@ import {
   ValueAxis,
   Chart,
   LineSeries,
+  PieSeries,
 } from "@devexpress/dx-react-chart-material-ui";
 
 import graphicIcon from "./../../Assets/Svg/circular-graphic-icon.svg";
 import barIcon from "./../../Assets/Svg/bar-graphic-icon.svg";
+import expandIcon from "./../../Assets/Svg/expand.svg";
+
+import { makeStyles } from "@material-ui/core/styles";
+
 import { object } from "yup";
 
 export default function BalancePage() {
@@ -25,9 +30,8 @@ export default function BalancePage() {
   let [expensesServices, setExpensesServices] = useState(0);
   let [expensesPaid, setExpensesPaid] = useState(0);
 
-  let [incomeData, setIncomeData] = useState([])
-
- 
+  let [incomeData, setIncomeData] = useState([]);
+  let [categoryData, setCategoryData] = useState([]);
 
   useEffect(() => {
     getTotalIncome();
@@ -37,8 +41,24 @@ export default function BalancePage() {
     getTotalExpensesServices();
     getTotalExpensesClothes();
     getTotalExpensesPaid();
+
     getTotalIncomeData()
+
   }, []);
+
+  useEffect(() => {
+    getTotalIncomeData();
+  }, [income, incomeMovements]);
+
+  useEffect(() => {
+    getTotalCategoryData();
+  }, [
+    expensesFuel,
+    expensesClothes,
+    expensesRestaurants,
+    expensesServices,
+    expensesPaid,
+  ]);
 
   const getTotalIncome = () => {
     let idUser = 1;
@@ -60,17 +80,31 @@ export default function BalancePage() {
     setIncomeMovements(incomes);
   };
 
-
   const getTotalIncomeData = () => {
+    const data = [];
+    for (let i = 0; i < incomeMovements.length; i++) {
+      data.push({ argument: i, value: incomeMovements[i] });
+    }
+    data.push({ argument: data.length, value: income });
+
+    setIncomeData(data);
+  };
+  const getTotalCategoryData = () => {
+    const totalTemp = [];
     const data = [
-      { argument: 1, value: incomeMovements[0] },
-      { argument: 2, value: income },
+      { category: "Fuel", area: (expensesFuel / expenses) * 100 },
+      { category: "Paid", area: (expensesPaid / expenses) * 100 },
+      { category: "Services", area: (expensesServices / expenses) * 100 },
+      { category: "Restaurants", area: (expensesRestaurants / expenses) * 100 },
+      { category: "Clothes", area: (expensesClothes / expenses) * 100 },
     ];
-    setIncomeData(data)
-  }
+
+    setCategoryData(data);
+  };
 
   const getTotalExpenses = () => {
     let idUser = 1;
+
     axios
       .get(
         `https://projectbankingenia.herokuapp.com/api/movements-user-date-operation/userId/${idUser}?startdate=2020-01-13&finishdate=2021-09-20&operation=REST`
@@ -85,6 +119,7 @@ export default function BalancePage() {
   };
   const getTotalExpensesFuel = () => {
     let idUser = 1;
+
     axios
       .get(
         `https://projectbankingenia.herokuapp.com/api/movements-user-date-operation-category/userId/${idUser}?startdate=2020-01-13&finishdate=2021-09-20&operation=REST&category=FUEL`
@@ -99,6 +134,7 @@ export default function BalancePage() {
   };
   const getTotalExpensesRestaurants = () => {
     let idUser = 1;
+
     axios
       .get(
         `https://projectbankingenia.herokuapp.com/api/movements-user-date-operation-category/userId/${idUser}?startdate=2020-01-13&finishdate=2021-09-20&operation=REST&category=RESTAURANTS`
@@ -113,6 +149,7 @@ export default function BalancePage() {
   };
   const getTotalExpensesServices = () => {
     let idUser = 1;
+
     axios
       .get(
         `https://projectbankingenia.herokuapp.com/api/movements-user-date-operation-category/userId/${idUser}?startdate=2020-01-13&finishdate=2021-09-20&operation=REST&category=UTILITIES`
@@ -127,6 +164,7 @@ export default function BalancePage() {
   };
   const getTotalExpensesClothes = () => {
     let idUser = 1;
+
     axios
       .get(
         `https://projectbankingenia.herokuapp.com/api/movements-user-date-operation-category/userId/${idUser}?startdate=2020-01-13&finishdate=2021-09-20&operation=REST&category=CLOTHES`
@@ -153,16 +191,17 @@ export default function BalancePage() {
           setExpensesPaid((expensesPaid += quantity));
         }
       });
-  };
+    };
+    
+    const useStyles = makeStyles((theme) => ({
+      chart: {
+        backgroundColor: "transparent",
+        boxShadow:"none"
+      },
+    }));
+    
+    const classes = useStyles();
 
-  // const Incomedata = [
-  //   for (let i = 0; i < incomeMovements.length; i++){
-  // { argument: 1, value: 10 },
-  // { argument: 2, value: 20 },
-  // { argument: 3, value: 30 },
-  //   }];
-
-  console.log("incomedata:", incomeData);
   return (
     <div>
 
@@ -172,7 +211,9 @@ export default function BalancePage() {
       :  <div className="balance-container">
         <div className="balance-container__top">
           <h2 className="balance-container__title">Balance</h2>
-          <input className="balance-container__input" type="text" />
+          <div className="balance-container__input">
+            <input type="text" /> <img src={expandIcon}></img>
+          </div>
         </div>
         <div className="balance-container__bottom">
           <div className="balance-container__left">
@@ -197,17 +238,24 @@ export default function BalancePage() {
           </div>
           <div className="balance-container__right">
             <div className="balance-container__right__txt-container">
-              <span>
+              <span className="graphic-btn">
                 <img src={graphicIcon} />
                 <h4>Gráfico circular</h4>
               </span>
-              <span>
+              <span className="graphic-btn">
                 <img src={barIcon} />
                 <h4>Gráfico de barras</h4>
               </span>
             </div>
             <div className="balance-container__right__graphic-container">
-              <div className="balance-container__right__graphic"></div>
+              <div className="balance-container__right__graphic">
+                <Paper className={classes.chart}>
+                  <Chart data={categoryData}>
+                    <PieSeries valueField="area" argumentField="category" />
+                  </Chart>
+                </Paper>
+              </div>
+
               <div className="balance-container__right__list-container">
                 <div className="balance-container__right__list-container__txt">
                   <h5 className="txt-item">Gasolina</h5>
@@ -216,6 +264,7 @@ export default function BalancePage() {
                   <h5 className="txt-item">Restaurantes</h5>
                   <h5 className="txt-item">Pagado</h5>
                 </div>
+
                 <div className="balance-container__right__list-container__expenses">
                   <h5 className="expenses-item">{expensesFuel}</h5>
                   <h5 className="expenses-item">{expensesServices}</h5>

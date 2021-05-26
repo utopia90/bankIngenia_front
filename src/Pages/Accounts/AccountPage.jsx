@@ -71,9 +71,9 @@ useEffect(() => {
             >
               <Paper>
               
-                <Typography fontSize="28px">
+                <h1  className="amountStyle">
                 {account.currentBalance}€
-                </Typography>
+                </h1>
                 <Typography fontSize="28px" className='flexi'>
            
     

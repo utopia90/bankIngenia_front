@@ -79,7 +79,7 @@ const useStyles = makeStyles((theme) => ({
   toolbarIcon: {
     display: "flex",
     alignItems: "center",
-    justifyContent: "flex-end",
+    justifyContent: "center",
     padding: "0 8px",
     ...theme.mixins.toolbar, //Se añaden todos los estilos de toolbar por defecto
   },
@@ -370,10 +370,6 @@ export default function Sidebar() {
         <img src={IngeniaIcon} />
         <img src={BankLogo} />
 
-
-          <IconButton onClick={handleDrawerClose}>
-            <ChevronLeftIcon />
-          </IconButton>
         </div>
         {/* Divider para separar los elementos del menú */}
         <Divider />

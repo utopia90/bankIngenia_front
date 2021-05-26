@@ -41,6 +41,9 @@ export default function BalancePage() {
     getTotalExpensesServices();
     getTotalExpensesClothes();
     getTotalExpensesPaid();
+
+    getTotalIncomeData()
+
   }, []);
 
   useEffect(() => {
@@ -201,7 +204,11 @@ export default function BalancePage() {
 
   return (
     <div>
-      <div className="balance-container">
+
+    {
+      incomeData ===undefined ?
+     <h5>Cargando datos</h5>
+      :  <div className="balance-container">
         <div className="balance-container__top">
           <h2 className="balance-container__title">Balance</h2>
           <div className="balance-container__input">
@@ -270,6 +277,8 @@ export default function BalancePage() {
           </div>
         </div>
       </div>
+    }
     </div>
+ 
   );
 }

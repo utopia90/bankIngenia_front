@@ -13,7 +13,8 @@ import visaIcon from "./../../Assets/Svg/visa-icon.svg";
 import bbvaIcon from "./../../Assets/Svg/bbva-icon.svg";
 import { pink } from "@material-ui/core/colors";
 import "./HomePage.scss";
-
+import GreenIcon from "./../../Assets/Svg/movement-green-down.svg";
+import RedIcon from "./../../Assets/Svg/movement-red.svg";
 const useStyles = makeStyles((theme) => ({
     container: {
       display: "grid",
@@ -91,9 +92,9 @@ export default function HomePage() {
             >
               <Paper>
                 <img src={bbvaIcon} className="bbva-icon" />
-                <Typography fontSize="28px">
+                <h1 className="amountStyle">
                   {card.account.currentCreditCardBalance} €
-                </Typography>
+                </h1>
                 <Typography fontSize="28px" className='flexi'>
            
                   <img src={visaIcon} className="bbva-icon" />
@@ -128,10 +129,19 @@ export default function HomePage() {
               <TableRow key={row.id}>
               { row.paymentType == "ACCOUNT" ?
 
-              <TableCell align="center" >{row.account.iban}</TableCell>
+<TableCell align="center" >
 
-              :
-              <TableCell align="center" >{row.account.cards[0].pan}</TableCell>}
+ {row.operationType=='REST' ? <img src={RedIcon}/>:<img src={GreenIcon}/>}
+
+{row.account.iban}</TableCell>
+
+:
+<TableCell align="center" >
+
+
+{row.operationType=='REST' ? <img src={RedIcon}/>:<img src={GreenIcon}/>}
+{row.account.cards[0].pan}
+</TableCell>}
            
 
                 <TableCell align="center">{row.quantity} €</TableCell>

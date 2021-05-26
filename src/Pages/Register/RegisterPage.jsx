@@ -8,10 +8,10 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import CopyRight from '../../Components/CopyRight/CopyRight';
 import './RegisterPage.scss';
 import RegisterForm from '../../Components/RegisterForm/RegisterForm';
+import * as Yup from "yup";
+import { Formik } from "formik";
 
 
-export default function RegisterPage() {
-    
 const useStyles = makeStyles(theme =>({
     paper:{
         marginTop:theme.spacing(8),
@@ -32,43 +32,98 @@ const useStyles = makeStyles(theme =>({
         margin: theme.spacing(1)
     }
 }))
-const classes = useStyles();
-let history = useHistory();
 
-const submit =(e) =>{
+const RegisterPage = () => {
+    let history = useHistory();
+    const classes = useStyles();
 
-    e.preventDefault();
-    console.log(e.target.value)
-    sessionStorage.setItem("logged",true);
-    history.push('/inicio');
-}
+    const Registro = (user) => {
 
-const getMovements = () => {
-    let idUser=1;
-    axios.get(`https://projectbankingenia.herokuapp.com/api/movement/userId/${idUser}`)
-    .then(res => {
-      const movens = res.data;
-      console.log(movens)
+        axios.post(`https://projectbankingenia.herokuapp.com/auth/registro`,user)
+        .then(res => {
 
-    })
+          history.push('/login');
+    
+        })
+ 
+    }
+return(
+    <Formik
+      initialValues={{
+        email: "",
+        password: "",
+      }}
+      onSubmit={(values, { setSubmitting }) => {
+  
+        //esto se va a ejecutar al realizar el submit
+        //simulamos una peticion http
+        if(values){
+            let user={
+            email:values.email,
+            password:values.password
+        }
+        Registro(user)
+        }
 
-}
+          setSubmitting(false);
 
-
-
-    return (
-        <Container component='main' maxWidth='xs'>
+  
+      }}
+      //**************Uso de YUP validacion de campos */
+      validationSchema={Yup.object().shape({
+        email: Yup.string()
+          .email("El email no es valido")
+          .required("El email es obligatorio"),
+        password: Yup.string().required("Las contraseña es obligatoria"),
+        //.matches(/(?=.*[0-9])/,'La contraseña debe tener al menos un numero')
+      })}
+    >
+  
+  
+      {/**Obtenemos de formik y se lo pasamos a nuestro formulario */}
+  
+      {(props) => {
+        const {
+          values,
+          touched,
+          errors,
+          isSubmitting,
+          handleChange,
+          handleBlur,
+          handleSubmit,
+        } = props;
+  
+        {
+          /*return del formulario que vamos a implementar*/
+        }
+  
+        return (
+            <Container component='main' maxWidth='xs'>
         <CssBaseline/>
         <div className={classes.paper}>
             <Avatar className={classes.avatar}>
                 <LockOutlinedIcon/>
             </Avatar>
-            <Typography component='h1'>Registro</Typography> 
-           <RegisterForm submit={submit} classes={classes}/>
+            <Typography component='h1'>Acceso</Typography> 
+           <RegisterForm
+              values={values}
+              touched={touched}
+              errors={errors}
+              isSubmitting={isSubmitting}
+              handleChange={handleChange}
+              handleBlur={handleBlur}
+              handleSubmit={handleSubmit}
+            classes={classes}/>
         </div>
         <Box my={8}>
            <CopyRight/>
         </Box>
     </Container>
-    )
-}
+
+        );
+      }}
+    </Formik>
+)
+};
+
+export default RegisterPage;

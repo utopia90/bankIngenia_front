@@ -2,7 +2,24 @@ import React, { useState, useEffect } from "react";
 import "./BalancePage.scss";
 import axios from "axios";
 
-import Paper from "@material-ui/core/Paper";
+ import {
+  AppBar,
+  Badge,
+  Container,
+  Divider,
+  Drawer,
+  Grid,
+  IconButton,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  Paper,
+  Toolbar,
+  Typography,
+  Avatar,
+  CssBaseline,
+} from "@material-ui/core"; 
 import {
   ArgumentAxis,
   ValueAxis,
@@ -18,6 +35,7 @@ import expandIcon from "./../../Assets/Svg/expand.svg";
 import { makeStyles } from "@material-ui/core/styles";
 
 import { object } from "yup";
+import { EqualizerTwoTone } from "@material-ui/icons";
 
 export default function BalancePage() {
   let [income, setIncome] = useState(0);
@@ -32,6 +50,9 @@ export default function BalancePage() {
 
   let [incomeData, setIncomeData] = useState([]);
   let [categoryData, setCategoryData] = useState([]);
+
+  let [changeIncomeGraphic, setChangeIncomeGraphic] = useState(true);
+
 
   useEffect(() => {
     getTotalIncome();
@@ -198,9 +219,16 @@ export default function BalancePage() {
         backgroundColor: "transparent",
         boxShadow:"none"
       },
+      lineSeries:{
+        color: "pink"
+      }
     }));
     
     const classes = useStyles();
+
+    const doSomething = function() {
+          console.log("onClick works!");
+    }
 
   return (
     <div>
@@ -218,7 +246,7 @@ export default function BalancePage() {
         <div className="balance-container__bottom">
           <div className="balance-container__left">
             <div className="balance-container__left__txt-container">
-              <h4 className="balance-container__left__txt-container--green" onClick="toggleLinearGrafic">
+              <h4 className="balance-container__left__txt-container--green">
                 Ingresos totales del mes: {income}
               </h4>
               <h4 className="balance-container__left__txt-container--red">
@@ -228,8 +256,8 @@ export default function BalancePage() {
             <div className="balance-container__left__graphic-container">
               <Paper>
                 <Chart data={incomeData}>
-                  <ArgumentAxis />
-                  <ValueAxis />
+                  <ArgumentAxis className={classes.lineSeries}/>
+                  <ValueAxis  />
 
                   <LineSeries valueField="value" argumentField="argument" />
                 </Chart>
@@ -238,11 +266,13 @@ export default function BalancePage() {
           </div>
           <div className="balance-container__right">
             <div className="balance-container__right__txt-container">
-              <span className="graphic-btn">
+            <div>
+              <span className="graphic-btn" onClick={() => { alert('hola!'); }}>
                 <img src={graphicIcon} />
                 <h4>Gráfico circular</h4>
               </span>
-              <span className="graphic-btn">
+            </div>
+              <span className="graphic-btn" >
                 <img src={barIcon} />
                 <h4>Gráfico de barras</h4>
               </span>
@@ -255,7 +285,6 @@ export default function BalancePage() {
                   </Chart>
                 </Paper>
               </div>
-
               <div className="balance-container__right__list-container">
                 <div className="balance-container__right__list-container__txt">
                   <h5 className="txt-item">Gasolina</h5>

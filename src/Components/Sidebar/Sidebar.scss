@@ -1,14 +1,10 @@
-.user-container{
-    padding-left: 3rem;
+.logoingenia{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin:20px;
 }
-
-.user-icon{
-    width: 2rem;
-    align-content:unset;
-    padding-left: 0.4rem;
-    position: relative;
-    top: 0.5rem;
-}
-.listItem :hover{
-background-color:#D01E69 !important;
+.toolbar{
+    display: row;
+    justify-content: space-between;
 }

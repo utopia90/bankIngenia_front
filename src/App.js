@@ -1,6 +1,7 @@
 import {BrowserRouter as Router, Switch, Route, Redirect} from 'react-router-dom'
 import './App.css';
 import Sidebar from './Components/Sidebar/Sidebar';
+
 import LoginPage from './Pages/Login/LoginPage';
 import RegisterPage from './Pages/Register/RegisterPage';
 
@@ -30,7 +31,7 @@ function App() {
           {/* Ruta a dashboard con redirección a login si no está logueado */}
           <Route path='/dashboard'>
             {loggedIn ? 
-                <Sidebar/>
+             <Sidebar/>
                 :          
                 <Redirect from = '/dashboard' to = '/login'/>
             }

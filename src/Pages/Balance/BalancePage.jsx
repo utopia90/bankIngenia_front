@@ -26,7 +26,10 @@ import {
   Chart,
   LineSeries,
   PieSeries,
+  BarSeries,
 } from "@devexpress/dx-react-chart-material-ui";
+import { scaleBand } from "@devexpress/dx-chart-core";
+import { ArgumentScale, Stack } from "@devexpress/dx-react-chart";
 
 import graphicIcon from "./../../Assets/Svg/circular-graphic-icon.svg";
 import barIcon from "./../../Assets/Svg/bar-graphic-icon.svg";
@@ -41,6 +44,7 @@ export default function BalancePage() {
   let [income, setIncome] = useState(0);
   let [expenses, setExpenses] = useState(0);
   let [incomeMovements, setIncomeMovements] = useState([]);
+  let [expensesMovements, setExpensesMovements] = useState([]);
 
   let [expensesFuel, setExpensesFuel] = useState(0);
   let [expensesRestaurants, setExpensesRestaurants] = useState(0);
@@ -49,9 +53,12 @@ export default function BalancePage() {
   let [expensesPaid, setExpensesPaid] = useState(0);
 
   let [incomeData, setIncomeData] = useState([]);
-  let [categoryData, setCategoryData] = useState([]);
+  let [expensesData, setExpensesData] = useState([]);
 
-  let [changeIncomeGraphic, setChangeIncomeGraphic] = useState(true);
+  let [categoryData, setCategoryData] = useState([]);
+  let [barCategoryData, setBarCategoryData] = useState([]);
+
+  let [changeIncomeGraphic, setChangeIncomeGraphic] = useState(false);
 
   useEffect(() => {
     getTotalIncome();
@@ -61,8 +68,8 @@ export default function BalancePage() {
     getTotalExpensesServices();
     getTotalExpensesClothes();
     getTotalExpensesPaid();
+    getBarCategoryData();
 
-    getTotalIncomeData();
   }, []);
 
   useEffect(() => {
@@ -78,6 +85,10 @@ export default function BalancePage() {
     expensesServices,
     expensesPaid,
   ]);
+
+  useEffect(() => {
+    getBarCategoryData();
+  }, [expensesFuel]);
 
   const getTotalIncome = () => {
     let idUser = 1;
@@ -108,20 +119,49 @@ export default function BalancePage() {
 
     setIncomeData(data);
   };
+
+  const getTotalExpensesData = () => {
+    const data = [];
+    for (let i = 0; i < expensesMovements.length; i++) {
+      data.push({ argument: i, value: expensesMovements[i] });
+    }
+    data.push({ argument: data.length, value: income });
+
+    setExpensesData(data);
+  };
   const getTotalCategoryData = () => {
+    const areaFuel = (expensesFuel / expenses) * 100;
+    const areaPaid = (expensesPaid / expenses) * 100;
+    const areaServices = (expensesServices / expenses) * 100;
+    const areaRestaurants = (expensesRestaurants / expenses) * 100;
+    const areaClothes = (expensesClothes / expenses) * 100;
+
     const data = [
-      { category: "Fuel", area: (expensesFuel / expenses) * 100 },
-      { category: "Paid", area: (expensesPaid / expenses) * 100 },
-      { category: "Services", area: (expensesServices / expenses) * 100 },
-      { category: "Restaurants", area: (expensesRestaurants / expenses) * 100 },
-      { category: "Clothes", area: (expensesClothes / expenses) * 100 },
+      { category: "Fuel", area: areaFuel },
+      { category: "Paid", area: areaPaid },
+      { category: "Services", area: areaServices },
+      { category: "Restaurants", area: areaRestaurants },
+      { category: "Clothes", area: areaClothes },
     ];
 
     setCategoryData(data);
   };
 
+  const getBarCategoryData = () => {
+    const barData = [
+      { category: "gasolina", expenses: expensesFuel },
+      { category: "pagado", expenses: expensesPaid },
+      { category: "servicios", expenses: expensesServices },
+      { category: "restaurantes", expenses: expensesRestaurants },
+      { category: "ropa", expenses: expensesClothes },
+    ];
+
+    setBarCategoryData(barData);
+  };
+
   const getTotalExpenses = () => {
     let idUser = 1;
+    let expensesArray = [];
 
     axios
       .get(
@@ -131,9 +171,11 @@ export default function BalancePage() {
         const movens = res.data;
         for (let i = 0; i < movens.length; i++) {
           let quantity = res.data[i].quantity;
+          expensesArray.push(quantity);
           setExpenses((expenses += quantity));
         }
       });
+    setExpensesMovements(expensesArray);
   };
   const getTotalExpensesFuel = () => {
     let idUser = 1;
@@ -223,9 +265,7 @@ export default function BalancePage() {
 
   const classes = useStyles();
 
-  const doSomething = function () {
-    console.log("onClick works!");
-  };
+  console.log("barcategorydata", barCategoryData);
 
   return (
     <div>
@@ -263,23 +303,64 @@ export default function BalancePage() {
             <div className="balance-container__right">
               <div className="balance-container__right__txt-container">
                 <div>
-                  <span className="graphic-btn" onClick={() => alert("hola!")}>
+                  <span
+                    className="graphic-btn"
+                    onClick={() => setChangeIncomeGraphic(true)}
+                  >
                     <img src={graphicIcon} />
                     <h4>Gráfico circular</h4>
                   </span>
                 </div>
-                <span className="graphic-btn">
+                <span
+                  className="graphic-btn"
+                  onClick={() => setChangeIncomeGraphic(false)}
+                >
                   <img src={barIcon} />
                   <h4>Gráfico de barras</h4>
                 </span>
               </div>
               <div className="balance-container__right__graphic-container">
                 <div className="balance-container__right__graphic">
-                  <Paper className={classes.chart}>
-                    <Chart data={categoryData}>
-                      <PieSeries valueField="area" argumentField="category" />
-                    </Chart>
-                  </Paper>
+                  {changeIncomeGraphic ? (
+                    <Paper className={classes.chart}>
+                      <Chart data={categoryData}>
+                        <PieSeries valueField="area" argumentField="category" />
+                      </Chart>
+                    </Paper>
+                  ) : (
+                    <Paper>
+                      <Chart data={barCategoryData}>
+                        <ArgumentAxis />
+                        <ValueAxis />
+                        <BarSeries
+                          valueField="expenses"
+                          argumentField="category"
+                          name="gasolina"
+                        />
+                        <BarSeries
+                          valueField="expenses"
+                          argumentField="category"
+                          name="pagado"
+                        />
+                        <BarSeries
+                          valueField="expenses"
+                          argumentField="category"
+                          name="servicios"
+                        />
+                        <BarSeries
+                          valueField="expenses"
+                          argumentField="category"
+                          name="restaurantes"
+                        />
+                        <BarSeries
+                          valueField="expenses"
+                          argumentField="category"
+                          name="ropa"
+                        />
+                        <Stack />
+                      </Chart>
+                    </Paper>
+                  )}
                 </div>
                 <div className="balance-container__right__list-container">
                   <div className="balance-container__right__list-container__txt">

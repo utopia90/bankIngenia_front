@@ -1,28 +1,23 @@
 import React, { useState } from "react";
-import PropTypes from 'prop-types';
-import {
-  BrowserRouter as Router,
-  Route,
-  Switch,
-} from "react-router-dom";
+import PropTypes from "prop-types";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import clsx from "clsx";
-import AppBar from '@material-ui/core/AppBar';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Divider from '@material-ui/core/Divider';
-import Drawer from '@material-ui/core/Drawer';
-import Hidden from '@material-ui/core/Hidden';
-import IconButton from '@material-ui/core/IconButton';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import MailIcon from '@material-ui/icons/Mail';
-import MenuIcon from '@material-ui/icons/Menu';
-import Toolbar from '@material-ui/core/Toolbar';
-import Paper from '@material-ui/core/Paper';
-
+import AppBar from "@material-ui/core/AppBar";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import Divider from "@material-ui/core/Divider";
+import Drawer from "@material-ui/core/Drawer";
+import Hidden from "@material-ui/core/Hidden";
+import IconButton from "@material-ui/core/IconButton";
+import InboxIcon from "@material-ui/icons/MoveToInbox";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import ListItemText from "@material-ui/core/ListItemText";
+import MailIcon from "@material-ui/icons/Mail";
+import MenuIcon from "@material-ui/icons/Menu";
+import Toolbar from "@material-ui/core/Toolbar";
+import Paper from "@material-ui/core/Paper";
 
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import NotificationIcon from "@material-ui/icons/Notifications";
@@ -40,13 +35,7 @@ import MenuList from "@material-ui/core/MenuList";
 
 import CopyRight from "../CopyRight/CopyRight";
 
-
-
-
-
-
-
-import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { makeStyles, useTheme } from "@material-ui/core/styles";
 import MenuListItems from "./MenuListItems";
 import DashboardRoutes from "../../Routes/DashboardRoutes";
 import expandIcon from "./../../Assets/Svg/expand.svg";
@@ -55,38 +44,31 @@ import IngeniaIcon from "./../../Assets/Svg//ingenia-logo.svg";
 import BankLogo from "./../../Assets/Svg/bank-logo.svg";
 
 import "./Sidebar.scss";
-import {
-    Badge,
-    Container,
-
-
-    Grid,
-
-    Avatar,
-
-  } from "@material-ui/core";
+import { Badge, Container, Grid, Avatar } from "@material-ui/core";
 
 const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
   root: {
-    display: 'flex',
+    display: "flex",
   },
   drawer: {
-    [theme.breakpoints.up('sm')]: {
+    [theme.breakpoints.up("sm")]: {
       width: drawerWidth,
       flexShrink: 0,
     },
   },
   appBar: {
-    [theme.breakpoints.up('sm')]: {
+    [theme.breakpoints.up("sm")]: {
       width: `calc(100% - ${drawerWidth}px)`,
       marginLeft: drawerWidth,
+      backgroundColor: "transparent",
+      color: "inherit"
     },
   },
   menuButton: {
     marginRight: theme.spacing(2),
-    [theme.breakpoints.up('sm')]: {
-      display: 'none',
+    [theme.breakpoints.up("sm")]: {
+      display: "none",
     },
   },
   // necessary for content to be below app bar
@@ -100,44 +82,43 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 const mainMenuList = [
-    {
-      text: "Inicio",
-      path: "/inicio",
-      icon: "INICIO",
-    },
-    {
-      text: "Cuentas",
-      path: "/cuentas",
-      icon: "CUENTAS",
-    },
-    {
-      text: "Tarjetas",
-      path: "/tarjetas",
-      icon: "TARJETAS",
-    },
-    {
-      text: "Movimientos",
-      path: "/movimientos",
-      icon: "MOVIMIENTOS",
-    },
-    {
-      text: "Balance",
-      path: "/balance",
-      icon: "BALANCE",
-    },
-  ];
-  
-const Sidebar = (props) => {
+  {
+    text: "Inicio",
+    path: "/inicio",
+    icon: "INICIO",
+  },
+  {
+    text: "Cuentas",
+    path: "/cuentas",
+    icon: "CUENTAS",
+  },
+  {
+    text: "Tarjetas",
+    path: "/tarjetas",
+    icon: "TARJETAS",
+  },
+  {
+    text: "Movimientos",
+    path: "/movimientos",
+    icon: "MOVIMIENTOS",
+  },
+  {
+    text: "Balance",
+    path: "/balance",
+    icon: "BALANCE",
+  },
+];
 
-    const { window } = props;
-    const classes = useStyles();
-    const theme = useTheme();
-    const [mobileOpen, setMobileOpen] = React.useState(false);
-  
-    const handleDrawerToggle = () => {
-      setMobileOpen(!mobileOpen);
-    };
-  
+const Sidebar = (props) => {
+  const { window } = props;
+  const classes = useStyles();
+  const theme = useTheme();
+  const [mobileOpen, setMobileOpen] = React.useState(false);
+
+  const handleDrawerToggle = () => {
+    setMobileOpen(!mobileOpen);
+  };
+
   //Estado que controle si se muestra el menú o no
   const [open, setOpen] = useState(true);
 
@@ -178,15 +159,15 @@ const Sidebar = (props) => {
     }
   }
 
-  
-    const container = window !== undefined ? () => window().document.body : undefined;
+  const container =
+    window !== undefined ? () => window().document.body : undefined;
 
-    return (
-        <div className={classes.root}>
-          <CssBaseline />
-          <AppBar position="fixed" className={classes.appBar}>
-            <Toolbar>
-            <IconButton
+  return (
+    <div className={classes.root}>
+      <CssBaseline />
+      <AppBar position="fixed" className={classes.appBar}>
+        <Toolbar>
+          <IconButton
             color="inherit"
             aria-label="open drawer"
             edge="start"
@@ -195,13 +176,6 @@ const Sidebar = (props) => {
           >
             <MenuIcon />
           </IconButton>
-
-
-
-
-
-
-
 
           <Typography
             component="h1"
@@ -213,9 +187,8 @@ const Sidebar = (props) => {
             Bienvenido/a a tu banca
           </Typography>
 
-
-  
           {/* Sección de Notificaciones para el usuario */}
+          <div className="notifications-section">
           <IconButton color="inherit">
             <Badge color="secondary" badgeContent={10}>
               <NotificationIcon />
@@ -233,8 +206,7 @@ const Sidebar = (props) => {
             Notificaciones
           </Typography>
 
-          <div>
-            <div className="user-container">
+          <div className="user-section">
               <img src={UserIcon} className="user-icon" />
               <Button
                 ref={anchoRef}
@@ -250,12 +222,14 @@ const Sidebar = (props) => {
                   fontWeight="500"
                   fontSize="10px"
                   cursor="pointer"
+
                 >
                   NOMBRE APELLIDO
                 </Typography>
                 <img src={expandIcon} className="expand-icon" />
               </Button>
             </div>
+
             <Popper
               open={openLogout}
               anchorEl={anchoRef.current}
@@ -263,6 +237,7 @@ const Sidebar = (props) => {
               transition
               disablePortal
             >
+
               {({ TransitionProps, placement }) => (
                 <Grow
                   {...TransitionProps}
@@ -293,83 +268,68 @@ const Sidebar = (props) => {
               )}
             </Popper>
           </div>
-
-
-
-
-
-
-
-
-
-
-
-
-            </Toolbar>
-          </AppBar>
-          <nav className={classes.drawer} aria-label="mailbox folders">
-            {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
-            <Hidden smUp implementation="css">
-              <Drawer
-                container={container}
-                variant="temporary"
-                anchor={theme.direction === 'rtl' ? 'right' : 'left'}
-                open={mobileOpen}
-                onClose={handleDrawerToggle}
-                classes={{
-                  paper: classes.drawerPaper,
-                }}
-                ModalProps={{
-                  keepMounted: true, // Better open performance on mobile.
-                }}
-              >
-                         <div className={classes.toolbar,"logoingenia"} >
-                    <img src={IngeniaIcon} />
-                    <img src={BankLogo} />
-                    </div>
-                    <Divider />
-                                <List>
-                        <MenuListItems list={mainMenuList} />
-                    </List>
-              </Drawer>
-            </Hidden>
-            <Hidden xsDown implementation="css">
-                <Drawer
-                    classes={{
-                    paper: classes.drawerPaper,
-                    }}
-                    variant="permanent"
-                    open
-                >
-                    <div className={classes.toolbar,"logoingenia"} >
-                    <img src={IngeniaIcon} />
-                    <img src={BankLogo} />
-                    </div>
-                    <Divider />  
-                    <List>
-                        <MenuListItems list={mainMenuList} />
-                    </List>
-
-                </Drawer>
-            </Hidden>
-          </nav>
-          <main className={classes.content}>
-            <div className={classes.toolbar} />
-            <Switch>
-              <Route path="/dashboard" component={DashboardRoutes} />
-            </Switch>
-
-
-          </main>
-        </div>
-      );
-}
+        </Toolbar>
+      </AppBar>
+      <nav className={classes.drawer} aria-label="mailbox folders">
+        {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
+        <Hidden smUp implementation="css">
+          <Drawer
+            container={container}
+            variant="temporary"
+            anchor={theme.direction === "rtl" ? "right" : "left"}
+            open={mobileOpen}
+            onClose={handleDrawerToggle}
+            classes={{
+              paper: classes.drawerPaper,
+            }}
+            ModalProps={{
+              keepMounted: true, // Better open performance on mobile.
+            }}
+          >
+            <div className={(classes.toolbar, "logoingenia")}>
+              <img src={IngeniaIcon} />
+              <img src={BankLogo} />
+            </div>
+            <Divider />
+            <List>
+              <MenuListItems list={mainMenuList} />
+            </List>
+          </Drawer>
+        </Hidden>
+        <Hidden xsDown implementation="css">
+          <Drawer
+            classes={{
+              paper: classes.drawerPaper,
+            }}
+            variant="permanent"
+            open
+          >
+            <div className={(classes.toolbar, "logoingenia")}>
+              <img src={IngeniaIcon} />
+              <img src={BankLogo} />
+            </div>
+            <Divider />
+            <List>
+              <MenuListItems list={mainMenuList} />
+            </List>
+          </Drawer>
+        </Hidden>
+      </nav>
+      <main className={classes.content}>
+        <div className={classes.toolbar} />
+        <Switch>
+          <Route path="/dashboard" component={DashboardRoutes} />
+        </Switch>
+      </main>
+    </div>
+  );
+};
 Sidebar.propTypes = {
-    /**
-     * Injected by the documentation to work in an iframe.
-     * You won't need it on your project.
-     */
-    window: PropTypes.func,
-  };
-  
+  /**
+   * Injected by the documentation to work in an iframe.
+   * You won't need it on your project.
+   */
+  window: PropTypes.func,
+};
+
 export default Sidebar;

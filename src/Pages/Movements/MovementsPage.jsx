@@ -61,7 +61,7 @@ export default function MovementsPage() {
 
               <TableCell align="center" >
               
-               {row.operationType=='REST' ? <img src={RedIcon}/>:<img src={GreenIcon}/>}
+               {row.operationType=='REST' ? <img className="movement-icon" src={RedIcon}/>:<img className="movement-icon" src={GreenIcon}/>}
               
               {row.account.iban}</TableCell>
 
@@ -69,7 +69,7 @@ export default function MovementsPage() {
               <TableCell align="center" >
               
               
-              {row.operationType=='REST' ? <img src={RedIcon}/>:<img src={GreenIcon}/>}
+              {row.operationType=='REST' ? <img className="movement-icon" src={RedIcon}/>:<img className="movement-icon" src={GreenIcon}/>}
               {row.account.cards[0].pan}
             </TableCell>}
            

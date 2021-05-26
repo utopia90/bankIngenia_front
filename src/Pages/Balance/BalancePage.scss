@@ -72,7 +72,7 @@ input {
     }
 
     &__graphic {
-      width: 40%;
+      width: 52%;
     }
 
     &__list-container {
@@ -120,14 +120,14 @@ input {
     background: #d95f02;
   }
 
-  .graphic-btn{
-    cursor: pointer;
-    z-index: 999999;
 
-    &:hover {
-      color: #d01e69;
-    }
+}
+.graphic-btn{
+  cursor: pointer;
+  z-index: 999999;
+
+  &:hover {
+    color: #d01e69;
   }
 }
-
 

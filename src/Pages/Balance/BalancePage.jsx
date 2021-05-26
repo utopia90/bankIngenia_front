@@ -267,7 +267,7 @@ export default function BalancePage() {
           <div className="balance-container__right">
             <div className="balance-container__right__txt-container">
             <div>
-              <span className="graphic-btn" onClick={() => { alert('hola!'); }}>
+              <span className="graphic-btn" onClick={() => alert('hola!') }>
                 <img src={graphicIcon} />
                 <h4>Gráfico circular</h4>
               </span>

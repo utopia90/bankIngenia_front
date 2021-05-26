@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./BalancePage.scss";
 import axios from "axios";
 
- import {
+import {
   AppBar,
   Badge,
   Container,
@@ -19,7 +19,7 @@ import axios from "axios";
   Typography,
   Avatar,
   CssBaseline,
-} from "@material-ui/core"; 
+} from "@material-ui/core";
 import {
   ArgumentAxis,
   ValueAxis,
@@ -53,7 +53,6 @@ export default function BalancePage() {
 
   let [changeIncomeGraphic, setChangeIncomeGraphic] = useState(true);
 
-
   useEffect(() => {
     getTotalIncome();
     getTotalExpenses();
@@ -63,8 +62,7 @@ export default function BalancePage() {
     getTotalExpensesClothes();
     getTotalExpensesPaid();
 
-    getTotalIncomeData()
-
+    getTotalIncomeData();
   }, []);
 
   useEffect(() => {
@@ -111,7 +109,6 @@ export default function BalancePage() {
     setIncomeData(data);
   };
   const getTotalCategoryData = () => {
-    const totalTemp = [];
     const data = [
       { category: "Fuel", area: (expensesFuel / expenses) * 100 },
       { category: "Paid", area: (expensesPaid / expenses) * 100 },
@@ -212,102 +209,100 @@ export default function BalancePage() {
           setExpensesPaid((expensesPaid += quantity));
         }
       });
-    };
-    
-    const useStyles = makeStyles((theme) => ({
-      chart: {
-        backgroundColor: "transparent",
-        boxShadow:"none"
-      },
-      lineSeries:{
-        color: "pink"
-      }
-    }));
-    
-    const classes = useStyles();
+  };
 
-    const doSomething = function() {
-          console.log("onClick works!");
-    }
+  const useStyles = makeStyles((theme) => ({
+    chart: {
+      backgroundColor: "transparent",
+      boxShadow: "none",
+    },
+    lineSeries: {
+      color: "pink",
+    },
+  }));
+
+  const classes = useStyles();
+
+  const doSomething = function () {
+    console.log("onClick works!");
+  };
 
   return (
     <div>
-
-    {
-      incomeData ===undefined ?
-     <h5>Cargando datos</h5>
-      :  <div className="balance-container">
-        <div className="balance-container__top">
-          <h2 className="balance-container__title">Balance</h2>
-          <div className="balance-container__input">
-            <input type="text" /> <img src={expandIcon}></img>
-          </div>
-        </div>
-        <div className="balance-container__bottom">
-          <div className="balance-container__left">
-            <div className="balance-container__left__txt-container">
-              <h4 className="balance-container__left__txt-container--green">
-                Ingresos totales del mes: {income}
-              </h4>
-              <h4 className="balance-container__left__txt-container--red">
-                Gastos totales del mes: {expenses}
-              </h4>
-            </div>
-            <div className="balance-container__left__graphic-container">
-              <Paper>
-                <Chart data={incomeData}>
-                  <ArgumentAxis className={classes.lineSeries}/>
-                  <ValueAxis  />
-
-                  <LineSeries valueField="value" argumentField="argument" />
-                </Chart>
-              </Paper>
+      {incomeData === undefined ? (
+        <h5>Cargando datos</h5>
+      ) : (
+        <div className="balance-container">
+          <div className="balance-container__top">
+            <h2 className="balance-container__title">Balance</h2>
+            <div className="balance-container__input">
+              <input type="text" /> <img src={expandIcon}></img>
             </div>
           </div>
-          <div className="balance-container__right">
-            <div className="balance-container__right__txt-container">
-            <div>
-              <span className="graphic-btn" onClick={() => alert('hola!') }>
-                <img src={graphicIcon} />
-                <h4>Gráfico circular</h4>
-              </span>
-            </div>
-              <span className="graphic-btn" >
-                <img src={barIcon} />
-                <h4>Gráfico de barras</h4>
-              </span>
-            </div>
-            <div className="balance-container__right__graphic-container">
-              <div className="balance-container__right__graphic">
-                <Paper className={classes.chart}>
-                  <Chart data={categoryData}>
-                    <PieSeries valueField="area" argumentField="category" />
+          <div className="balance-container__bottom">
+            <div className="balance-container__left">
+              <div className="balance-container__left__txt-container">
+                <h4 className="balance-container__left__txt-container--green">
+                  Ingresos totales del mes: {income}
+                </h4>
+                <h4 className="balance-container__left__txt-container--red">
+                  Gastos totales del mes: {expenses}
+                </h4>
+              </div>
+              <div className="balance-container__left__graphic-container">
+                <Paper>
+                  <Chart data={incomeData}>
+                    <ArgumentAxis className={classes.lineSeries} />
+                    <ValueAxis />
+
+                    <LineSeries valueField="value" argumentField="argument" />
                   </Chart>
                 </Paper>
               </div>
-              <div className="balance-container__right__list-container">
-                <div className="balance-container__right__list-container__txt">
-                  <h5 className="txt-item">Gasolina</h5>
-                  <h5 className="txt-item">Servicios</h5>
-                  <h5 className="txt-item">Ropa</h5>
-                  <h5 className="txt-item">Restaurantes</h5>
-                  <h5 className="txt-item">Pagado</h5>
+            </div>
+            <div className="balance-container__right">
+              <div className="balance-container__right__txt-container">
+                <div>
+                  <span className="graphic-btn" onClick={() => alert("hola!")}>
+                    <img src={graphicIcon} />
+                    <h4>Gráfico circular</h4>
+                  </span>
                 </div>
+                <span className="graphic-btn">
+                  <img src={barIcon} />
+                  <h4>Gráfico de barras</h4>
+                </span>
+              </div>
+              <div className="balance-container__right__graphic-container">
+                <div className="balance-container__right__graphic">
+                  <Paper className={classes.chart}>
+                    <Chart data={categoryData}>
+                      <PieSeries valueField="area" argumentField="category" />
+                    </Chart>
+                  </Paper>
+                </div>
+                <div className="balance-container__right__list-container">
+                  <div className="balance-container__right__list-container__txt">
+                    <h5 className="txt-item">Gasolina</h5>
+                    <h5 className="txt-item">Servicios</h5>
+                    <h5 className="txt-item">Ropa</h5>
+                    <h5 className="txt-item">Restaurantes</h5>
+                    <h5 className="txt-item">Pagado</h5>
+                  </div>
 
-                <div className="balance-container__right__list-container__expenses">
-                  <h5 className="expenses-item">{expensesFuel}</h5>
-                  <h5 className="expenses-item">{expensesServices}</h5>
-                  <h5 className="expenses-item">{expensesClothes}</h5>
-                  <h5 className="expenses-item">{expensesRestaurants}</h5>
-                  <h5 className="expenses-item">{expensesPaid}</h5>
+                  <div className="balance-container__right__list-container__expenses">
+                    <h5 className="expenses-item">{expensesFuel}</h5>
+                    <h5 className="expenses-item">{expensesServices}</h5>
+                    <h5 className="expenses-item">{expensesClothes}</h5>
+                    <h5 className="expenses-item">{expensesRestaurants}</h5>
+                    <h5 className="expenses-item">{expensesPaid}</h5>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    }
+      )}
     </div>
- 
   );
 }

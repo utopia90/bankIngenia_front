@@ -8,7 +8,7 @@ function App() {
   //TODO para pruebas 
  // let loggedIn= sessionStorage.getItem('logged')
   //Todo false y sale directamente el login, true y sale el dashboard
-  let loggedIn= false;
+  let loggedIn= true;
 
 
   return (

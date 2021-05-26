@@ -8,6 +8,7 @@ import { Container, Grid, Paper, Typography } from "@material-ui/core";
 import clsx from "clsx";
 
 import visaIcon from "./../../Assets/Svg/visa-icon.svg";
+import masterCardIcon from "./../../Assets/Svg/mastercard-icon.svg";
 import bbvaIcon from "./../../Assets/Svg/bbva-icon.svg";
 import { pink } from "@material-ui/core/colors";
 import "./BankcardPage.scss";
@@ -76,7 +77,11 @@ const BankcardPage = () => {
                 </h1>
                 <Typography fontSize="28px" className='flexi'>
            
-                  <img src={visaIcon} className="bbva-icon" />
+           {card.bankCardType==='VISA'?
+           <img src={visaIcon} className="bbva-icon" />:
+           <img src={masterCardIcon} className="bbva-icon" />
+           }
+                  
                   <span className="account-balance-txt">
                     {  card.pan}
                   </span>

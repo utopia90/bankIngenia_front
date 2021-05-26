@@ -42,12 +42,25 @@ const LoginPage = () => {
         .then(res => {
           const token = res.data;
           sessionStorage.setItem("logged",token);
+          sessionStorage.setItem("userid",token);
           console.log(token)
+          traerUsuarioporNombreUsu(user.email)
           history.push('/dashboard/inicio');
     
         })
  
     }
+    const traerUsuarioporNombreUsu = (nomUsu) => {
+
+      axios.get(`https://projectbankingenia.herokuapp.com/api/user-mail/${nomUsu}`)
+      .then(res => {
+        const usu = res.data;
+        localStorage.setItem("userName",usu.name+" "+usu.surname);
+        localStorage.setItem("userid",usu.id);
+  
+      })
+
+  }
 return(
     <Formik
       initialValues={{

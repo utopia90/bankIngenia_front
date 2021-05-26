@@ -9,12 +9,15 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import {Grid,Paper,Container,Typography} from '@material-ui/core';
-import visaIcon from "./../../Assets/Svg/visa-icon.svg";
+
 import bbvaIcon from "./../../Assets/Svg/bbva-icon.svg";
 import { pink } from "@material-ui/core/colors";
 import "./HomePage.scss";
 import GreenIcon from "./../../Assets/Svg/movement-green-down.svg";
 import RedIcon from "./../../Assets/Svg/movement-red.svg";
+import visaIcon from "./../../Assets/Svg/visa-icon.svg";
+import masterCardIcon from "./../../Assets/Svg/mastercard-icon.svg";
+
 const useStyles = makeStyles((theme) => ({
     container: {
       display: "grid",
@@ -96,8 +99,10 @@ export default function HomePage() {
                   {card.account.currentCreditCardBalance} €
                 </h1>
                 <Typography fontSize="28px" className='flexi'>
-           
-                  <img src={visaIcon} className="bbva-icon" />
+                {card.bankCardType==='VISA'?
+           <img src={visaIcon} className="bbva-icon" />:
+           <img src={masterCardIcon} className="bbva-icon" />
+           }
                   <span className="account-balance-txt">
                     {  card.pan}
                   </span>

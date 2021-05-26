@@ -129,20 +129,20 @@ export default function HomePage() {
               <TableRow key={row.id}>
               { row.paymentType == "ACCOUNT" ?
 
-<TableCell align="center" >
+                <TableCell align="center" >
 
- {row.operationType=='REST' ? <img src={RedIcon}/>:<img src={GreenIcon}/>}
+                {row.operationType=='REST' ? <img src={RedIcon}/>:<img src={GreenIcon}/>}
 
-{row.account.iban}</TableCell>
+                {row.account.iban}</TableCell>
 
-:
-<TableCell align="center" >
+                :
+                <TableCell align="center" >
 
 
-{row.operationType=='REST' ? <img src={RedIcon}/>:<img src={GreenIcon}/>}
-{row.account.cards[0].pan}
-</TableCell>}
-           
+                {row.operationType=='REST' ? <img src={RedIcon}/>:<img src={GreenIcon}/>}
+                {row.account.cards[0].pan}
+                </TableCell>}
+                          
 
                 <TableCell align="center">{row.quantity} €</TableCell>
                 <TableCell align="center">{row.categoryType}</TableCell>

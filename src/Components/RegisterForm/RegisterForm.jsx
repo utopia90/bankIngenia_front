@@ -17,7 +17,7 @@ const RegisterForm = ({submit},classes) => {
         <Grid container>
 
             <Grid item xs={12} sm={6}>
-                <Link  variant='body2' >{'Ya tengo Cuenta'}</Link>
+                <Link  variant='body2' to='/login'>{'Ya tengo Cuenta'}</Link>
             </Grid>
         </Grid>
     </form>

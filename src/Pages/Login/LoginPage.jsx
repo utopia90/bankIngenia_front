@@ -8,9 +8,8 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import './Login.scss';
 import LoginFom from '../../Components/LoginForm/LoginFom';
 import CopyRight from '../../Components/CopyRight/CopyRight';
-
-
-
+import * as Yup from "yup";
+import { Formik } from "formik";
 
 const useStyles = makeStyles(theme =>({
     paper:{
@@ -33,21 +32,9 @@ const useStyles = makeStyles(theme =>({
     }
 }))
 
-
-    
 const LoginPage = () => {
-    const classes = useStyles();
     let history = useHistory();
-    
-    const submit =(e) =>{
- 
-        e.preventDefault();
-        let user={
-            email:"borja@diaz",
-            password:"1234"
-        }
-      Login(user)
-    }
+    const classes = useStyles();
 
     const Login = (user) => {
 
@@ -61,28 +48,82 @@ const LoginPage = () => {
         })
  
     }
+return(
+    <Formik
+      initialValues={{
+        email: "",
+        password: "",
+      }}
+      onSubmit={(values, { setSubmitting }) => {
+  
+        //esto se va a ejecutar al realizar el submit
+        //simulamos una peticion http
+        if(values){
+            let user={
+            email:values.email,
+            password:values.password
+        }
+      Login(user)
+        }
 
+          setSubmitting(false);
 
-
-
-
-
-
-    return (
-        <Container component='main' maxWidth='xs'>
+  
+      }}
+      //**************Uso de YUP validacion de campos */
+      validationSchema={Yup.object().shape({
+        email: Yup.string()
+          .email("El email no es valido")
+          .required("El email es obligatorio"),
+        password: Yup.string().required("Las contraseña es obligatoria"),
+        //.matches(/(?=.*[0-9])/,'La contraseña debe tener al menos un numero')
+      })}
+    >
+  
+  
+      {/**Obtenemos de formik y se lo pasamos a nuestro formulario */}
+  
+      {(props) => {
+        const {
+          values,
+          touched,
+          errors,
+          isSubmitting,
+          handleChange,
+          handleBlur,
+          handleSubmit,
+        } = props;
+  
+        {
+          /*return del formulario que vamos a implementar*/
+        }
+  
+        return (
+            <Container component='main' maxWidth='xs'>
         <CssBaseline/>
         <div className={classes.paper}>
             <Avatar className={classes.avatar}>
                 <LockOutlinedIcon/>
             </Avatar>
             <Typography component='h1'>Acceso</Typography> 
-           <LoginFom submit={submit} classes={classes}/>
+           <LoginFom
+              values={values}
+              touched={touched}
+              errors={errors}
+              isSubmitting={isSubmitting}
+              handleChange={handleChange}
+              handleBlur={handleBlur}
+              handleSubmit={handleSubmit}
+            classes={classes}/>
         </div>
         <Box my={8}>
            <CopyRight/>
         </Box>
     </Container>
-    );
-}
 
-export default LoginPage;
+        );
+      }}
+    </Formik>
+)
+};
+  export default LoginPage;

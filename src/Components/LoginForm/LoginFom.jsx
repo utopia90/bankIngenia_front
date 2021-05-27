@@ -94,6 +94,8 @@ const LoginForm = (props) => {
           <Link variant="body2" to="registro">{"No tengo cuenta"}</Link>
         </Grid>
       </Grid>
+      <p>Usuario:pruebas@pruebas</p>
+      <p>Password:pruebas</p>
     </form>
   );
 };

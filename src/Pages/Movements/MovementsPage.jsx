@@ -22,9 +22,13 @@ const useStyles = makeStyles({
 export default function MovementsPage() {
     const classes = useStyles();
     const [movements, setMovements] = useState([])
-
+    const [idUser, setId] = useState('')
+    useEffect(() => {
+     let idre= localStorage.getItem("userId");
+     setId(idre)
+    }, [])
     const getMovements = () => {
-        let idUser=1;
+ 
         axios.get(`https://projectbankingenia.herokuapp.com/api/movement/userId/${idUser}`)
         .then(res => {
           const movens = res.data;

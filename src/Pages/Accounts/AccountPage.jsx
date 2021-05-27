@@ -31,12 +31,15 @@ const useStyles = makeStyles((theme) => ({
 
 const AccountPage = () => {
 
-
+  const [idUser, setId] = useState('')
+  useEffect(() => {
+   let idre= localStorage.getItem("userId");
+   setId(idre)
+  }, [])
   const [accounts, setAccounts] = useState([]);
   const classes = useStyles();
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
   const getAcccountsByUserID = () => {
-    let idUser = 1;
     axios
       .get(
         `https://projectbankingenia.herokuapp.com/api/user/${idUser}`

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { useHistory } from "react-router-dom";
@@ -116,6 +116,11 @@ const mainMenuList = [
 ];
 
 const Sidebar = (props) => {
+  const [name, setName] = useState('')
+  useEffect(() => {
+   let user= localStorage.getItem("userName");
+    setName(user)
+  }, [])
   const { window } = props;
   const classes = useStyles();
   const theme = useTheme();
@@ -260,7 +265,7 @@ const Sidebar = (props) => {
                   width='100%'
                   className={classes.title}
                 >
-                  NOMBRE APELLIDO
+                 {name}
                 </Typography>
                 <img src={expandIcon} className="expand-icon" />
               </Button>

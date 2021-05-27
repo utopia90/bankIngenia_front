@@ -1,3 +1,4 @@
+import React, {useState, useEffect} from 'react'
 import {BrowserRouter as Router, Switch, Route, Redirect} from 'react-router-dom'
 import './App.css';
 import Sidebar from './Components/Sidebar/Sidebar';
@@ -7,11 +8,11 @@ import RegisterPage from './Pages/Register/RegisterPage';
 
 function App() {
   //TODO para pruebas 
- // let loggedIn= sessionStorage.getItem('logged')
-  //Todo false y sale directamente el login, true y sale el dashboard
-  let loggedIn= true;
-
-
+  const [loggedIn, setLoggedIn] = useState(sessionStorage.getItem('logged'))
+  useEffect(() => {
+    let logg= sessionStorage.getItem('logged');
+    setLoggedIn(logg)
+  }, [loggedIn]);
   return (
     
    <Router>

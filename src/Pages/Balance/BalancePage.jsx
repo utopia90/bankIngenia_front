@@ -43,6 +43,13 @@ import { object } from "yup";
 import { EqualizerTwoTone } from "@material-ui/icons";
 
 export default function BalancePage() {
+
+
+  const [idUser, setId] = useState('')
+  useEffect(() => {
+   let idre= localStorage.getItem("userId");
+   setId(idre)
+  }, [])
   let [income, setIncome] = useState(0);
   let [expenses, setExpenses] = useState(0);
   let [incomeMovements, setIncomeMovements] = useState([]);
@@ -104,7 +111,6 @@ export default function BalancePage() {
   }, [changeIncomeGraphic, changeLinearGraphic]);
 
   const getTotalIncome = () => {
-    let idUser = 1;
     let incomes = [];
     axios
       .get(
@@ -171,8 +177,7 @@ export default function BalancePage() {
   };
 
   const getTotalExpenses = () => {
-    let idUser = 1;
-    let expensesArray = [];
+       let expensesArray = [];
 
     axios
       .get(
@@ -189,7 +194,6 @@ export default function BalancePage() {
     setExpensesMovements(expensesArray);
   };
   const getTotalExpensesFuel = () => {
-    let idUser = 1;
 
     axios
       .get(
@@ -204,7 +208,6 @@ export default function BalancePage() {
       });
   };
   const getTotalExpensesRestaurants = () => {
-    let idUser = 1;
 
     axios
       .get(
@@ -219,7 +222,6 @@ export default function BalancePage() {
       });
   };
   const getTotalExpensesServices = () => {
-    let idUser = 1;
 
     axios
       .get(
@@ -234,8 +236,6 @@ export default function BalancePage() {
       });
   };
   const getTotalExpensesClothes = () => {
-    let idUser = 1;
-
     axios
       .get(
         `https://projectbankingenia.herokuapp.com/api/movements-user-date-operation-category/userId/${idUser}?startdate=2020-01-13&finishdate=2021-09-20&operation=REST&category=CLOTHES`
@@ -249,7 +249,6 @@ export default function BalancePage() {
       });
   };
   const getTotalExpensesPaid = () => {
-    let idUser = 1;
     axios
       .get(
         `https://projectbankingenia.herokuapp.com/api/movements-user-date-operation-category/userId/${idUser}?startdate=2020-01-13&finishdate=2021-09-20&operation=REST&category=PAID`

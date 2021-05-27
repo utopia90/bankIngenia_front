@@ -34,11 +34,16 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const BankcardPage = () => {
+  const [idUser, setId] = useState('')
+  useEffect(() => {
+   let idre= localStorage.getItem("userId");
+   setId(idre)
+  }, [])
   const [bankCards, setCardsBank] = useState([]);
   const classes = useStyles();
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
   const getCardBankByUserID = () => {
-    let idUser = 1;
+
     axios
       .get(
         `https://projectbankingenia.herokuapp.com/api/bankcard-user-id/${idUser}`

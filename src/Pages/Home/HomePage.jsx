@@ -70,6 +70,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 export default function HomePage() {
+  const [idUser, setId] = useState('')
+  useEffect(() => {
+   let idre= localStorage.getItem("userId");
+   setId(idre)
+  }, [])
   const location = useLocation();
   const history = useHistory();
   const navegar = (ruta) => {
@@ -140,7 +145,7 @@ export default function HomePage() {
   }, [changeIncomeGraphic, changeLinearGraphic]);
 
   const getTotalIncome = () => {
-    let idUser = 1;
+
     let incomes = [];
     axios
       .get(
@@ -207,7 +212,7 @@ export default function HomePage() {
   };
 
   const getTotalExpenses = () => {
-    let idUser = 1;
+
     let expensesArray = [];
 
     axios
@@ -225,7 +230,6 @@ export default function HomePage() {
     setExpensesMovements(expensesArray);
   };
   const getTotalExpensesFuel = () => {
-    let idUser = 1;
 
     axios
       .get(
@@ -240,7 +244,7 @@ export default function HomePage() {
       });
   };
   const getTotalExpensesRestaurants = () => {
-    let idUser = 1;
+
 
     axios
       .get(
@@ -255,7 +259,7 @@ export default function HomePage() {
       });
   };
   const getTotalExpensesServices = () => {
-    let idUser = 1;
+
 
     axios
       .get(
@@ -270,7 +274,7 @@ export default function HomePage() {
       });
   };
   const getTotalExpensesClothes = () => {
-    let idUser = 1;
+
 
     axios
       .get(
@@ -285,7 +289,7 @@ export default function HomePage() {
       });
   };
   const getTotalExpensesPaid = () => {
-    let idUser = 1;
+
     axios
       .get(
         `https://projectbankingenia.herokuapp.com/api/movements-user-date-operation-category/userId/${idUser}?startdate=2020-01-13&finishdate=2021-09-20&operation=REST&category=PAID`
@@ -309,7 +313,7 @@ export default function HomePage() {
   };
 
   const getCardBankByUserID = () => {
-    let idUser = 1;
+
     axios
       .get(
         `https://projectbankingenia.herokuapp.com/api/bankcard-user-id/${idUser}`
@@ -321,7 +325,7 @@ export default function HomePage() {
       });
   };
   const getMovements = () => {
-    let idUser = 1;
+
     axios
       .get(
         `https://projectbankingenia.herokuapp.com/api/movement/userId/${idUser}`

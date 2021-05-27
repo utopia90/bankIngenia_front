@@ -42,7 +42,6 @@ const LoginPage = () => {
         .then(res => {
           const token = res.data;
           sessionStorage.setItem("logged",token);
-          sessionStorage.setItem("userid",token);
           console.log(token)
           traerUsuarioporNombreUsu(user.email)
           history.push('/dashboard/inicio');
@@ -56,7 +55,7 @@ const LoginPage = () => {
       .then(res => {
         const usu = res.data;
         localStorage.setItem("userName",usu.name+" "+usu.surname);
-        localStorage.setItem("userid",usu.id);
+        localStorage.setItem("userId",usu.id);
   
       })
 
@@ -71,7 +70,9 @@ return(
   
         //esto se va a ejecutar al realizar el submit
         //simulamos una peticion http
+  
         if(values){
+          alert("hola")
             let user={
             email:values.email,
             password:values.password

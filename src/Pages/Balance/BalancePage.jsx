@@ -43,9 +43,7 @@ import { object } from "yup";
 import { EqualizerTwoTone } from "@material-ui/icons";
 
 export default function BalancePage() {
-
-
-  let idUser= localStorage.getItem("userId");
+  let idUser = localStorage.getItem("userId");
   let [income, setIncome] = useState(0);
   let [expenses, setExpenses] = useState(0);
   let [incomeMovements, setIncomeMovements] = useState([]);
@@ -92,16 +90,13 @@ export default function BalancePage() {
     getTotalExpensesClothes();
     getTotalExpensesPaid();
     getTotalCategoryData();
-
-
   }, []);
 
   useEffect(() => {
     getTotalIncomeData();
     getTotalExpensesData();
     getTotalCategoryData();
-
-  }, [income, incomeMovements, expenses, expensesMovements]);
+  }, [income, expenses]);
 
   useEffect(() => {
     getTotalCategoryData();
@@ -141,7 +136,7 @@ export default function BalancePage() {
     for (let i = 0; i < expensesMovements.length; i++) {
       data.push({ argument: i, value: expensesMovements[i] });
     }
-    data.push({ argument: data.length, value: income });
+    data.push({ argument: data.length, value: expenses });
 
     setExpensesData(data);
   };
@@ -174,7 +169,7 @@ export default function BalancePage() {
   };
 
   const getTotalExpenses = () => {
-       let expensesArray = [];
+    let expensesArray = [];
 
     axios
       .get(
@@ -191,7 +186,6 @@ export default function BalancePage() {
     setExpensesMovements(expensesArray);
   };
   const getTotalExpensesFuel = () => {
-
     axios
       .get(
         `https://projectbankingenia.herokuapp.com/api/movements-user-date-operation-category/userId/${idUser}?startdate=2020-01-13&finishdate=2021-09-20&operation=REST&category=FUEL`
@@ -205,7 +199,6 @@ export default function BalancePage() {
       });
   };
   const getTotalExpensesRestaurants = () => {
-
     axios
       .get(
         `https://projectbankingenia.herokuapp.com/api/movements-user-date-operation-category/userId/${idUser}?startdate=2020-01-13&finishdate=2021-09-20&operation=REST&category=RESTAURANTS`
@@ -219,7 +212,6 @@ export default function BalancePage() {
       });
   };
   const getTotalExpensesServices = () => {
-
     axios
       .get(
         `https://projectbankingenia.herokuapp.com/api/movements-user-date-operation-category/userId/${idUser}?startdate=2020-01-13&finishdate=2021-09-20&operation=REST&category=UTILITIES`
@@ -281,7 +273,7 @@ export default function BalancePage() {
       "& .MuiTextField-root": {
         margin: theme.spacing(1),
         width: "210ch",
-        color: "pink"
+        color: "pink",
       },
     },
   }));
@@ -343,7 +335,6 @@ export default function BalancePage() {
               </div>
               <div className="balance-container__left__graphic-container">
                 {changeLinearGraphic ? (
-
                   <Paper>
                     <Chart data={incomeData}>
                       <ArgumentAxis className={classes.lineSeries} />
@@ -352,9 +343,7 @@ export default function BalancePage() {
                       <LineSeries valueField="value" argumentField="argument" />
                     </Chart>
                   </Paper>
-
                 ) : (
-
                   <Paper>
                     <Chart data={expensesData}>
                       <ArgumentAxis className={classes.lineSeries} />
@@ -363,7 +352,6 @@ export default function BalancePage() {
                       <LineSeries valueField="value" argumentField="argument" />
                     </Chart>
                   </Paper>
-
                 )}
               </div>
             </div>
@@ -389,7 +377,7 @@ export default function BalancePage() {
               <div className="balance-container__right__graphic-container">
                 <div className="balance-container__right__graphic">
                   {changeIncomeGraphic ? (
-                    <Paper className={classes.chart} >
+                    <Paper className={classes.chart}>
                       <Chart data={categoryData}>
                         <PieSeries valueField="area" argumentField="category" />
                       </Chart>

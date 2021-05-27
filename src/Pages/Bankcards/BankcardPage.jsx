@@ -34,12 +34,11 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const BankcardPage = () => {
-  let idUser= localStorage.getItem("userId");
+  let idUser = localStorage.getItem("userId");
   const [bankCards, setCardsBank] = useState([]);
   const classes = useStyles();
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
   const getCardBankByUserID = () => {
-
     axios
       .get(
         `https://projectbankingenia.herokuapp.com/api/bankcard-user-id/${idUser}`
@@ -60,33 +59,22 @@ const BankcardPage = () => {
 
       <Container>
         <Grid container spacing={3} className="card-container">
-
-
           {bankCards.map((card, index) => (
-            <Grid
-              key={index}
-              item
-              xs={12}
-              md={3}
-              lg={3}
-              
-            >
+            <Grid key={index} item xs={12} md={3} lg={3}>
               <Paper>
                 <img src={bbvaIcon} className="bbva-icon" />
                 <h1 className="amountStyle">
                   {card.account.currentCreditCardBalance} €
                 </h1>
-                <Typography fontSize="28px" className='flexi'>
-           
-           {card.bankCardType==='VISA'?
-           <img src={visaIcon} className="bbva-icon" />:
-           <img src={masterCardIcon} className="bbva-icon" />
-           }
-                  
-                  <span className="account-balance-txt">
-                    {  card.pan}
-                  </span>
-               </Typography>
+                <Typography fontSize="28px" className="flexi">
+                  {card.bankCardType === "VISA" ? (
+                    <img src={visaIcon} className="bbva-icon" />
+                  ) : (
+                    <img src={masterCardIcon} className="bbva-icon" />
+                  )}
+
+                  <span className="account-balance-txt">{card.pan}</span>
+                </Typography>
               </Paper>
             </Grid>
           ))}

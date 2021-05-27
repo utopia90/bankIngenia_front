@@ -102,7 +102,7 @@ export default function HomePage() {
   let [categoryData, setCategoryData] = useState([]);
   let [barCategoryData, setBarCategoryData] = useState([]);
 
-  let [changeIncomeGraphic, setChangeIncomeGraphic] = useState(false);
+  let [changeIncomeGraphic, setChangeIncomeGraphic] = useState(true);
   let [changeLinearGraphic, setChangeLinearGraphic] = useState(true);
 
   let [inputValue, setInputValue] = useState("");
@@ -136,7 +136,7 @@ export default function HomePage() {
     getTotalIncomeData();
     getTotalExpensesData();
     getTotalCategoryData();
-  }, [income, incomeMovements, expenses, expensesMovements]);
+  }, [income, expenses]);
 
   useEffect(() => {
     getTotalCategoryData();
@@ -177,7 +177,7 @@ export default function HomePage() {
     for (let i = 0; i < expensesMovements.length; i++) {
       data.push({ argument: i, value: expensesMovements[i] });
     }
-    data.push({ argument: data.length, value: income });
+    data.push({ argument: data.length, value: expenses });
 
     setExpensesData(data);
   };

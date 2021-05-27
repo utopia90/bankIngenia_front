@@ -8,30 +8,24 @@ import { List, ListItem, ListItemIcon, ListItemText } from "@material-ui/core";
 
 //Iconos de material UI
 
-
-import { ReactComponent  as HomePageIcon } from './../../Assets/Svg/house-icon.svg';
-import { ReactComponent  as AccountPageIcon } from './../../Assets/Svg/account-icon.svg';
-import { ReactComponent  as BankCardIcon } from './../../Assets/Svg/card-icon.svg';
-import { ReactComponent  as  MovementsIcon} from './../../Assets/Svg/movements-icon.svg';
-import { ReactComponent  as  BalanceIcon} from './../../Assets/Svg/balance-icon.svg';
-
-
-
-
-
+import { ReactComponent as HomePageIcon } from "./../../Assets/Svg/house-icon.svg";
+import { ReactComponent as AccountPageIcon } from "./../../Assets/Svg/account-icon.svg";
+import { ReactComponent as BankCardIcon } from "./../../Assets/Svg/card-icon.svg";
+import { ReactComponent as MovementsIcon } from "./../../Assets/Svg/movements-icon.svg";
+import { ReactComponent as BalanceIcon } from "./../../Assets/Svg/balance-icon.svg";
 
 const getIcon = (icon) => {
   switch (icon) {
     case "INICIO":
-      return <HomePageIcon/>
+      return <HomePageIcon />;
     case "CUENTAS":
       return <AccountPageIcon />;
     case "TARJETAS":
-      return <BankCardIcon/>;
+      return <BankCardIcon />;
     case "MOVIMIENTOS":
-      return <MovementsIcon/>;
+      return <MovementsIcon />;
     case "BALANCE":
-      return <BalanceIcon/>;
+      return <BalanceIcon />;
     default:
       return <HomePageIcon />;
   }
@@ -50,7 +44,7 @@ const MenuListItems = ({ list }) => {
   return (
     <List>
       {list.map(({ text, path, icon }, index) => (
-        <ListItem key={index} button onClick={() => navegar(path)} >
+        <ListItem key={index} button onClick={() => navegar(path)}>
           <ListItemIcon>
             {/* Llamamos al método getIcon que nos va a devover el 
                             componente Icono que toque */}

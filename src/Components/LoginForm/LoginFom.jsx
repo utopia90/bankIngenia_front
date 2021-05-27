@@ -39,16 +39,16 @@ const LoginForm = (props) => {
         autoComplete="email"
         variant="outlined"
         name="email"
-      type="text"
-      placeholder="Email/Usuario"
-      value={values.email}
-      onChange={handleChange}
-      onBlur={handleBlur}
-      className={errors.email && touched.email && "error"}
+        type="text"
+        placeholder="Email/Usuario"
+        value={values.email}
+        onChange={handleChange}
+        onBlur={handleBlur}
+        className={errors.email && touched.email && "error"}
       ></TextField>
-          {errors.email && touched.email && (
-      <div className="error">{errors.email}</div>
-    )}
+      {errors.email && touched.email && (
+        <div className="error">{errors.email}</div>
+      )}
 
       <TextField
         required
@@ -62,14 +62,14 @@ const LoginForm = (props) => {
         autoComplete="current-password"
         variant="outlined"
         placeholder="Password"
-      value={values.password}
-      onChange={handleChange}
-      onBlur={handleBlur}
-      className={errors.password && touched.password && "error"}
+        value={values.password}
+        onChange={handleChange}
+        onBlur={handleBlur}
+        className={errors.password && touched.password && "error"}
       ></TextField>
-          {errors.password && touched.password && (
-      <div className="error">{errors.password}</div>
-    )}
+      {errors.password && touched.password && (
+        <div className="error">{errors.password}</div>
+      )}
       <FormControlLabel
         control={<Checkbox value="remenber" color="secondary" />}
         label="Recordad datos"
@@ -85,9 +85,10 @@ const LoginForm = (props) => {
         Acceder
       </Button>
       <Grid container>
-
         <Grid item xs={12} sm={6}>
-          <Link variant="body2" to="/registro">{"No tengo cuenta"}</Link>
+          <Link variant="body2" to="/registro">
+            {"No tengo cuenta"}
+          </Link>
         </Grid>
       </Grid>
       <p>Usuario:pruebas@pruebas.com</p>

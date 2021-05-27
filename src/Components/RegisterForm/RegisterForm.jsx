@@ -28,7 +28,7 @@ const RegisterForm = (props) => {
   } = props;
   return (
     <form onSubmit={handleSubmit} className={classes.form}>
-          <TextField
+      <TextField
         required
         fullWidth
         autoFocus
@@ -48,7 +48,6 @@ const RegisterForm = (props) => {
       {errors.name && touched.name && (
         <div className="error">{errors.name}</div>
       )}
-
 
       <TextField
         required
@@ -111,7 +110,6 @@ const RegisterForm = (props) => {
       {errors.password && touched.password && (
         <div className="error">{errors.password}</div>
       )}
-
 
       <FormControlLabel
         control={<Checkbox value="remenber" color="secondary" />}

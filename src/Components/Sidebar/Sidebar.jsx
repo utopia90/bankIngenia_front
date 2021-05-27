@@ -63,10 +63,9 @@ const useStyles = makeStyles((theme) => ({
       marginLeft: drawerWidth,
 
       color: "inherit",
-     
     },
     color: "inherit",
-    backgroundColor: "white"
+    backgroundColor: "white",
   },
   menuButton: {
     marginRight: theme.spacing(2),
@@ -116,11 +115,11 @@ const mainMenuList = [
 ];
 
 const Sidebar = (props) => {
-  const [name, setName] = useState('')
+  const [name, setName] = useState("");
   useEffect(() => {
-   let user= localStorage.getItem("userName");
-    setName(user)
-  }, [])
+    let user = localStorage.getItem("userName");
+    setName(user);
+  }, []);
   const { window } = props;
   const classes = useStyles();
   const theme = useTheme();
@@ -176,12 +175,8 @@ const Sidebar = (props) => {
   return (
     <div className={classes.root}>
       <CssBaseline />
-      <AppBar position="fixed" className={classes.appBar} >
-
+      <AppBar position="fixed" className={classes.appBar}>
         <Toolbar>
-
-
-
           <IconButton
             color="inherit"
             aria-label="open drawer"
@@ -192,124 +187,104 @@ const Sidebar = (props) => {
             <MenuIcon />
           </IconButton>
 
-
-
-
-
-
-
-
-
-
-
-<div className="toolbar-father">
-
-
-          <Typography
-            component="h1"
-            variant="h6"
-            color="inherit"
-            className={classes.title}
-            noWrap
-          >
-            Bienvenido/a a tu banca
-          </Typography>
-
-
-
-
-<div className="secondSection">
-          {/* Sección de Notificaciones para el usuario */}
-          <div className="notifications-section">
-            <IconButton color="inherit">
-              <Badge color="secondary" badgeContent={10}>
-                <NotificationIcon />
-              </Badge>
-            </IconButton>
+          <div className="toolbar-father">
             <Typography
               component="h1"
               variant="h6"
               color="inherit"
-              fontWeight="400"
-              fontSize="16px"
-              cursor="pointer"
-              noWrap
               className={classes.title}
+              noWrap
             >
-              Notificaciones
+              Bienvenido/a a tu banca
             </Typography>
-            </div>
 
-
-
-
-
-
-
-            <div className="user-section">
-              <img src={UserIcon} className="user-icon" />
-              <Button
-                ref={anchoRef}
-                aria-controls={openLogout ? "menu-list-grow" : undefined}
-                aria-haspopup="true"
-                onClick={handleToggle}
-                className="user__btn"
-              >
+            <div className="secondSection">
+              {/* Sección de Notificaciones para el usuario */}
+              <div className="notifications-section">
+                <IconButton color="inherit">
+                  <Badge color="secondary" badgeContent={10}>
+                    <NotificationIcon />
+                  </Badge>
+                </IconButton>
                 <Typography
                   component="h1"
                   variant="h6"
                   color="inherit"
-                  fontWeight="500"
-                  fontSize="10px"
+                  fontWeight="400"
+                  fontSize="16px"
                   cursor="pointer"
-                  width='100%'
+                  noWrap
                   className={classes.title}
                 >
-                 {name}
+                  Notificaciones
                 </Typography>
-                <img src={expandIcon} className="expand-icon" />
-              </Button>
-       
+              </div>
 
-            <Popper
-              open={openLogout}
-              anchorEl={anchoRef.current}
-              role={undefined}
-              transition
-              disablePortal
-            >
-              {({ TransitionProps, placement }) => (
-                <Grow
-                  {...TransitionProps}
-                  style={{
-                    transformOrigin:
-                      placement === "bottom" ? "center top" : "center bottom",
-                  }}
+              <div className="user-section">
+                <img src={UserIcon} className="user-icon" />
+                <Button
+                  ref={anchoRef}
+                  aria-controls={openLogout ? "menu-list-grow" : undefined}
+                  aria-haspopup="true"
+                  onClick={handleToggle}
+                  className="user__btn"
                 >
-                  <Paper>
-                    <ClickAwayListener onClickAway={handleClose}>
-                      <MenuList
-                        autoFocusItem={openLogout}
-                        id="menu-list-grow"
-                        onKeyDown={handleListKeyDown}
-                      >
-                        <MenuItem>
-                          <div onClick={logout}>
-                            Desconectar
-                            <IconButton color="inherit">
-                              <ExitToAppIcon />
-                            </IconButton>
-                          </div>
-                        </MenuItem>
-                      </MenuList>
-                    </ClickAwayListener>
-                  </Paper>
-                </Grow>
-              )}
-            </Popper>
+                  <Typography
+                    component="h1"
+                    variant="h6"
+                    color="inherit"
+                    fontWeight="500"
+                    fontSize="10px"
+                    cursor="pointer"
+                    width="100%"
+                    className={classes.title}
+                  >
+                    {name}
+                  </Typography>
+                  <img src={expandIcon} className="expand-icon" />
+                </Button>
+
+                <Popper
+                  open={openLogout}
+                  anchorEl={anchoRef.current}
+                  role={undefined}
+                  transition
+                  disablePortal
+                >
+                  {({ TransitionProps, placement }) => (
+                    <Grow
+                      {...TransitionProps}
+                      style={{
+                        transformOrigin:
+                          placement === "bottom"
+                            ? "center top"
+                            : "center bottom",
+                      }}
+                    >
+                      <Paper>
+                        <ClickAwayListener onClickAway={handleClose}>
+                          <MenuList
+                            autoFocusItem={openLogout}
+                            id="menu-list-grow"
+                            onKeyDown={handleListKeyDown}
+                          >
+                            <MenuItem>
+                              <div onClick={logout}>
+                                Desconectar
+                                <IconButton color="inherit">
+                                  <ExitToAppIcon />
+                                </IconButton>
+                              </div>
+                            </MenuItem>
+                          </MenuList>
+                        </ClickAwayListener>
+                      </Paper>
+                    </Grow>
+                  )}
+                </Popper>
+              </div>
             </div>
-</div>
-</div>
+          </div>
         </Toolbar>
       </AppBar>
       <nav className={classes.drawer} aria-label="mailbox folders">

@@ -93,6 +93,8 @@ export default function BalancePage() {
   useEffect(() => {
     getTotalIncomeData();
     getTotalExpensesData();
+    getTotalCategoryData();
+
   }, [income, incomeMovements, expenses, expensesMovements]);
 
   useEffect(() => {

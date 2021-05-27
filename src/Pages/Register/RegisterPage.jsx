@@ -52,6 +52,8 @@ return(
       initialValues={{
         email: "",
         password: "",
+        name:"",
+        surname:""
       }}
       onSubmit={(values, { setSubmitting }) => {
   
@@ -60,7 +62,9 @@ return(
         if(values){
             let user={
             email:values.email,
-            password:values.password
+            password:values.password,
+            name:values.name,
+            surname:values.surname,
         }
         Registro(user)
         }
@@ -75,6 +79,8 @@ return(
           .email("El email no es valido")
           .required("El email es obligatorio"),
         password: Yup.string().required("Las contraseña es obligatoria"),
+        name: Yup.string().required("El nombre es obligatorio"),
+        surname: Yup.string().required("El apellido es obligatorio"),
         //.matches(/(?=.*[0-9])/,'La contraseña debe tener al menos un numero')
       })}
     >

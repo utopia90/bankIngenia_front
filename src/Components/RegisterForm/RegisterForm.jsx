@@ -28,6 +28,48 @@ const RegisterForm = (props) => {
   } = props;
   return (
     <form onSubmit={handleSubmit} className={classes.form}>
+          <TextField
+        required
+        fullWidth
+        autoFocus
+        id="name"
+        type="text"
+        label="name"
+        name="name"
+        margin="normal"
+        autoComplete="current-password"
+        variant="outlined"
+        placeholder="name"
+        value={values.name}
+        onChange={handleChange}
+        onBlur={handleBlur}
+        className={errors.name && touched.name && "error"}
+      ></TextField>
+      {errors.name && touched.name && (
+        <div className="error">{errors.name}</div>
+      )}
+
+
+      <TextField
+        required
+        fullWidth
+        autoFocus
+        id="surname"
+        type="text"
+        label="surname"
+        name="surname"
+        margin="normal"
+        autoComplete="current-password"
+        variant="outlined"
+        placeholder="surname"
+        value={values.surname}
+        onChange={handleChange}
+        onBlur={handleBlur}
+        className={errors.surname && touched.surname && "error"}
+      ></TextField>
+      {errors.surname && touched.surname && (
+        <div className="error">{errors.surname}</div>
+      )}
       <TextField
         required
         fullWidth
@@ -69,6 +111,8 @@ const RegisterForm = (props) => {
       {errors.password && touched.password && (
         <div className="error">{errors.password}</div>
       )}
+
+
       <FormControlLabel
         control={<Checkbox value="remenber" color="secondary" />}
         label="Recordad datos"

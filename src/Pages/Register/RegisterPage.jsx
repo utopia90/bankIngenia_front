@@ -110,7 +110,7 @@ return(
             <Avatar className={classes.avatar}>
                 <LockOutlinedIcon/>
             </Avatar>
-            <Typography component='h1'>Acceso</Typography> 
+            <Typography component='h1'>Registro</Typography> 
            <RegisterForm
               values={values}
               touched={touched}

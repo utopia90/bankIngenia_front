@@ -40,18 +40,19 @@ const LoginPage = () => {
 
         axios.post(`https://projectbankingenia.herokuapp.com/auth/login`,user)
         .then(res => {
-          const token = res.data;
+          const token = res.data.jwt;
           sessionStorage.setItem("logged",token);
           console.log(token)
           traerUsuarioporNombreUsu(user.email)
+          console.log(user)
           history.push('/dashboard/inicio');
     
         })
  
     }
     const traerUsuarioporNombreUsu = (nomUsu) => {
-
-      axios.get(`https://projectbankingenia.herokuapp.com/api/user-mail/${nomUsu}`)
+console.log(nomUsu)
+      axios.get('https://projectbankingenia.herokuapp.com/api/user-mail/'+nomUsu)
       .then(res => {
         const usu = res.data;
         localStorage.setItem("userName",usu.name+" "+usu.surname);
@@ -67,12 +68,8 @@ return(
         password: "",
       }}
       onSubmit={(values, { setSubmitting }) => {
-  
-        //esto se va a ejecutar al realizar el submit
-        //simulamos una peticion http
-  
         if(values){
-          alert("hola")
+          console.log(values)
             let user={
             email:values.email,
             password:values.password

@@ -34,11 +34,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const BankcardPage = () => {
-  const [idUser, setId] = useState('')
-  useEffect(() => {
-   let idre= localStorage.getItem("userId");
-   setId(idre)
-  }, [])
+  let idUser= localStorage.getItem("userId");
   const [bankCards, setCardsBank] = useState([]);
   const classes = useStyles();
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);

@@ -91,10 +91,10 @@ const LoginForm = (props) => {
           </Link>
         </Grid>
         <Grid item xs={12} sm={6}>
-          <Link variant="body2" to="registro">{"No tengo cuenta"}</Link>
+          <Link variant="body2" to="/registro">{"No tengo cuenta"}</Link>
         </Grid>
       </Grid>
-      <p>Usuario:pruebas@pruebas</p>
+      <p>Usuario:pruebas@pruebas.com</p>
       <p>Password:pruebas</p>
     </form>
   );

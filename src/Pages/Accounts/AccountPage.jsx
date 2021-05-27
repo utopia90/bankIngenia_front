@@ -30,12 +30,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const AccountPage = () => {
-
-  const [idUser, setId] = useState('')
-  useEffect(() => {
-   let idre= localStorage.getItem("userId");
-   setId(idre)
-  }, [])
+  let idUser= localStorage.getItem("userId");
   const [accounts, setAccounts] = useState([]);
   const classes = useStyles();
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);

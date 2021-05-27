@@ -70,11 +70,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 export default function HomePage() {
-  const [idUser, setId] = useState('')
-  useEffect(() => {
-   let idre= localStorage.getItem("userId");
-   setId(idre)
-  }, [])
+
+   let idUser= localStorage.getItem("userId");
+
   const location = useLocation();
   const history = useHistory();
   const navegar = (ruta) => {

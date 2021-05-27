@@ -45,11 +45,7 @@ import { EqualizerTwoTone } from "@material-ui/icons";
 export default function BalancePage() {
 
 
-  const [idUser, setId] = useState('')
-  useEffect(() => {
-   let idre= localStorage.getItem("userId");
-   setId(idre)
-  }, [])
+  let idUser= localStorage.getItem("userId");
   let [income, setIncome] = useState(0);
   let [expenses, setExpenses] = useState(0);
   let [incomeMovements, setIncomeMovements] = useState([]);

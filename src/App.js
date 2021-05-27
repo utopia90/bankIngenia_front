@@ -8,11 +8,8 @@ import RegisterPage from './Pages/Register/RegisterPage';
 
 function App() {
   //TODO para pruebas 
-  const [loggedIn, setLoggedIn] = useState(sessionStorage.getItem('logged'))
-  useEffect(() => {
-    let logg= sessionStorage.getItem('logged');
-    setLoggedIn(logg)
-  }, [loggedIn]);
+let loggedIn=sessionStorage.getItem('logged');
+
   return (
     
    <Router>

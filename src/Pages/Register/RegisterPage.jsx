@@ -65,7 +65,6 @@ const RegisterPage = () => {
       onSubmit={(values, { setSubmitting }) => {
         //esto se va a ejecutar al realizar el submit
         //simulamos una peticion http
-<<<<<<< HEAD
         if(values){
             let user={
             email:values.email,
@@ -74,14 +73,7 @@ const RegisterPage = () => {
             surname:values.surname,
         }
         Registro(user)
-=======
-        if (values) {
-          let user = {
-            email: values.email,
-            password: values.password,
-          };
-          Registro(user);
->>>>>>> 2771ddb0f63967455f9dcb7ef674d7b09508a64c
+
         }
 
         setSubmitting(false);

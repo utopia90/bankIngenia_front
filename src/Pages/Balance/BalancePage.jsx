@@ -60,7 +60,7 @@ export default function BalancePage() {
   let [categoryData, setCategoryData] = useState([]);
   let [barCategoryData, setBarCategoryData] = useState([]);
 
-  let [changeIncomeGraphic, setChangeIncomeGraphic] = useState(false);
+  let [changeIncomeGraphic, setChangeIncomeGraphic] = useState(true);
   let [changeLinearGraphic, setChangeLinearGraphic] = useState(true);
 
   let [inputValue, setInputValue] = useState("");

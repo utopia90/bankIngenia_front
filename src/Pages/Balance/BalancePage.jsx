@@ -97,6 +97,7 @@ export default function BalancePage() {
     getTotalExpensesPaid();
     getTotalCategoryData();
 
+
   }, []);
 
   useEffect(() => {
@@ -346,6 +347,7 @@ export default function BalancePage() {
               </div>
               <div className="balance-container__left__graphic-container">
                 {changeLinearGraphic ? (
+
                   <Paper>
                     <Chart data={incomeData}>
                       <ArgumentAxis className={classes.lineSeries} />
@@ -354,7 +356,9 @@ export default function BalancePage() {
                       <LineSeries valueField="value" argumentField="argument" />
                     </Chart>
                   </Paper>
+
                 ) : (
+
                   <Paper>
                     <Chart data={expensesData}>
                       <ArgumentAxis className={classes.lineSeries} />
@@ -363,6 +367,7 @@ export default function BalancePage() {
                       <LineSeries valueField="value" argumentField="argument" />
                     </Chart>
                   </Paper>
+
                 )}
               </div>
             </div>
@@ -388,7 +393,7 @@ export default function BalancePage() {
               <div className="balance-container__right__graphic-container">
                 <div className="balance-container__right__graphic">
                   {changeIncomeGraphic ? (
-                    <Paper className={classes.chart}>
+                    <Paper className={classes.chart} >
                       <Chart data={categoryData}>
                         <PieSeries valueField="area" argumentField="category" />
                       </Chart>

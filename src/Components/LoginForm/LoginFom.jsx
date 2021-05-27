@@ -85,11 +85,7 @@ const LoginForm = (props) => {
         Acceder
       </Button>
       <Grid container>
-        <Grid item xs={12} sm={6}>
-          <Link href="#" variant="body2">
-            {"he olvidado la contraseña"}
-          </Link>
-        </Grid>
+
         <Grid item xs={12} sm={6}>
           <Link variant="body2" to="/registro">{"No tengo cuenta"}</Link>
         </Grid>

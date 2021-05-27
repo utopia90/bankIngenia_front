@@ -8,7 +8,13 @@ import RegisterPage from './Pages/Register/RegisterPage';
 
 function App() {
   //TODO para pruebas 
-let loggedIn=sessionStorage.getItem('logged');
+
+  const [loggedIn, setLoggedIn] = useState([sessionStorage.getItem('logged')]);
+  useEffect(() => {
+let sesion = sessionStorage.getItem('logged')
+setLoggedIn(sesion)
+  }, [sessionStorage.getItem('logged')])
+
 
   return (
     

@@ -45,7 +45,7 @@ const LoginPage = () => {
           console.log(token)
           traerUsuarioporNombreUsu(user.email)
           console.log(user)
-          history.push('/dashboard/inicio');
+
     
         })
  
@@ -57,7 +57,8 @@ console.log(nomUsu)
         const usu = res.data;
         localStorage.setItem("userName",usu.name+" "+usu.surname);
         localStorage.setItem("userId",usu.id);
-  
+        window.location.replace('/');
+        history.push('/');
       })
 
   }

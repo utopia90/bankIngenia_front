@@ -45,3 +45,17 @@ padding:10px;
     .colorGris{
         color:grey;
     }
+
+    .padre{
+        display: flex;
+    }
+    .hijo{
+        display: flex;
+        flex-direction: column;
+    }
+
+   
+.balance-graphiccontainer__bottom{
+    display: flex;
+    flex-direction: column;
+}

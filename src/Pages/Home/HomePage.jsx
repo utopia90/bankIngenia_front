@@ -339,13 +339,12 @@ export default function HomePage() {
   }, []);
   return (
     <div className={classes.root}>
-      <h1>Inicio</h1>
-      <div className="homepage-container">
-        <div className="cards-movements-container">
-          <Grid container spacing={12}>
-            <Grid item xs={12} sm={6}>
-              <Paper className={classes.paper}>
-                <div className="flexi">
+      <Grid container spacing={3}>
+      <Grid item xs={12} sm={6}>
+          <Paper className={classes.paper}>
+
+<div className='tarjetas'>
+<div className="flexi">
                   <h1>Tarjetas</h1>{" "}
                   <h3
                     onClick={() => {
@@ -384,12 +383,14 @@ export default function HomePage() {
                     </Grid>
                   ))}
                 </Grid>
-              </Paper>
-            </Grid>
 
-            <Grid item xs={12} sm={6}>
-              <Paper className={classes.paper}>
-                <div className="flexi">
+
+
+</div>
+
+<div className='movimientos'>
+
+<div className="flexi">
                   <h1>Movimientos</h1>{" "}
                   <h3
                     onClick={() => {
@@ -451,15 +452,24 @@ export default function HomePage() {
                     </TableBody>
                   </Table>
                 </TableContainer>
-              </Paper>
-            </Grid>
-          </Grid>
-        </div>
-        <Grid container spacing={12}>
-          {incomeData === undefined ? (
+
+
+</div>
+
+
+
+
+            
+          </Paper>
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <Paper className={classes.paper}>
+                <div className='graficos'>
+
+                {incomeData === undefined ? (
             <h5>Cargando datos</h5>
           ) : (
-            <div className="balance-container">
+            <div className="">
               <div className="balance-container__top">
                 <form className={classes.root} noValidate autoComplete="off">
                   <div>
@@ -491,9 +501,9 @@ export default function HomePage() {
                   </div>
                 </form>
               </div>
-              <div></div>
+     
               <div className="balance-graphiccontainer__bottom">
-                <div className="balance-container__left">
+                <div className="">
                   <div className="balance-container__left__txt-container">
                     <h4
                       onClick={() => setChangeLinearGraphic(true)}
@@ -536,7 +546,7 @@ export default function HomePage() {
                     )}
                   </div>
                 </div>
-                <div className="balance-container__right">
+                <div className="">
                   <div className="balance-container__right__txt-container">
                     <div>
                       <span
@@ -623,8 +633,28 @@ export default function HomePage() {
               </div>
             </div>
           )}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                </div>
+
+
+          </Paper>
         </Grid>
+      </Grid>
       </div>
-    </div>
   );
 }

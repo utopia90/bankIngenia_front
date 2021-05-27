@@ -257,6 +257,7 @@ const Sidebar = (props) => {
                   fontWeight="500"
                   fontSize="10px"
                   cursor="pointer"
+                  width='100%'
                   className={classes.title}
                 >
                   NOMBRE APELLIDO

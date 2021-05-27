@@ -9,9 +9,6 @@ code {
   font-family: 'dmSans-regular';
 }
 
-body {
-  overflow-y: hidden;
-}
 
 @font-face {
   font-family: "dmSans-bold";

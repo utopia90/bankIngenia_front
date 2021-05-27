@@ -61,9 +61,12 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up("sm")]: {
       width: `calc(100% - ${drawerWidth}px)`,
       marginLeft: drawerWidth,
-      backgroundColor: "transparent",
+
       color: "inherit",
+     
     },
+    color: "inherit",
+    backgroundColor: "white"
   },
   menuButton: {
     marginRight: theme.spacing(2),
@@ -168,8 +171,12 @@ const Sidebar = (props) => {
   return (
     <div className={classes.root}>
       <CssBaseline />
-      <AppBar position="fixed" className={classes.appBar}>
+      <AppBar position="fixed" className={classes.appBar} >
+
         <Toolbar>
+
+
+
           <IconButton
             color="inherit"
             aria-label="open drawer"
@@ -179,6 +186,19 @@ const Sidebar = (props) => {
           >
             <MenuIcon />
           </IconButton>
+
+
+
+
+
+
+
+
+
+
+
+<div className="toolbar-father">
+
 
           <Typography
             component="h1"
@@ -190,6 +210,10 @@ const Sidebar = (props) => {
             Bienvenido/a a tu banca
           </Typography>
 
+
+
+
+<div className="secondSection">
           {/* Sección de Notificaciones para el usuario */}
           <div className="notifications-section">
             <IconButton color="inherit">
@@ -209,6 +233,13 @@ const Sidebar = (props) => {
             >
               Notificaciones
             </Typography>
+            </div>
+
+
+
+
+
+
 
             <div className="user-section">
               <img src={UserIcon} className="user-icon" />
@@ -232,7 +263,7 @@ const Sidebar = (props) => {
                 </Typography>
                 <img src={expandIcon} className="expand-icon" />
               </Button>
-            </div>
+       
 
             <Popper
               open={openLogout}
@@ -270,7 +301,9 @@ const Sidebar = (props) => {
                 </Grow>
               )}
             </Popper>
-          </div>
+            </div>
+</div>
+</div>
         </Toolbar>
       </AppBar>
       <nav className={classes.drawer} aria-label="mailbox folders">

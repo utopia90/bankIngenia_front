@@ -6,16 +6,27 @@
 }
 .notifications-section{
     display: flex;
-   
-    position: absolute;
-    right: 4rem;
+    flex-direction:row;
 }
-img.user-icon {
-    position: relative;
-    width: 2rem;
-    top: 1rem;
+.user-section {
+    display: flex;
+    flex-direction:row;
+margin-left: 20px;
+}
+.toolbar-father{
+    display: flex;
+    flex-direction:row; 
+    justify-content: space-between;
+    width: 100%;
+}
+.secondSection{
+    display: flex;
+    flex-direction:row; 
+    
+    justify-content: end;
 }
 
+/*
 h1.MuiTypography-root.makeStyles-title-8.MuiTypography-h6.MuiTypography-colorInherit.MuiTypography-noWrap {
     font-size: 1.2rem;
 }
@@ -27,11 +38,9 @@ h1.MuiTypography-root.makeStyles-title-8.MuiTypography-h6.MuiTypography-colorInh
     font-size: 1.2rem;
 
 }
-.user-section {
-    padding-left: 4rem;
-}
+
 
 .MuiTypography-body1 {
     font-family: "dmSans-Regular" !important;
 
-}
+}*/

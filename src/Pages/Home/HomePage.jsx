@@ -340,321 +340,305 @@ export default function HomePage() {
   return (
     <div className={classes.root}>
       <Grid container spacing={3}>
-      <Grid item xs={12} sm={6}>
+        <Grid item xs={12} sm={6}>
           <Paper className={classes.paper}>
-
-<div className='tarjetas'>
-<div className="flexi">
-                  <h1>Tarjetas</h1>{" "}
-                  <h3
-                    onClick={() => {
-                      navegar("/dashboard/tarjetas");
-                    }}
+            <div className="tarjetas">
+              <div className="flexi">
+                <h1>Tarjetas</h1>{" "}
+                <h3
+                  onClick={() => {
+                    navegar("/dashboard/tarjetas");
+                  }}
+                >
+                  Ver Tarjetas
+                </h3>
+              </div>
+              <Grid container spacing={3}>
+                {bankCards.map((card, index) => (
+                  <Grid
+                    key={index}
+                    item
+                    xs={12}
+                    md={6}
+                    lg={6}
+                    className="card-container"
                   >
-                    Ver Tarjetas
-                  </h3>
-                </div>
-                <Grid container spacing={3}>
-                  {bankCards.map((card, index) => (
-                    <Grid
-                      key={index}
-                      item
-                      xs={12}
-                      md={6}
-                      lg={6}
-                      className="card-container"
-                    >
-                      <Paper>
-                        <img src={bbvaIcon} className="bbva-icon" />
-                        <h1 className="amountStyle">
-                          {card.account.currentCreditCardBalance} €
-                        </h1>
-                        <Typography fontSize="28px" className="flexi">
-                          {card.bankCardType === "VISA" ? (
-                            <img src={visaIcon} className="bbva-icon" />
-                          ) : (
-                            <img src={masterCardIcon} className="bbva-icon" />
-                          )}
-                          <span className="account-balance-txt">
-                            {card.pan}
-                          </span>
-                        </Typography>
-                      </Paper>
-                    </Grid>
-                  ))}
-                </Grid>
+                    <Paper>
+                      <img src={bbvaIcon} className="bbva-icon" />
+                      <h1 className="amountStyle">
+                        {card.account.currentCreditCardBalance} €
+                      </h1>
+                      <Typography fontSize="28px" className="flexi">
+                        {card.bankCardType === "VISA" ? (
+                          <img src={visaIcon} className="bbva-icon" />
+                        ) : (
+                          <img src={masterCardIcon} className="bbva-icon" />
+                        )}
+                        <span className="account-balance-txt">{card.pan}</span>
+                      </Typography>
+                    </Paper>
+                  </Grid>
+                ))}
+              </Grid>
+            </div>
 
-
-
-</div>
-
-<div className='movimientos'>
-
-<div className="flexi">
-                  <h1>Movimientos</h1>{" "}
-                  <h3
-                    onClick={() => {
-                      navegar("/dashboard/movimientos");
-                    }}
-                  >
-                    Ver Movimientos
-                  </h3>
-                </div>
-                <TableContainer component={Paper}>
-                  <Table className={classes.table} aria-label="simple table">
-                    <TableHead>
-                      <TableRow>
-                        <TableCell align="center">
-                          <span className="colorGris">IBAN-NºTarjeta</span>
-                        </TableCell>
-                        <TableCell align="center">
-                          <span className="colorGris">Cantidad</span>
-                        </TableCell>
-                        <TableCell align="center">
-                          <span className="colorGris">Concepto</span>
-                        </TableCell>
-                        <TableCell align="center">
-                          <span className="colorGris">Fecha</span>
-                        </TableCell>
-                      </TableRow>
-                    </TableHead>
-                    <TableBody>
-                      {movements.map((row) => (
-                        <TableRow key={row.id}>
-                          {row.paymentType == "ACCOUNT" ? (
-                            <TableCell align="center">
-                              {row.operationType == "REST" ? (
-                                <img src={RedIcon} />
-                              ) : (
-                                <img src={GreenIcon} />
-                              )}
-
-                              {row.account.iban}
-                            </TableCell>
-                          ) : (
-                            <TableCell align="center">
-                              {row.operationType == "REST" ? (
-                                <img src={RedIcon} />
-                              ) : (
-                                <img src={GreenIcon} />
-                              )}
-                              {row.account.cards[0].pan}
-                            </TableCell>
-                          )}
-
-                          <TableCell align="center">{row.quantity} €</TableCell>
+            <div className="movimientos">
+              <div className="flexi">
+                <h1>Movimientos</h1>{" "}
+                <h3
+                  onClick={() => {
+                    navegar("/dashboard/movimientos");
+                  }}
+                >
+                  Ver Movimientos
+                </h3>
+              </div>
+              <TableContainer component={Paper}>
+                <Table className={classes.table} aria-label="simple table">
+                  <TableHead>
+                    <TableRow>
+                      <TableCell align="center">
+                        <span className="colorGris">IBAN-NºTarjeta</span>
+                      </TableCell>
+                      <TableCell align="center">
+                        <span className="colorGris">Cantidad</span>
+                      </TableCell>
+                      <TableCell align="center">
+                        <span className="colorGris">Concepto</span>
+                      </TableCell>
+                      <TableCell align="center">
+                        <span className="colorGris">Fecha</span>
+                      </TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {movements.map((row) => (
+                      <TableRow key={row.id}>
+                        {row.paymentType == "ACCOUNT" ? (
                           <TableCell align="center">
-                            {row.categoryType}
+                            {row.operationType == "REST" ? (
+                              <img src={RedIcon} />
+                            ) : (
+                              <img src={GreenIcon} />
+                            )}
+
+                            {row.account.iban}
                           </TableCell>
-                          <TableCell align="center">{row.date}</TableCell>
-                        </TableRow>
-                      ))}
-                    </TableBody>
-                  </Table>
-                </TableContainer>
+                        ) : (
+                          <TableCell align="center">
+                            {row.operationType == "REST" ? (
+                              <img src={RedIcon} />
+                            ) : (
+                              <img src={GreenIcon} />
+                            )}
+                            {row.account.cards[0].pan}
+                          </TableCell>
+                        )}
 
-
-</div>
-
-
-
-
-            
+                        <TableCell align="center">{row.quantity} €</TableCell>
+                        <TableCell align="center">{row.categoryType}</TableCell>
+                        <TableCell align="center">{row.date}</TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </TableContainer>
+            </div>
           </Paper>
         </Grid>
         <Grid item xs={12} sm={6}>
+       
           <Paper className={classes.paper}>
-                <div className='graficos'>
-
-                {incomeData === undefined ? (
-            <h5>Cargando datos</h5>
-          ) : (
-            <div className="">
-              <div className="balance-container__top">
-                <form className={classes.root} noValidate autoComplete="off">
-                  <div>
+          <div className="flexi">
+                <h1>Balance Total</h1>{" "}
+                <h3
+                  onClick={() => {
+                    navegar("/dashboard/balance");
+                  }}
+                >
+                  Ver Análisis
+                </h3>
+              </div>
+            <div className="graficos">
+              {incomeData === undefined ? (
+                <h5>Cargando datos</h5>
+              ) : (
+                <div className="">
+                  <div className="balance-container__top">
                     <form
                       className={classes.root}
                       noValidate
                       autoComplete="off"
                     >
                       <div>
-                        <TextField
-                          id="standard-select-currency-native"
-                          select
-                          label=""
-                          value={inputData}
-                          onChange={handleInputChange}
-                          SelectProps={{
-                            native: true,
-                          }}
-                          helperText="Por favor, seleccione el balance que desea consultar"
+                        <form
+                          className={classes.root}
+                          noValidate
+                          autoComplete="off"
                         >
-                          {inputData.map((option) => (
-                            <option key={option.value} value={option.value}>
-                              {option.label}
-                            </option>
-                          ))}
-                        </TextField>
+                          <div>
+                            <TextField
+                              id="standard-select-currency-native"
+                              select
+                              label=""
+                              value={inputData}
+                              onChange={handleInputChange}
+                              SelectProps={{
+                                native: true,
+                              }}
+                              helperText="Por favor, seleccione el balance que desea consultar"
+                            >
+                              {inputData.map((option) => (
+                                <option key={option.value} value={option.value}>
+                                  {option.label}
+                                </option>
+                              ))}
+                            </TextField>
+                          </div>
+                        </form>
                       </div>
                     </form>
                   </div>
-                </form>
-              </div>
-     
-              <div className="balance-graphiccontainer__bottom">
-                <div className="">
-                  <div className="balance-container__left__txt-container">
-                    <h4
-                      onClick={() => setChangeLinearGraphic(true)}
-                      className="balance-container__left__txt-container--green"
-                    >
-                      Ingresos totales del mes: {income}
-                    </h4>
-                    <h4
-                      onClick={() => setChangeLinearGraphic(false)}
-                      className="balance-container__left__txt-container--red"
-                    >
-                      Gastos totales del mes: {expenses}
-                    </h4>
-                  </div>
-                  <div className="balance-container__left__graphic-container">
-                    {changeLinearGraphic ? (
-                      <Paper>
-                        <Chart data={incomeData}>
-                          <ArgumentAxis className={classes.lineSeries} />
-                          <ValueAxis />
 
-                          <LineSeries
-                            valueField="value"
-                            argumentField="argument"
-                          />
-                        </Chart>
-                      </Paper>
-                    ) : (
-                      <Paper>
-                        <Chart data={expensesData}>
-                          <ArgumentAxis className={classes.lineSeries} />
-                          <ValueAxis />
-
-                          <LineSeries
-                            valueField="value"
-                            argumentField="argument"
-                          />
-                        </Chart>
-                      </Paper>
-                    )}
-                  </div>
-                </div>
-                <div className="">
-                  <div className="balance-container__right__txt-container">
-                    <div>
-                      <span
-                        className="graphic-btn"
-                        onClick={() => setChangeIncomeGraphic(true)}
-                      >
-                        <img src={graphicIcon} />
-                        <h4>Gráfico circular</h4>
-                      </span>
-                    </div>
-                    <span
-                      className="graphic-btn"
-                      onClick={() => setChangeIncomeGraphic(false)}
-                    >
-                      <img src={barIcon} />
-                      <h4>Gráfico de barras</h4>
-                    </span>
-                  </div>
-                  <div className="balance-container__right__graphic-container">
-                    <div className="balance-container__right__graphic">
-                      {changeIncomeGraphic ? (
-                        <Paper className={classes.chart}>
-                          <Chart data={categoryData}>
-                            <PieSeries
-                              valueField="area"
-                              argumentField="category"
-                            />
-                          </Chart>
-                        </Paper>
-                      ) : (
-                        <Paper>
-                          <Chart data={barCategoryData}>
-                            <ArgumentAxis />
-                            <ValueAxis />
-                            <BarSeries
-                              valueField="expenses"
-                              argumentField="category"
-                              name="gasolina"
-                            />
-                            <BarSeries
-                              valueField="expenses"
-                              argumentField="category"
-                              name="pagado"
-                            />
-                            <BarSeries
-                              valueField="expenses"
-                              argumentField="category"
-                              name="servicios"
-                            />
-                            <BarSeries
-                              valueField="expenses"
-                              argumentField="category"
-                              name="restaurantes"
-                            />
-                            <BarSeries
-                              valueField="expenses"
-                              argumentField="category"
-                              name="ropa"
-                            />
-                            <Stack />
-                          </Chart>
-                        </Paper>
-                      )}
-                    </div>
-                    <div className="balance-container__right__list-container">
-                      <div className="balance-container__right__list-container__txt">
-                        <h5 className="txt-item">Gasolina</h5>
-                        <h5 className="txt-item">Servicios</h5>
-                        <h5 className="txt-item">Ropa</h5>
-                        <h5 className="txt-item">Restaurantes</h5>
-                        <h5 className="txt-item">Pagado</h5>
+                  <div className="balance-graphiccontainer__bottom">
+                    <div className="">
+                      <div className="balance-container__left__txt-container">
+                        <h4
+                          onClick={() => setChangeLinearGraphic(true)}
+                          className="balance-container__left__txt-container--green"
+                        >
+                          Ingresos totales del mes: {income}
+                        </h4>
+                        <h4
+                          onClick={() => setChangeLinearGraphic(false)}
+                          className="balance-container__left__txt-container--red"
+                        >
+                          Gastos totales del mes: {expenses}
+                        </h4>
                       </div>
+                      <div className="balance-container__left__graphic-container">
+                        {changeLinearGraphic ? (
+                          <Paper>
+                            <Chart data={incomeData}>
+                              <ArgumentAxis className={classes.lineSeries} />
+                              <ValueAxis />
 
-                      <div className="balance-container__right__list-container__expenses">
-                        <h5 className="expenses-item">{expensesFuel}</h5>
-                        <h5 className="expenses-item">{expensesServices}</h5>
-                        <h5 className="expenses-item">{expensesClothes}</h5>
-                        <h5 className="expenses-item">{expensesRestaurants}</h5>
-                        <h5 className="expenses-item">{expensesPaid}</h5>
+                              <LineSeries
+                                valueField="value"
+                                argumentField="argument"
+                              />
+                            </Chart>
+                          </Paper>
+                        ) : (
+                          <Paper>
+                            <Chart data={expensesData}>
+                              <ArgumentAxis className={classes.lineSeries} />
+                              <ValueAxis />
+
+                              <LineSeries
+                                valueField="value"
+                                argumentField="argument"
+                              />
+                            </Chart>
+                          </Paper>
+                        )}
                       </div>
                     </div>
+                    <div className="">
+                      <div className="balance-container__right__txt-container">
+                        <div>
+                          <span
+                            className="graphic-btn"
+                            onClick={() => setChangeIncomeGraphic(true)}
+                          >
+                            <img src={graphicIcon} />
+                            <h4>Gráfico circular</h4>
+                          </span>
+                        </div>
+                        <span
+                          className="graphic-btn"
+                          onClick={() => setChangeIncomeGraphic(false)}
+                        >
+                          <img src={barIcon} />
+                          <h4>Gráfico de barras</h4>
+                        </span>
+                      </div>
+                      <div className="balance-container__right__graphic-container">
+                        <div className="balance-container__right__graphic">
+                          {changeIncomeGraphic ? (
+                            <Paper className={classes.chart}>
+                              <Chart data={categoryData}>
+                                <PieSeries
+                                  valueField="area"
+                                  argumentField="category"
+                                />
+                              </Chart>
+                            </Paper>
+                          ) : (
+                            <Paper>
+                              <Chart data={barCategoryData}>
+                                <ArgumentAxis />
+                                <ValueAxis />
+                                <BarSeries
+                                  valueField="expenses"
+                                  argumentField="category"
+                                  name="gasolina"
+                                />
+                                <BarSeries
+                                  valueField="expenses"
+                                  argumentField="category"
+                                  name="pagado"
+                                />
+                                <BarSeries
+                                  valueField="expenses"
+                                  argumentField="category"
+                                  name="servicios"
+                                />
+                                <BarSeries
+                                  valueField="expenses"
+                                  argumentField="category"
+                                  name="restaurantes"
+                                />
+                                <BarSeries
+                                  valueField="expenses"
+                                  argumentField="category"
+                                  name="ropa"
+                                />
+                                <Stack />
+                              </Chart>
+                            </Paper>
+                          )}
+                        </div>
+                        <div className="balance-container__right__list-container">
+                          <div className="balance-container__right__list-container__txt">
+                            <h5 className="txt-item">Gasolina</h5>
+                            <h5 className="txt-item">Servicios</h5>
+                            <h5 className="txt-item">Ropa</h5>
+                            <h5 className="txt-item">Restaurantes</h5>
+                            <h5 className="txt-item">Pagado</h5>
+                          </div>
+
+                          <div className="balance-container__right__list-container__expenses">
+                            <h5 className="expenses-item">{expensesFuel}</h5>
+                            <h5 className="expenses-item">
+                              {expensesServices}
+                            </h5>
+                            <h5 className="expenses-item">{expensesClothes}</h5>
+                            <h5 className="expenses-item">
+                              {expensesRestaurants}
+                            </h5>
+                            <h5 className="expenses-item">{expensesPaid}</h5>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
-              </div>
+              )}
             </div>
-          )}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                </div>
-
-
           </Paper>
         </Grid>
       </Grid>
-      </div>
+    </div>
   );
 }

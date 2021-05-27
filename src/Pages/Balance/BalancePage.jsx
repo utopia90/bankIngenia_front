@@ -88,6 +88,8 @@ export default function BalancePage() {
     getTotalExpensesServices();
     getTotalExpensesClothes();
     getTotalExpensesPaid();
+    getTotalCategoryData();
+
   }, []);
 
   useEffect(() => {
@@ -327,7 +329,7 @@ export default function BalancePage() {
             </form>
           </div>
           <div></div>
-          <div className="balance-container__bottom">
+          <div className="balance-graphiccontainer__bottom">
             <div className="balance-container__left">
               <div className="balance-container__left__txt-container">
                 <h4

@@ -138,3 +138,8 @@ input {
 .hidden{
   display: none;
 }
+
+.balance-graphiccontainer__bottom{
+  display: flex;
+  flex-direction: column;
+}

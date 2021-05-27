@@ -19,6 +19,8 @@ import {
   Typography,
   Avatar,
   CssBaseline,
+  MenuItem,
+  TextField,
 } from "@material-ui/core";
 import {
   ArgumentAxis,
@@ -61,6 +63,22 @@ export default function BalancePage() {
   let [changeIncomeGraphic, setChangeIncomeGraphic] = useState(false);
   let [changeLinearGraphic, setChangeLinearGraphic] = useState(true);
 
+  let [inputValue, setInputValue] = useState("");
+
+  const inputData = [
+    {
+      value: "",
+      label: "",
+    },
+    {
+      value: "gastos",
+      label: "Balance GLobal Gastos",
+    },
+    {
+      value: "ingresos",
+      label: "Balance GLobal Ingresos",
+    },
+  ];
 
   useEffect(() => {
     getTotalIncome();
@@ -70,28 +88,16 @@ export default function BalancePage() {
     getTotalExpensesServices();
     getTotalExpensesClothes();
     getTotalExpensesPaid();
-
   }, []);
 
   useEffect(() => {
     getTotalIncomeData();
     getTotalExpensesData();
-
   }, [income, incomeMovements, expenses, expensesMovements]);
 
   useEffect(() => {
     getTotalCategoryData();
-  }, [
-    expensesFuel,
-    expensesClothes,
-    expensesRestaurants,
-    expensesServices,
-    expensesPaid,
-  ]);
-
-  useEffect(() => {
-    getBarCategoryData();
-  }, [expensesFuel]);
+  }, [changeIncomeGraphic, changeLinearGraphic]);
 
   const getTotalIncome = () => {
     let idUser = 1;
@@ -148,15 +154,13 @@ export default function BalancePage() {
     ];
 
     setCategoryData(data);
-  };
 
-  const getBarCategoryData = () => {
     const barData = [
-      { category: "gasolina", expenses: expensesFuel },
-      { category: "pagado", expenses: expensesPaid },
-      { category: "servicios", expenses: expensesServices },
-      { category: "restaurantes", expenses: expensesRestaurants },
-      { category: "ropa", expenses: expensesClothes },
+      { category: "gasolina", expenses: areaFuel },
+      { category: "pagado", expenses: areaPaid },
+      { category: "servicios", expenses: areaServices },
+      { category: "restaurantes", expenses: areaRestaurants },
+      { category: "ropa", expenses: areaClothes },
     ];
 
     setBarCategoryData(barData);
@@ -256,6 +260,15 @@ export default function BalancePage() {
       });
   };
 
+  const handleInputChange = (event) => {
+    let eventValue = event.target.value;
+    setInputValue(eventValue);
+    eventValue == "gastos"
+      ? setChangeLinearGraphic(false)
+      : setChangeLinearGraphic(true);
+  };
+
+  console.log(inputValue);
   const useStyles = makeStyles((theme) => ({
     chart: {
       backgroundColor: "transparent",
@@ -264,13 +277,18 @@ export default function BalancePage() {
     lineSeries: {
       color: "pink",
     },
+    root: {
+      "& .MuiTextField-root": {
+        margin: theme.spacing(1),
+        width: "210ch",
+        color: "pink"
+      },
+    },
   }));
-
   const classes = useStyles();
 
   console.log("expensesData", expensesData);
   console.log("expensesmovements", expensesMovements);
-
 
   return (
     <div>
@@ -280,41 +298,69 @@ export default function BalancePage() {
         <div className="balance-container">
           <div className="balance-container__top">
             <h2 className="balance-container__title">Balance</h2>
-            <div className="balance-container__input">
-              <input type="text" /> <img src={expandIcon}></img>
-            </div>
+            <form className={classes.root} noValidate autoComplete="off">
+              <div>
+                <form className={classes.root} noValidate autoComplete="off">
+                  <div>
+                    <TextField
+                      id="standard-select-currency-native"
+                      select
+                      label=""
+                      value={inputData}
+                      onChange={handleInputChange}
+                      SelectProps={{
+                        native: true,
+                      }}
+                      helperText="Por favor, seleccione el balance que desea consultar"
+                    >
+                      {inputData.map((option) => (
+                        <option key={option.value} value={option.value}>
+                          {option.label}
+                        </option>
+                      ))}
+                    </TextField>
+                  </div>
+                </form>
+              </div>
+            </form>
           </div>
+          <div></div>
           <div className="balance-container__bottom">
             <div className="balance-container__left">
               <div className="balance-container__left__txt-container">
-                <h4 onClick={() => setChangeLinearGraphic(true)} className="balance-container__left__txt-container--green">
-                  Ingresos totales del mes: {income}  
+                <h4
+                  onClick={() => setChangeLinearGraphic(true)}
+                  className="balance-container__left__txt-container--green"
+                >
+                  Ingresos totales del mes: {income}
                 </h4>
-                <h4 onClick={() => setChangeLinearGraphic(false)} className="balance-container__left__txt-container--red">
+                <h4
+                  onClick={() => setChangeLinearGraphic(false)}
+                  className="balance-container__left__txt-container--red"
+                >
                   Gastos totales del mes: {expenses}
                 </h4>
               </div>
               <div className="balance-container__left__graphic-container">
-              {changeLinearGraphic ? (
+                {changeLinearGraphic ? (
+                  <Paper>
+                    <Chart data={incomeData}>
+                      <ArgumentAxis className={classes.lineSeries} />
+                      <ValueAxis />
 
-                <Paper>
-                  <Chart data={incomeData}>
-                    <ArgumentAxis className={classes.lineSeries} />
-                    <ValueAxis />
+                      <LineSeries valueField="value" argumentField="argument" />
+                    </Chart>
+                  </Paper>
+                ) : (
+                  <Paper>
+                    <Chart data={expensesData}>
+                      <ArgumentAxis className={classes.lineSeries} />
+                      <ValueAxis />
 
-                    <LineSeries valueField="value" argumentField="argument" />
-                  </Chart>
-                </Paper>
-              ):(
-                <Paper>
-                  <Chart data={expensesData}>
-                    <ArgumentAxis className={classes.lineSeries} />
-                    <ValueAxis />
-
-                    <LineSeries valueField="value" argumentField="argument" />
-                  </Chart>
-                </Paper>
-              )}
+                      <LineSeries valueField="value" argumentField="argument" />
+                    </Chart>
+                  </Paper>
+                )}
               </div>
             </div>
             <div className="balance-container__right">

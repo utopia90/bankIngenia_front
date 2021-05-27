@@ -1,14 +1,27 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: 'dmSans-regular';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: 'dmSans-regular';
 }
 
+body {
+  overflow-y: hidden;
+}
+
+@font-face {
+  font-family: "dmSans-bold";
+  src: local("dmSans-bold"),
+   url("./Assets/Typography/DMSans-Bold.ttf") format("truetype");
+  font-weight: bold;
+  }
+
+  @font-face {
+    font-family: "dmSans-regular";
+    src: local("dmSans-regular"),
+     url("./Assets/Typography/DMSans-Regular.ttf") format("truetype");
+    }

@@ -62,7 +62,7 @@ const useStyles = makeStyles((theme) => ({
       width: `calc(100% - ${drawerWidth}px)`,
       marginLeft: drawerWidth,
       backgroundColor: "transparent",
-      color: "inherit"
+      color: "inherit",
     },
   },
   menuButton: {
@@ -79,6 +79,9 @@ const useStyles = makeStyles((theme) => ({
   content: {
     flexGrow: 1,
     padding: theme.spacing(3),
+  },
+  title: {
+    fontFamily: "dmSans-regular",
   },
 }));
 const mainMenuList = [
@@ -189,24 +192,25 @@ const Sidebar = (props) => {
 
           {/* Sección de Notificaciones para el usuario */}
           <div className="notifications-section">
-          <IconButton color="inherit">
-            <Badge color="secondary" badgeContent={10}>
-              <NotificationIcon />
-            </Badge>
-          </IconButton>
-          <Typography
-            component="h1"
-            variant="h6"
-            color="inherit"
-            fontWeight="400"
-            fontSize="16px"
-            cursor="pointer"
-            noWrap
-          >
-            Notificaciones
-          </Typography>
+            <IconButton color="inherit">
+              <Badge color="secondary" badgeContent={10}>
+                <NotificationIcon />
+              </Badge>
+            </IconButton>
+            <Typography
+              component="h1"
+              variant="h6"
+              color="inherit"
+              fontWeight="400"
+              fontSize="16px"
+              cursor="pointer"
+              noWrap
+              className={classes.title}
+            >
+              Notificaciones
+            </Typography>
 
-          <div className="user-section">
+            <div className="user-section">
               <img src={UserIcon} className="user-icon" />
               <Button
                 ref={anchoRef}
@@ -222,7 +226,7 @@ const Sidebar = (props) => {
                   fontWeight="500"
                   fontSize="10px"
                   cursor="pointer"
-
+                  className={classes.title}
                 >
                   NOMBRE APELLIDO
                 </Typography>
@@ -237,7 +241,6 @@ const Sidebar = (props) => {
               transition
               disablePortal
             >
-
               {({ TransitionProps, placement }) => (
                 <Grow
                   {...TransitionProps}

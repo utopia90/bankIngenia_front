@@ -55,7 +55,7 @@ const BankcardPage = () => {
 
   return (
     <div>
-      <h1>Cards</h1>
+      <h1>Tarjetas</h1>
 
       <Container>
         <Grid container spacing={3} className="card-container">

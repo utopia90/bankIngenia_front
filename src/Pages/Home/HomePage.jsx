@@ -17,6 +17,7 @@ import GreenIcon from "./../../Assets/Svg/movement-green-down.svg";
 import RedIcon from "./../../Assets/Svg/movement-red.svg";
 import visaIcon from "./../../Assets/Svg/visa-icon.svg";
 import masterCardIcon from "./../../Assets/Svg/mastercard-icon.svg";
+import BalancePage from '../Balance/BalancePage';
 
 const useStyles = makeStyles((theme) => ({
     container: {

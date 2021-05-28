@@ -25,7 +25,7 @@ export default function MovementsPage() {
     let idUser= localStorage.getItem("userId");
     const getMovements = () => {
  
-        axios.get(`http://localhost:8080/api/movement/userId/${idUser}`)
+        axios.get(`https://projectbankingenia.herokuapp.com/api/movement/userId/${idUser}`)
         .then(res => {
           const movens = res.data;
           console.log(movens)

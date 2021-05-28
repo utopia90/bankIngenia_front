@@ -47,7 +47,6 @@ input {
   &__right {
     width: 50%;
 
-
     &__txt-container {
       display: flex;
       justify-content: space-between;
@@ -58,7 +57,7 @@ input {
       span {
         display: flex;
         justify-content: space-between;
-        
+
         img {
           padding-right: 1.5rem;
         }
@@ -120,22 +119,13 @@ input {
     @include before();
     background: #d95f02;
   }
-
-
 }
-.graphic-btn{
+.graphic-btn {
   cursor: pointer;
   z-index: 999999;
 
   &:hover {
     color: #d01e69;
   }
-}
-
-.show{
-  display: block;
-}
-.hidden{
-  display: none;
 }
 

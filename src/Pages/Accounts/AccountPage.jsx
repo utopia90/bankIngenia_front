@@ -23,41 +23,36 @@ const useStyles = makeStyles((theme) => ({
   },
   divider: {
     margin: theme.spacing(2, 0),
-  },  
+  },
   fixedHeight: {
     height: 240,
   },
 }));
 
 const AccountPage = () => {
-  let idUser= localStorage.getItem("userId");
+  let idUser = localStorage.getItem("userId");
   const [accounts, setAccounts] = useState([]);
   const classes = useStyles();
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
   const getAcccountsByUserID = () => {
     axios
-      .get(
-        `http://localhost:8080/api/user/${idUser}`
-      )
+      .get(`https://projectbankingenia.herokuapp.com/api/user/${idUser}`)
       .then((res) => {
         const accoun = res.data.accounts;
         console.log(accoun);
         setAccounts(accoun);
       });
   };
-useEffect(() => {
-    getAcccountsByUserID()
-}, []);
+  useEffect(() => {
+    getAcccountsByUserID();
+  }, []);
 
   return (
     <div>
       <h1>Cuentas</h1>
 
-
-    <Container>
+      <Container>
         <Grid container spacing={3}>
-
-
           {accounts.map((account, index) => (
             <Grid
               key={index}
@@ -68,23 +63,15 @@ useEffect(() => {
               className="card-container"
             >
               <Paper>
-              
-                <h1  className="amountStyle">
-                {account.currentBalance}€
-                </h1>
-                <Typography fontSize="28px" className='flexi'>
-           
-    
-                  <span className="account-balance-txt">
-                  {account.iban}
-                  </span>
-               </Typography>
+                <h1 className="amountStyle">{account.currentBalance}€</h1>
+                <Typography fontSize="28px" className="flexi">
+                  <span className="account-balance-txt">{account.iban}</span>
+                </Typography>
               </Paper>
             </Grid>
           ))}
         </Grid>
       </Container>
-
     </div>
   );
 };

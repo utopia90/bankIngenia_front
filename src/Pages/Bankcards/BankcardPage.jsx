@@ -41,7 +41,7 @@ const BankcardPage = () => {
   const getCardBankByUserID = () => {
     axios
       .get(
-        `https://projectbankingenia.herokuapp.com/api/bankcard-user-id/${idUser}`
+        `http://localhost:8080/api/bankcard-user-id/${idUser}`
       )
       .then((res) => {
         const cards = res.data;

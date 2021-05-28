@@ -147,7 +147,7 @@ export default function HomePage() {
     let incomes = [];
     axios
       .get(
-        `https://projectbankingenia.herokuapp.com/api/movements-user-date-operation/userId/${idUser}?startdate=2020-01-13&finishdate=2021-09-20&operation=SUM`
+        `http://localhost:8080/api/movements-user-date-operation/userId/${idUser}?startdate=2020-01-13&finishdate=2021-09-20&operation=SUM`
       )
       .then((res) => {
         const movens = res.data;
@@ -182,6 +182,12 @@ export default function HomePage() {
     setExpensesData(data);
   };
   const getTotalCategoryData = () => {
+    if(expensesFuel===undefined) expensesFuel=0
+    if(expenses===undefined)expenses=0
+    if(expensesPaid===undefined)expensesPaid=0
+    if(expensesServices===undefined)expensesServices=0
+    if(expensesRestaurants===undefined)expensesRestaurants=0
+    if(expensesClothes===undefined)expensesClothes=0
     const areaFuel = (expensesFuel / expenses) * 100;
     const areaPaid = (expensesPaid / expenses) * 100;
     const areaServices = (expensesServices / expenses) * 100;
@@ -215,7 +221,7 @@ export default function HomePage() {
 
     axios
       .get(
-        `https://projectbankingenia.herokuapp.com/api/movements-user-date-operation/userId/${idUser}?startdate=2020-01-13&finishdate=2021-09-20&operation=REST`
+        `http://localhost:8080/api/movements-user-date-operation/userId/${idUser}?startdate=2020-01-13&finishdate=2021-09-20&operation=REST`
       )
       .then((res) => {
         const movens = res.data;
@@ -231,7 +237,7 @@ export default function HomePage() {
 
     axios
       .get(
-        `https://projectbankingenia.herokuapp.com/api/movements-user-date-operation-category/userId/${idUser}?startdate=2020-01-13&finishdate=2021-09-20&operation=REST&category=FUEL`
+        `http://localhost:8080/api/movements-user-date-operation-category/userId/${idUser}?startdate=2020-01-13&finishdate=2021-09-20&operation=REST&category=FUEL`
       )
       .then((res) => {
         const movens = res.data;
@@ -246,7 +252,7 @@ export default function HomePage() {
 
     axios
       .get(
-        `https://projectbankingenia.herokuapp.com/api/movements-user-date-operation-category/userId/${idUser}?startdate=2020-01-13&finishdate=2021-09-20&operation=REST&category=RESTAURANTS`
+        `http://localhost:8080/api/movements-user-date-operation-category/userId/${idUser}?startdate=2020-01-13&finishdate=2021-09-20&operation=REST&category=RESTAURANTS`
       )
       .then((res) => {
         const movens = res.data;
@@ -261,7 +267,7 @@ export default function HomePage() {
 
     axios
       .get(
-        `https://projectbankingenia.herokuapp.com/api/movements-user-date-operation-category/userId/${idUser}?startdate=2020-01-13&finishdate=2021-09-20&operation=REST&category=UTILITIES`
+        `http://localhost:8080/api/movements-user-date-operation-category/userId/${idUser}?startdate=2020-01-13&finishdate=2021-09-20&operation=REST&category=UTILITIES`
       )
       .then((res) => {
         const movens = res.data;
@@ -276,7 +282,7 @@ export default function HomePage() {
 
     axios
       .get(
-        `https://projectbankingenia.herokuapp.com/api/movements-user-date-operation-category/userId/${idUser}?startdate=2020-01-13&finishdate=2021-09-20&operation=REST&category=CLOTHES`
+        `http://localhost:8080/api/movements-user-date-operation-category/userId/${idUser}?startdate=2020-01-13&finishdate=2021-09-20&operation=REST&category=CLOTHES`
       )
       .then((res) => {
         const movens = res.data;
@@ -290,7 +296,7 @@ export default function HomePage() {
 
     axios
       .get(
-        `https://projectbankingenia.herokuapp.com/api/movements-user-date-operation-category/userId/${idUser}?startdate=2020-01-13&finishdate=2021-09-20&operation=REST&category=PAID`
+        `http://localhost:8080/api/movements-user-date-operation-category/userId/${idUser}?startdate=2020-01-13&finishdate=2021-09-20&operation=REST&category=PAID`
       )
       .then((res) => {
         const movens = res.data;
@@ -314,7 +320,7 @@ export default function HomePage() {
 
     axios
       .get(
-        `https://projectbankingenia.herokuapp.com/api/bankcard-user-id/${idUser}`
+        `http://localhost:8080/api/bankcard-user-id/${idUser}`
       )
       .then((res) => {
         const cards = res.data;
@@ -326,7 +332,7 @@ export default function HomePage() {
 
     axios
       .get(
-        `https://projectbankingenia.herokuapp.com/api/movement/userId/${idUser}`
+        `http://localhost:8080/api/movement/userId/${idUser}`
       )
       .then((res) => {
         const movens = res.data;

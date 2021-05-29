@@ -94,7 +94,6 @@ export default function BalancePage() {
     getTotalExpensesServices();
     getTotalExpensesClothes();
     getTotalExpensesPaid();
-    getTotalCategoryData();
   }, []);
 
   useEffect(() => {
@@ -287,6 +286,7 @@ export default function BalancePage() {
 
   console.log("expensesData", expensesData);
   console.log("expensesmovements", expensesMovements);
+  console.log("caregorydata", categoryData);
 
   return (
     <div>

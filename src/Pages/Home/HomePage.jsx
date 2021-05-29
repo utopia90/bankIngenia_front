@@ -148,7 +148,7 @@ export default function HomePage() {
 
   useEffect(() => {
     getTotalCategoryData();
-  }, [areaFuel, areaClothes]);
+  }, [expenses]);
 
   const getTotalIncome = () => {
     let incomes = [];
@@ -217,6 +217,8 @@ export default function HomePage() {
   };
   const getTotalExpenses = () => {
     let expensesArray = [];
+
+    console.log("caregorydata", categoryData);
 
     axios
       .get(

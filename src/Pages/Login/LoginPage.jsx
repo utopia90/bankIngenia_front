@@ -10,7 +10,8 @@ import LoginFom from '../../Components/LoginForm/LoginFom';
 import CopyRight from '../../Components/CopyRight/CopyRight';
 import * as Yup from "yup";
 import { Formik } from "formik";
-
+import IngeniaIcon from "./../../Assets/Svg//ingenia-logo.svg";
+import BankLogo from "./../../Assets/Svg/bank-logo.svg";
 const useStyles = makeStyles(theme =>({
     paper:{
         marginTop:theme.spacing(8),
@@ -114,9 +115,13 @@ return(
             <Container component='main' maxWidth='xs'>
         <CssBaseline/>
         <div className={classes.paper}>
-            <Avatar className={classes.avatar}>
-                <LockOutlinedIcon/>
-            </Avatar>
+     
+            <div className="logoingenia">
+              <img src={IngeniaIcon} />
+              <img src={BankLogo} />
+            </div>
+
+
             <Typography component='h1'>Acceso</Typography> 
            <LoginFom
               values={values}

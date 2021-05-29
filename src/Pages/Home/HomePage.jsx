@@ -98,14 +98,6 @@ export default function HomePage() {
   let [incomeData, setIncomeData] = useState([]);
   let [expensesData, setExpensesData] = useState([]);
 
-  let [categoryData, setCategoryData] = useState([
-    { category: "Gasolina", area: 4 },
-    { category: "Pagado", area: 2 },
-    { category: "Servicios", area: 5 },
-    { category: "Restaurantes", area: 6 },
-    { category: "Ropa", area: 10 },
-  ]);
-
   let [changeIncomeGraphic, setChangeIncomeGraphic] = useState(true);
   let [changeLinearGraphic, setChangeLinearGraphic] = useState(true);
 
@@ -116,6 +108,14 @@ export default function HomePage() {
   let [areaClothes, setAreaClothes] = useState(0);
   let [areaServices, setAreaServices] = useState(0);
   let [areaRestaurants, setAreaRestaurants] = useState(0);
+
+  let categoryData = [
+    { category: "Gasolina", area: expensesFuel },
+    { category: "Pagado", area: expensesPaid },
+    { category: "Servicios", area: expensesServices },
+    { category: "Restaurantes", area: expensesRestaurants },
+    { category: "Ropa", area: expensesClothes },
+  ];
 
   const inputData = [
     {
@@ -145,10 +145,6 @@ export default function HomePage() {
     getTotalIncomeData();
     getTotalExpensesData();
   }, [expenses, income]);
-
-  useEffect(() => {
-    getTotalCategoryData();
-  }, [expenses]);
 
   const getTotalIncome = () => {
     let incomes = [];
@@ -189,32 +185,6 @@ export default function HomePage() {
     setExpensesData(data);
   };
 
-  const getTotalCategoryData = () => {
-    if (expensesFuel === undefined || expensesFuel == 0) areaFuel = 0;
-    if (expenses === undefined) expenses = 0;
-    if (expensesPaid === undefined || expensesPaid == 0) areaPaid = 0;
-    if (expensesServices === undefined || expensesServices == 0)
-      areaServices = 0;
-    if (expensesRestaurants === undefined || expensesRestaurants == 0)
-      areaRestaurants = 0;
-    if (expensesClothes === undefined || expensesClothes == 0) areaClothes = 0;
-
-    setAreaFuel((expensesFuel / expenses) * 100);
-    setAreaPaid((expensesPaid / expenses) * 100);
-    setAreaServices((expensesServices / expenses) * 100);
-    setAreaRestaurants((expensesRestaurants / expenses) * 100);
-    setAreaClothes((expensesClothes / expenses) * 100);
-
-    const data = [
-      { category: "Gasolina", area: areaFuel },
-      { category: "Pagado", area: areaPaid },
-      { category: "Servicios", area: areaServices },
-      { category: "Restaurantes", area: areaRestaurants },
-      { category: "Ropa", area: areaClothes },
-    ];
-
-    setCategoryData(data);
-  };
   const getTotalExpenses = () => {
     let expensesArray = [];
 
@@ -301,6 +271,33 @@ export default function HomePage() {
       });
   };
 
+  // const getTotalCategoryData = () => {
+  //   if (expensesFuel === undefined || expensesFuel == 0) areaFuel = 0;
+  //   if (expenses === undefined) expenses = 0;
+  //   if (expensesPaid === undefined || expensesPaid == 0) areaPaid = 0;
+  //   if (expensesServices === undefined || expensesServices == 0)
+  //     areaServices = 0;
+  //   if (expensesRestaurants === undefined || expensesRestaurants == 0)
+  //     areaRestaurants = 0;
+  //   if (expensesClothes === undefined || expensesClothes == 0) areaClothes = 0;
+
+  //   setAreaFuel((expensesFuel / expenses) * 100);
+  //   setAreaPaid((expensesPaid / expenses) * 100);
+  //   setAreaServices((expensesServices / expenses) * 100);
+  //   setAreaRestaurants((expensesRestaurants / expenses) * 100);
+  //   setAreaClothes((expensesClothes / expenses) * 100);
+
+  //   const data = [
+  //     { category: "Gasolina", area: expensesFuel },
+  //      { category: "Pagado", area: expensesPaid },
+  //   { category: "Servicios", area: expensesServices },
+  //   { category: "Restaurantes", area: expensesRestaurants },
+  //    { category: "Ropa", area: expensesClothes },
+  //   ];
+
+  //   setCategoryData(data);
+  //  };
+
   const handleInputChange = (event) => {
     let eventValue = event.target.value;
     setInputValue(eventValue);
@@ -336,6 +333,14 @@ export default function HomePage() {
     getCardBankByUserID();
     getMovements();
   }, []);
+
+  console.log("caregorydata", categoryData);
+  console.log("fuel", expensesFuel);
+  console.log("paid", expensesPaid);
+  console.log("clothes", expensesClothes);
+  console.log("services", expensesServices);
+  console.log("restaurants", expensesRestaurants);
+
   return (
     <div className={classes.root}>
       <Grid container spacing={3}>

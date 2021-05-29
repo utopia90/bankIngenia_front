@@ -58,7 +58,6 @@ export default function BalancePage() {
   let [incomeData, setIncomeData] = useState([]);
   let [expensesData, setExpensesData] = useState([]);
 
-  let [categoryData, setCategoryData] = useState([]);
 
   let [changeIncomeGraphic, setChangeIncomeGraphic] = useState(true);
   let [changeLinearGraphic, setChangeLinearGraphic] = useState(true);
@@ -70,6 +69,16 @@ export default function BalancePage() {
   let [areaClothes, setAreaClothes] = useState(0);
   let [areaServices, setAreaServices] = useState(0);
   let [areaRestaurants, setAreaRestaurants] = useState(0);
+
+  let categoryData = 
+ [
+    { category: "Gasolina", area: expensesFuel },
+     { category: "Pagado", area: expensesPaid },
+  { category: "Servicios", area: expensesServices },
+  { category: "Restaurantes", area: expensesRestaurants },
+   { category: "Ropa", area: expensesClothes },
+  ];
+
 
   const inputData = [
     {
@@ -99,12 +108,12 @@ export default function BalancePage() {
   useEffect(() => {
     getTotalIncomeData();
     getTotalExpensesData();
+
   }, [income, expenses]);
 
-  
-  useEffect(() => {
-    getTotalCategoryData();
-  }, [expenses]);
+  // useEffect(() => {
+  //   getTotalCategoryData();
+  // }, [expenses]);
 
   const getTotalIncome = () => {
     let incomes = [];
@@ -144,33 +153,7 @@ export default function BalancePage() {
 
     setExpensesData(data);
   };
-  const getTotalCategoryData = () => {
 
-    if (expensesFuel === undefined || expensesFuel == 0) areaFuel = 0;
-    if (expenses === undefined) expenses = 0;
-    if (expensesPaid === undefined || expensesPaid == 0) areaPaid = 0;
-    if (expensesServices === undefined || expensesServices == 0)
-      areaServices = 0;
-    if (expensesRestaurants === undefined || expensesRestaurants == 0)
-      areaRestaurants = 0;
-    if (expensesClothes === undefined || expensesClothes == 0) areaClothes = 0;
-
-    setAreaFuel((expensesFuel / expenses) * 100);
-    setAreaPaid((expensesPaid / expenses) * 100);
-    setAreaServices((expensesServices / expenses) * 100);
-    setAreaRestaurants((expensesRestaurants / expenses) * 100);
-    setAreaClothes((expensesClothes / expenses) * 100);
-
-    const data = [
-      { category: "Gasolina", area: areaFuel },
-      { category: "Pagado", area: areaPaid },
-      { category: "Servicios", area: areaServices },
-      { category: "Restaurantes", area: areaRestaurants },
-      { category: "Ropa", area: areaClothes },
-    ];
-
-    setCategoryData(data);
-  };
 
   const getTotalExpenses = () => {
     let expensesArray = [];
@@ -256,6 +239,34 @@ export default function BalancePage() {
       });
   };
 
+  // const getTotalCategoryData = () => {
+    //   if (expensesFuel === undefined || expensesFuel == 0) areaFuel = 0;
+    //   if (expenses === undefined) expenses = 0;
+    //   if (expensesPaid === undefined || expensesPaid == 0) areaPaid = 0;
+    //   if (expensesServices === undefined || expensesServices == 0)
+    //     areaServices = 0;
+    //   if (expensesRestaurants === undefined || expensesRestaurants == 0)
+    //     areaRestaurants = 0;
+    //   if (expensesClothes === undefined || expensesClothes == 0) areaClothes = 0;
+  
+    //   setAreaFuel((expensesFuel / expenses) * 100);
+    //   setAreaPaid((expensesPaid / expenses) * 100);
+    //   setAreaServices((expensesServices / expenses) * 100);
+    //   setAreaRestaurants((expensesRestaurants / expenses) * 100);
+    //   setAreaClothes((expensesClothes / expenses) * 100);
+  
+    //   const data = [
+    //     { category: "Gasolina", area: expensesFuel },
+    //      { category: "Pagado", area: expensesPaid },
+    //   { category: "Servicios", area: expensesServices },
+    //   { category: "Restaurantes", area: expensesRestaurants },
+    //    { category: "Ropa", area: expensesClothes },
+    //   ];
+  
+    //   setCategoryData(data);
+    //  };
+
+
   const handleInputChange = (event) => {
     let eventValue = event.target.value;
     console.log(eventValue);
@@ -284,9 +295,17 @@ export default function BalancePage() {
   }));
   const classes = useStyles();
 
+
   console.log("expensesData", expensesData);
   console.log("expensesmovements", expensesMovements);
   console.log("caregorydata", categoryData);
+  console.log('expensesfuel', expensesFuel)
+  console.log('expensespaid', expensesPaid)
+  console.log('expensesclothes', expensesClothes)
+  console.log('expensesservics', expensesServices)
+
+
+
 
   return (
     <div>

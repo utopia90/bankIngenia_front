@@ -36,7 +36,9 @@ const AccountPage = () => {
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
   const getAcccountsByUserID = () => {
     axios
-      .get(`https://projectbankingenia.herokuapp.com/api/user/${idUser}`)
+      .get(
+        `https://projectbankingenia.herokuapp.com/api/user/${idUser}`
+      )
       .then((res) => {
         const accoun = res.data.accounts;
         console.log(accoun);

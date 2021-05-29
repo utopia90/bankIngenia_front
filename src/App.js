@@ -15,7 +15,6 @@ let sesion = sessionStorage.getItem('logged')
 setLoggedIn(sesion)
   }, [sessionStorage.getItem('logged')])
 
-
   return (
     
    <Router>

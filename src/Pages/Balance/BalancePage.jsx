@@ -59,17 +59,22 @@ export default function BalancePage() {
   let [expensesData, setExpensesData] = useState([]);
 
   let [categoryData, setCategoryData] = useState([]);
-  let [barCategoryData, setBarCategoryData] = useState([]);
 
   let [changeIncomeGraphic, setChangeIncomeGraphic] = useState(true);
   let [changeLinearGraphic, setChangeLinearGraphic] = useState(true);
 
-  let [inputValue, setInputValue] = useState('');
+  let [inputValue, setInputValue] = useState("");
+
+  let [areaFuel, setAreaFuel] = useState(0);
+  let [areaPaid, setAreaPaid] = useState(0);
+  let [areaClothes, setAreaClothes] = useState(0);
+  let [areaServices, setAreaServices] = useState(0);
+  let [areaRestaurants, setAreaRestaurants] = useState(0);
 
   const inputData = [
     {
-      value: '',
-      label: '',
+      value: "",
+      label: "",
     },
     {
       value: "gastos",
@@ -95,18 +100,18 @@ export default function BalancePage() {
   useEffect(() => {
     getTotalIncomeData();
     getTotalExpensesData();
-    getTotalCategoryData();
   }, [income, expenses]);
 
+  
   useEffect(() => {
     getTotalCategoryData();
-  }, [changeIncomeGraphic, changeLinearGraphic]);
+  }, [expenses]);
 
   const getTotalIncome = () => {
     let incomes = [];
     axios
       .get(
-        `http://localhost:8080/api/movements-user-date-operation/userId/${idUser}?startdate=2020-01-13&finishdate=2021-09-20&operation=SUM`
+        `https://projectbankingenia.herokuapp.com/api/movements-user-date-operation/userId/${idUser}?startdate=2020-01-13&finishdate=2021-09-20&operation=SUM`
       )
       .then((res) => {
         const movens = res.data;
@@ -121,7 +126,6 @@ export default function BalancePage() {
     setIncomeMovements(incomes);
   };
 
-  // metodo para conseguir los datos para el gráfico linear
   const getTotalIncomeData = () => {
     const data = [];
     for (let i = 0; i < incomeMovements.length; i++) {
@@ -141,47 +145,32 @@ export default function BalancePage() {
 
     setExpensesData(data);
   };
-
-      // metodo para conseguir los datos para el gráfico circular/barras
-
   const getTotalCategoryData = () => {
 
-    if(expensesFuel===undefined) expensesFuel=0
-    if(expenses===undefined)expenses=0
-    if(expensesPaid===undefined)expensesPaid=0
-    if(expensesServices===undefined)expensesServices=0
-    if(expensesRestaurants===undefined)expensesRestaurants=0
-    if(expensesClothes===undefined)expensesClothes=0
+    if (expensesFuel === undefined || expensesFuel == 0) areaFuel = 0;
+    if (expenses === undefined) expenses = 0;
+    if (expensesPaid === undefined || expensesPaid == 0) areaPaid = 0;
+    if (expensesServices === undefined || expensesServices == 0)
+      areaServices = 0;
+    if (expensesRestaurants === undefined || expensesRestaurants == 0)
+      areaRestaurants = 0;
+    if (expensesClothes === undefined || expensesClothes == 0) areaClothes = 0;
 
-    const areaFuel = (expensesFuel / expenses) * 100;
-
-
-    const areaPaid = (expensesPaid / expenses) * 100;
-    const areaServices = (expensesServices / expenses) * 100;
-    const areaRestaurants = (expensesRestaurants / expenses) * 100;
-    const areaClothes = (expensesClothes / expenses) * 100;
-  
+    setAreaFuel((expensesFuel / expenses) * 100);
+    setAreaPaid((expensesPaid / expenses) * 100);
+    setAreaServices((expensesServices / expenses) * 100);
+    setAreaRestaurants((expensesRestaurants / expenses) * 100);
+    setAreaClothes((expensesClothes / expenses) * 100);
 
     const data = [
-      { category: "Fuel", area: areaFuel },
-      { category: "Paid", area: areaPaid },
-      { category: "Services", area: areaServices },
-      { category: "Restaurants", area: areaRestaurants },
-      { category: "Clothes", area: areaClothes },
+      { category: "Gasolina", area: areaFuel },
+      { category: "Pagado", area: areaPaid },
+      { category: "Servicios", area: areaServices },
+      { category: "Restaurantes", area: areaRestaurants },
+      { category: "Ropa", area: areaClothes },
     ];
 
     setCategoryData(data);
-
-    const barData = [
-      { category: "gasolina", expenses: expensesFuel },
-      { category: "pagado", expenses: expensesPaid },
-      { category: "servicios", expenses: expensesServices },
-      { category: "restaurantes", expenses: expensesRestaurants },
-      { category: "ropa", expenses: expensesClothes },
-    ];
-
-    setBarCategoryData(barData);
-  
   };
 
   const getTotalExpenses = () => {
@@ -189,7 +178,7 @@ export default function BalancePage() {
 
     axios
       .get(
-        `http://localhost:8080/api/movements-user-date-operation/userId/${idUser}?startdate=2020-01-13&finishdate=2021-09-20&operation=REST`
+        `https://projectbankingenia.herokuapp.com/api/movements-user-date-operation/userId/${idUser}?startdate=2020-01-13&finishdate=2021-09-20&operation=REST`
       )
       .then((res) => {
         const movens = res.data;
@@ -204,7 +193,7 @@ export default function BalancePage() {
   const getTotalExpensesFuel = () => {
     axios
       .get(
-        `http://localhost:8080/api/movements-user-date-operation-category/userId/${idUser}?startdate=2020-01-13&finishdate=2021-09-20&operation=REST&category=FUEL`
+        `https://projectbankingenia.herokuapp.com/api/movements-user-date-operation-category/userId/${idUser}?startdate=2020-01-13&finishdate=2021-09-20&operation=REST&category=FUEL`
       )
       .then((res) => {
         const movens = res.data;
@@ -217,7 +206,7 @@ export default function BalancePage() {
   const getTotalExpensesRestaurants = () => {
     axios
       .get(
-        `http://localhost:8080/api/movements-user-date-operation-category/userId/${idUser}?startdate=2020-01-13&finishdate=2021-09-20&operation=REST&category=RESTAURANTS`
+        `https://projectbankingenia.herokuapp.com/api/movements-user-date-operation-category/userId/${idUser}?startdate=2020-01-13&finishdate=2021-09-20&operation=REST&category=RESTAURANTS`
       )
       .then((res) => {
         const movens = res.data;
@@ -230,7 +219,7 @@ export default function BalancePage() {
   const getTotalExpensesServices = () => {
     axios
       .get(
-        `http://localhost:8080/api/movements-user-date-operation-category/userId/${idUser}?startdate=2020-01-13&finishdate=2021-09-20&operation=REST&category=UTILITIES`
+        `https://projectbankingenia.herokuapp.com/api/movements-user-date-operation-category/userId/${idUser}?startdate=2020-01-13&finishdate=2021-09-20&operation=REST&category=UTILITIES`
       )
       .then((res) => {
         const movens = res.data;
@@ -243,7 +232,7 @@ export default function BalancePage() {
   const getTotalExpensesClothes = () => {
     axios
       .get(
-        `http://localhost:8080/api/movements-user-date-operation-category/userId/${idUser}?startdate=2020-01-13&finishdate=2021-09-20&operation=REST&category=CLOTHES`
+        `https://projectbankingenia.herokuapp.com/api/movements-user-date-operation-category/userId/${idUser}?startdate=2020-01-13&finishdate=2021-09-20&operation=REST&category=CLOTHES`
       )
       .then((res) => {
         const movens = res.data;
@@ -256,7 +245,7 @@ export default function BalancePage() {
   const getTotalExpensesPaid = () => {
     axios
       .get(
-        `http://localhost:8080/api/movements-user-date-operation-category/userId/${idUser}?startdate=2020-01-13&finishdate=2021-09-20&operation=REST&category=PAID`
+        `https://projectbankingenia.herokuapp.com/api/movements-user-date-operation-category/userId/${idUser}?startdate=2020-01-13&finishdate=2021-09-20&operation=REST&category=PAID`
       )
       .then((res) => {
         const movens = res.data;
@@ -270,6 +259,7 @@ export default function BalancePage() {
 
   const handleInputChange = (event) => {
     let eventValue = event.target.value;
+    console.log(eventValue);
     setInputValue(eventValue);
     eventValue == "gastos"
       ? setChangeLinearGraphic(false)
@@ -316,6 +306,7 @@ export default function BalancePage() {
                       label=""
                       value={inputData}
                       onChange={handleInputChange}
+                      multiple={false}
                       SelectProps={{
                         native: true,
                       }}
@@ -351,8 +342,6 @@ export default function BalancePage() {
               </div>
               <div className="balance-container__left__graphic-container">
                 {changeLinearGraphic ? (
-
-                //  ----------------------------------------INICIO grafico linear de ingresos --------------------------------------------
                   <Paper>
                     <Chart data={incomeData}>
                       <ArgumentAxis className={classes.lineSeries} />
@@ -361,11 +350,7 @@ export default function BalancePage() {
                       <LineSeries valueField="value" argumentField="argument" />
                     </Chart>
                   </Paper>
-                //  ----------------------------------------   FIN grafico linear de ingresos --------------------------------------------
-
                 ) : (
-                //  ----------------------------------------INICIO grafico linear de gastos --------------------------------------------
-
                   <Paper>
                     <Chart data={expensesData}>
                       <ArgumentAxis className={classes.lineSeries} />
@@ -374,8 +359,6 @@ export default function BalancePage() {
                       <LineSeries valueField="value" argumentField="argument" />
                     </Chart>
                   </Paper>
-                  //  ----------------------------------------FIN grafico linear de gastos --------------------------------------------
-
                 )}
               </div>
             </div>
@@ -401,54 +384,45 @@ export default function BalancePage() {
               <div className="balance-container__right__graphic-container">
                 <div className="balance-container__right__graphic">
                   {changeIncomeGraphic ? (
-            //  ---------------------------------------- INICIO grafico circular  --------------------------------------------
-
                     <Paper className={classes.chart}>
                       <Chart data={categoryData}>
                         <PieSeries valueField="area" argumentField="category" />
                       </Chart>
                     </Paper>
                   ) : (
-              //  ---------------------------------------- FIN grafico circular  --------------------------------------------
-
-                   //  ----------------------------------------INICIO grafico de barras  --------------------------------------------
-
                     <Paper>
-                      <Chart data={barCategoryData}>
+                      <Chart data={categoryData}>
                         <ArgumentAxis />
                         <ValueAxis />
                         <BarSeries
-                          valueField="expenses"
+                          valueField="area"
                           argumentField="category"
                           name="gasolina"
                         />
                         <BarSeries
-                          valueField="expenses"
+                          valueField="area"
                           argumentField="category"
                           name="pagado"
                         />
                         <BarSeries
-                          valueField="expenses"
+                          valueField="area"
                           argumentField="category"
                           name="servicios"
                         />
                         <BarSeries
-                          valueField="expenses"
+                          valueField="area"
                           argumentField="category"
                           name="restaurantes"
                         />
                         <BarSeries
-                          valueField="expenses"
+                          valueField="area"
                           argumentField="category"
                           name="ropa"
                         />
                         <Stack />
                       </Chart>
                     </Paper>
-                  //  ----------------------------------------FIN grafico de barras  --------------------------------------------
-
                   )}
-
                 </div>
                 <div className="balance-container__right__list-container">
                   <div className="balance-container__right__list-container__txt">

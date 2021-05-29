@@ -70,8 +70,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 export default function HomePage() {
-
-   let idUser= localStorage.getItem("userId");
+  let idUser = localStorage.getItem("userId");
 
   const location = useLocation();
   const history = useHistory();
@@ -99,13 +98,24 @@ export default function HomePage() {
   let [incomeData, setIncomeData] = useState([]);
   let [expensesData, setExpensesData] = useState([]);
 
-  let [categoryData, setCategoryData] = useState([]);
-  let [barCategoryData, setBarCategoryData] = useState([]);
+  let [categoryData, setCategoryData] = useState([
+    { category: "Gasolina", area: 4 },
+    { category: "Pagado", area: 2 },
+    { category: "Servicios", area: 5 },
+    { category: "Restaurantes", area: 6 },
+    { category: "Ropa", area: 10 },
+  ]);
 
   let [changeIncomeGraphic, setChangeIncomeGraphic] = useState(true);
   let [changeLinearGraphic, setChangeLinearGraphic] = useState(true);
 
   let [inputValue, setInputValue] = useState("");
+
+  let [areaFuel, setAreaFuel] = useState(0);
+  let [areaPaid, setAreaPaid] = useState(0);
+  let [areaClothes, setAreaClothes] = useState(0);
+  let [areaServices, setAreaServices] = useState(0);
+  let [areaRestaurants, setAreaRestaurants] = useState(0);
 
   const inputData = [
     {
@@ -129,25 +139,22 @@ export default function HomePage() {
     getTotalExpensesServices();
     getTotalExpensesClothes();
     getTotalExpensesPaid();
-    getTotalCategoryData();
   }, []);
 
   useEffect(() => {
     getTotalIncomeData();
     getTotalExpensesData();
-    getTotalCategoryData();
-  }, [income, expenses]);
+  }, [expenses, income]);
 
   useEffect(() => {
     getTotalCategoryData();
-  }, [changeIncomeGraphic, changeLinearGraphic]);
+  }, [areaFuel, areaClothes]);
 
   const getTotalIncome = () => {
-
     let incomes = [];
     axios
       .get(
-        `http://localhost:8080/api/movements-user-date-operation/userId/${idUser}?startdate=2020-01-13&finishdate=2021-09-20&operation=SUM`
+        `https://projectbankingenia.herokuapp.com/api/movements-user-date-operation/userId/${idUser}?startdate=2020-01-13&finishdate=2021-09-20&operation=SUM`
       )
       .then((res) => {
         const movens = res.data;
@@ -181,47 +188,39 @@ export default function HomePage() {
 
     setExpensesData(data);
   };
+
   const getTotalCategoryData = () => {
-    if(expensesFuel===undefined) expensesFuel=0
-    if(expenses===undefined)expenses=0
-    if(expensesPaid===undefined)expensesPaid=0
-    if(expensesServices===undefined)expensesServices=0
-    if(expensesRestaurants===undefined)expensesRestaurants=0
-    if(expensesClothes===undefined)expensesClothes=0
-    const areaFuel = (expensesFuel / expenses) * 100;
-    const areaPaid = (expensesPaid / expenses) * 100;
-    const areaServices = (expensesServices / expenses) * 100;
-    const areaRestaurants = (expensesRestaurants / expenses) * 100;
-    const areaClothes = (expensesClothes / expenses) * 100;
+    if (expensesFuel === undefined || expensesFuel == 0) areaFuel = 0;
+    if (expenses === undefined) expenses = 0;
+    if (expensesPaid === undefined || expensesPaid == 0) areaPaid = 0;
+    if (expensesServices === undefined || expensesServices == 0)
+      areaServices = 0;
+    if (expensesRestaurants === undefined || expensesRestaurants == 0)
+      areaRestaurants = 0;
+    if (expensesClothes === undefined || expensesClothes == 0) areaClothes = 0;
+
+    setAreaFuel((expensesFuel / expenses) * 100);
+    setAreaPaid((expensesPaid / expenses) * 100);
+    setAreaServices((expensesServices / expenses) * 100);
+    setAreaRestaurants((expensesRestaurants / expenses) * 100);
+    setAreaClothes((expensesClothes / expenses) * 100);
 
     const data = [
-      { category: "Fuel", area: areaFuel },
-      { category: "Paid", area: areaPaid },
-      { category: "Services", area: areaServices },
-      { category: "Restaurants", area: areaRestaurants },
-      { category: "Clothes", area: areaClothes },
+      { category: "Gasolina", area: areaFuel },
+      { category: "Pagado", area: areaPaid },
+      { category: "Servicios", area: areaServices },
+      { category: "Restaurantes", area: areaRestaurants },
+      { category: "Ropa", area: areaClothes },
     ];
 
     setCategoryData(data);
-
-    const barData = [
-      { category: "gasolina", expenses: areaFuel },
-      { category: "pagado", expenses: areaPaid },
-      { category: "servicios", expenses: areaServices },
-      { category: "restaurantes", expenses: areaRestaurants },
-      { category: "ropa", expenses: areaClothes },
-    ];
-
-    setBarCategoryData(barData);
   };
-
   const getTotalExpenses = () => {
-
     let expensesArray = [];
 
     axios
       .get(
-        `http://localhost:8080/api/movements-user-date-operation/userId/${idUser}?startdate=2020-01-13&finishdate=2021-09-20&operation=REST`
+        `https://projectbankingenia.herokuapp.com/api/movements-user-date-operation/userId/${idUser}?startdate=2020-01-13&finishdate=2021-09-20&operation=REST`
       )
       .then((res) => {
         const movens = res.data;
@@ -234,10 +233,9 @@ export default function HomePage() {
     setExpensesMovements(expensesArray);
   };
   const getTotalExpensesFuel = () => {
-
     axios
       .get(
-        `http://localhost:8080/api/movements-user-date-operation-category/userId/${idUser}?startdate=2020-01-13&finishdate=2021-09-20&operation=REST&category=FUEL`
+        `https://projectbankingenia.herokuapp.com/api/movements-user-date-operation-category/userId/${idUser}?startdate=2020-01-13&finishdate=2021-09-20&operation=REST&category=FUEL`
       )
       .then((res) => {
         const movens = res.data;
@@ -248,11 +246,9 @@ export default function HomePage() {
       });
   };
   const getTotalExpensesRestaurants = () => {
-
-
     axios
       .get(
-        `http://localhost:8080/api/movements-user-date-operation-category/userId/${idUser}?startdate=2020-01-13&finishdate=2021-09-20&operation=REST&category=RESTAURANTS`
+        `https://projectbankingenia.herokuapp.com/api/movements-user-date-operation-category/userId/${idUser}?startdate=2020-01-13&finishdate=2021-09-20&operation=REST&category=RESTAURANTS`
       )
       .then((res) => {
         const movens = res.data;
@@ -263,11 +259,9 @@ export default function HomePage() {
       });
   };
   const getTotalExpensesServices = () => {
-
-
     axios
       .get(
-        `http://localhost:8080/api/movements-user-date-operation-category/userId/${idUser}?startdate=2020-01-13&finishdate=2021-09-20&operation=REST&category=UTILITIES`
+        `https://projectbankingenia.herokuapp.com/api/movements-user-date-operation-category/userId/${idUser}?startdate=2020-01-13&finishdate=2021-09-20&operation=REST&category=UTILITIES`
       )
       .then((res) => {
         const movens = res.data;
@@ -278,11 +272,9 @@ export default function HomePage() {
       });
   };
   const getTotalExpensesClothes = () => {
-
-
     axios
       .get(
-        `http://localhost:8080/api/movements-user-date-operation-category/userId/${idUser}?startdate=2020-01-13&finishdate=2021-09-20&operation=REST&category=CLOTHES`
+        `https://projectbankingenia.herokuapp.com/api/movements-user-date-operation-category/userId/${idUser}?startdate=2020-01-13&finishdate=2021-09-20&operation=REST&category=CLOTHES`
       )
       .then((res) => {
         const movens = res.data;
@@ -293,10 +285,9 @@ export default function HomePage() {
       });
   };
   const getTotalExpensesPaid = () => {
-
     axios
       .get(
-        `http://localhost:8080/api/movements-user-date-operation-category/userId/${idUser}?startdate=2020-01-13&finishdate=2021-09-20&operation=REST&category=PAID`
+        `https://projectbankingenia.herokuapp.com/api/movements-user-date-operation-category/userId/${idUser}?startdate=2020-01-13&finishdate=2021-09-20&operation=REST&category=PAID`
       )
       .then((res) => {
         const movens = res.data;
@@ -317,10 +308,9 @@ export default function HomePage() {
   };
 
   const getCardBankByUserID = () => {
-
     axios
       .get(
-        `http://localhost:8080/api/bankcard-user-id/${idUser}`
+        `https://projectbankingenia.herokuapp.com/api/bankcard-user-id/${idUser}`
       )
       .then((res) => {
         const cards = res.data;
@@ -329,10 +319,9 @@ export default function HomePage() {
       });
   };
   const getMovements = () => {
-
     axios
       .get(
-        `http://localhost:8080/api/movement/userId/${idUser}`
+        `https://projectbankingenia.herokuapp.com/api/movement/userId/${idUser}`
       )
       .then((res) => {
         const movens = res.data;
@@ -425,9 +414,9 @@ export default function HomePage() {
                         {row.paymentType == "ACCOUNT" ? (
                           <TableCell align="center">
                             {row.operationType == "REST" ? (
-                              <img src={RedIcon} />
+                              <img src={RedIcon} className="movement-icon" />
                             ) : (
-                              <img src={GreenIcon} />
+                              <img src={GreenIcon} className="movement-icon" />
                             )}
 
                             {row.account.iban}
@@ -435,9 +424,9 @@ export default function HomePage() {
                         ) : (
                           <TableCell align="center">
                             {row.operationType == "REST" ? (
-                              <img src={RedIcon} />
+                              <img src={RedIcon} className="movement-icon" />
                             ) : (
-                              <img src={GreenIcon} />
+                              <img src={GreenIcon} className="movement-icon" />
                             )}
                             {row.account.cards[0].pan}
                           </TableCell>
@@ -455,18 +444,17 @@ export default function HomePage() {
           </Paper>
         </Grid>
         <Grid item xs={12} sm={6}>
-       
           <Paper className={classes.paper}>
-          <div className="flexi">
-                <h1>Balance Total</h1>{" "}
-                <h3
-                  onClick={() => {
-                    navegar("/dashboard/balance");
-                  }}
-                >
-                  Ver Análisis
-                </h3>
-              </div>
+            <div className="flexi">
+              <h1>Balance Total</h1>{" "}
+              <h3
+                onClick={() => {
+                  navegar("/dashboard/balance");
+                }}
+              >
+                Ver Análisis
+              </h3>
+            </div>
             <div className="graficos">
               {incomeData === undefined ? (
                 <h5>Cargando datos</h5>
@@ -584,31 +572,31 @@ export default function HomePage() {
                             </Paper>
                           ) : (
                             <Paper>
-                              <Chart data={barCategoryData}>
+                              <Chart data={categoryData}>
                                 <ArgumentAxis />
                                 <ValueAxis />
                                 <BarSeries
-                                  valueField="expenses"
+                                  valueField="area"
                                   argumentField="category"
                                   name="gasolina"
                                 />
                                 <BarSeries
-                                  valueField="expenses"
+                                  valueField="area"
                                   argumentField="category"
                                   name="pagado"
                                 />
                                 <BarSeries
-                                  valueField="expenses"
+                                  valueField="area"
                                   argumentField="category"
                                   name="servicios"
                                 />
                                 <BarSeries
-                                  valueField="expenses"
+                                  valueField="area"
                                   argumentField="category"
                                   name="restaurantes"
                                 />
                                 <BarSeries
-                                  valueField="expenses"
+                                  valueField="area"
                                   argumentField="category"
                                   name="ropa"
                                 />

@@ -72,10 +72,7 @@ const LoginForm = (props) => {
       {errors.password && touched.password && (
         <div className="error">{errors.password}</div>
       )}
-      <FormControlLabel
-        control={<Checkbox value="remenber" color="secondary" />}
-        label="Recordad datos"
-      />
+
       <Button
         type="submit"
         fullWidth

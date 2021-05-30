@@ -64,8 +64,7 @@ const RegisterPage = () => {
         surname:""
       }}
       onSubmit={(values, { setSubmitting }) => {
-        //esto se va a ejecutar al realizar el submit
-        //simulamos una peticion http
+
         if(values){
             let user={
             email:values.email,

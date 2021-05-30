@@ -1,74 +1,77 @@
-.account-container{
-    display: flex;
-    justify-content: space-between;
-    width: 90%;
-    vertical-align: middle;
-    transform: translateY(8rem);
+.account-container {
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
+  vertical-align: middle;
+  transform: translateY(8rem);
 }
 
-.account-balance-txt{
-font-size: 19px;
-font-style: normal;
-font-weight: bold;
-line-height: 36px;
-letter-spacing: 0.025em;
-text-align: left;
-color: #D01E69;
-
+.account-balance-txt {
+  font-size: 19px;
+  font-style: normal;
+  font-weight: bold;
+  line-height: 36px;
+  letter-spacing: 0.025em;
+  text-align: left;
+  color: #d01e69;
 }
-.flexi{
-display: flex;
-flex-direction: row;
-justify-content: space-between;
-margin: 10px;
-padding:10px;
+.flexi {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 10px;
+  padding: 10px;
 }
-.flexi{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin: 10px;
-    padding:10px;
-    }
-    .amountStyle{
-        color: #D01E69;
-        text-align: left;
-        margin: 15px;   
-    }
-    .bbva-icon{
-        margin: 15px; 
-    }
-    .card-container{
-        padding: 15px;
-        border-radius: 40px;
-    }
-    .colorGris{
-        color:grey;
-    }
-
-    .padre{
-        display: flex;
-    }
-    .hijo{
-        display: flex;
-        flex-direction: column;
-    }
-
-   
-.balance-graphiccontainer__bottom{
-    display: flex;
-    flex-direction: column;
+.flexi {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 10px;
+  padding: 10px;
 }
-.flexCards{
-display: flex;
-flex-direction: row;
+.amountStyle {
+  color: #d01e69;
+  text-align: left;
+  margin: 15px;
 }
-.graficos{
-text-align: center
+.bbva-icon {
+  margin: 15px;
+}
+.card-container {
+  padding: 15px;
+  border-radius: 40px;
+}
+.colorGris {
+  color: grey;
 }
 
-.movement-icon{
-    position: relative;
-    top: 0.5rem;
-    padding-right: 0.2rem;
+.padre {
+  display: flex;
 }
+.hijo {
+  display: flex;
+  flex-direction: column;
+}
+
+.balance-graphiccontainer__bottom {
+  display: flex;
+  flex-direction: column;
+}
+.flexCards {
+  display: flex;
+  flex-direction: row;
+}
+.graficos {
+  text-align: center;
+}
+
+.movement-icon {
+  position: relative;
+  top: 0.5rem;
+  padding-right: 0.2rem;
+}
+
+rect {
+  fill: #d01e69;
+}
+

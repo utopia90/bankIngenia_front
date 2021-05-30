@@ -1,24 +1,27 @@
 body {
   margin: 0;
-  font-family: 'dmSans-regular';
+  font-family: "dmSans-regular";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: 'dmSans-regular';
+  font-family: "dmSans-regular";
 }
-
 
 @font-face {
   font-family: "dmSans-bold";
   src: local("dmSans-bold"),
-   url("./Assets/Typography/DMSans-Bold.ttf") format("truetype");
+    url("./Assets/Typography/DMSans-Bold.ttf") format("truetype");
   font-weight: bold;
-  }
+}
 
-  @font-face {
-    font-family: "dmSans-regular";
-    src: local("dmSans-regular"),
-     url("./Assets/Typography/DMSans-Regular.ttf") format("truetype");
-    }
+@font-face {
+  font-family: "dmSans-regular";
+  src: local("dmSans-regular"),
+    url("./Assets/Typography/DMSans-Regular.ttf") format("truetype");
+}
+
+.MuiTypography-body1 {
+  font-family: "dmSans-regular" !important;
+}

@@ -16,10 +16,6 @@ import {
   Box,
 } from "@material-ui/core";
 
-import Snackbar from '@material-ui/core/Snackbar';
-import IconButton from '@material-ui/core/IconButton';
-import CloseIcon from '@material-ui/icons/Close';
-
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import CopyRight from "../../Components/CopyRight/CopyRight";
 import "./RegisterPage.scss";
@@ -51,21 +47,13 @@ const useStyles = makeStyles((theme) => ({
 const RegisterPage = () => {
   let history = useHistory();
   const classes = useStyles();
-  const [open, setOpen] = React.useState(false);
+
   const Registro = (user) => {
     axios
       .post(`https://projectbankingenia.herokuapp.com/auth/registro`, user)
       .then((res) => {
-        setOpen(true)
         history.push("/login");
       });
-  };
-  const handleClose = (event, reason) => {
-    if (reason === 'clickaway') {
-      return;
-    }
-
-    setOpen(false);
   };
   return (
     <Formik
@@ -121,26 +109,6 @@ const RegisterPage = () => {
 
         return (
           <Container component="main" maxWidth="xs">
-          <Snackbar
-        anchorOrigin={{
-          vertical: 'top',
-          horizontal: 'center',
-        }}
-        open={open}
-        autoHideDuration={6000}
-        onClose={handleClose}
-        message="Registro Correcto"
-        action={
-          <React.Fragment>
-            <Button color="secondary" size="small" >
-              UNDO
-            </Button>
-            <IconButton size="small" aria-label="close" color="inherit" onClick={handleClose}>
-              <CloseIcon fontSize="small" />
-            </IconButton>
-          </React.Fragment>
-        }
-      />
             <CssBaseline />
             <div className={classes.paper}>
             <div className="logoingenia">

@@ -390,49 +390,52 @@ export default function BalancePage() {
                   <h4>Gráfico de barras</h4>
                 </span>
               </div>
-              <div className="balance-container__right__graphic-container">
-                <div className="balance-container__right__graphic">
-                  {changeIncomeGraphic ? (
-                    <Paper className={classes.chart}>
-                      <Chart data={categoryData}>
-                        <PieSeries valueField="area" argumentField="category" />
-                      </Chart>
-                    </Paper>
-                  ) : (
-                    <Paper>
-                      <Chart data={categoryData}>
-                        <ArgumentAxis />
-                        <ValueAxis />
-                        <BarSeries
-                          valueField="area"
-                          argumentField="category"
-                          name="gasolina"
-                        />
-                        <BarSeries
-                          valueField="area"
-                          argumentField="category"
-                          name="pagado"
-                        />
-                        <BarSeries
-                          valueField="area"
-                          argumentField="category"
-                          name="servicios"
-                        />
-                        <BarSeries
-                          valueField="area"
-                          argumentField="category"
-                          name="restaurantes"
-                        />
-                        <BarSeries
-                          valueField="area"
-                          argumentField="category"
-                          name="ropa"
-                        />
-                        <Stack />
-                      </Chart>
-                    </Paper>
-                  )}
-                </div>
+              <div className="balance-container__right__graphic-block">
+                        <div className="balance-container__right__graphic">
+                          {changeIncomeGraphic ? (
+                            <Paper className={classes.chart}>
+                              <Chart data={categoryData}>
+                                <PieSeries
+                                  valueField="area"
+                                  argumentField="category"
+                                />
+                              </Chart>
+                            </Paper>
+                          ) : (
+                            <Paper>
+                              <Chart data={categoryData}>
+                                <ArgumentAxis />
+                                <ValueAxis />
+                                <BarSeries
+                                  valueField="area"
+                                  argumentField="category"
+                                  name="gasolina"
+                                />
+                                <BarSeries
+                                  valueField="area"
+                                  argumentField="category"
+                                  name="pagado"
+                                />
+                                <BarSeries
+                                  valueField="area"
+                                  argumentField="category"
+                                  name="servicios"
+                                />
+                                <BarSeries
+                                  valueField="area"
+                                  argumentField="category"
+                                  name="restaurantes"
+                                />
+                                <BarSeries
+                                  valueField="area"
+                                  argumentField="category"
+                                  name="ropa"
+                                />
+                                <Stack />
+                              </Chart>
+                            </Paper>
+                          )}
+                        </div>
                 <div className="balance-container__right__list-container">
                   <div className="balance-container__right__list-container__txt">
                     <h5 className="txt-item">Gasolina</h5>

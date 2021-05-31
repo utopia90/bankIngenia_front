@@ -71,9 +71,6 @@
   padding-right: 0.2rem;
 }
 
-rect {
-  fill: #d01e69;
-}
 .balance-container__right__graphic-block {
   display: flex;
   justify-content: space-between;
@@ -82,4 +79,8 @@ rect {
 .balance-container__right__list-block {
   width: 37%;
   display: flex;
+}
+
+rect {
+  fill:  #d01e69;
 }

@@ -56,6 +56,7 @@ const RegisterPage = () => {
     axios
       .post(`https://projectbankingenia.herokuapp.com/auth/registro`, user)
       .then((res) => {
+        setOpen(true)
         history.push("/login");
       });
   };
@@ -122,13 +123,13 @@ const RegisterPage = () => {
           <Container component="main" maxWidth="xs">
           <Snackbar
         anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'left',
+          vertical: 'top',
+          horizontal: 'center',
         }}
         open={open}
         autoHideDuration={6000}
         onClose={handleClose}
-        message="Note archived"
+        message="Registro Correcto"
         action={
           <React.Fragment>
             <Button color="secondary" size="small" >

@@ -35,9 +35,9 @@ const LoanForm = (props) => {
 
   const monthsData = [
     {
-        value: "",
-        label: "",
-      },
+      value: "",
+      label: "",
+    },
     {
       value: 3,
       label: "3 meses",
@@ -69,8 +69,6 @@ const LoanForm = (props) => {
   useEffect(() => {
     getAcccountsByUserID();
   }, []);
-
-
 
   return (
     <form onSubmit={handleSubmit} className={classes.form}>
@@ -124,9 +122,7 @@ const LoanForm = (props) => {
         }}
         helperText="Por favor, seleccione la cuenta donde desea recibir el préstamo"
       >
-             <option value="">
-            Selecciona una Cuenta
-          </option>
+        <option value="">Selecciona una Cuenta</option>
 
         {accounts.map((option) => (
           <option key={option.id} value={option.iban}>
@@ -145,9 +141,7 @@ const LoanForm = (props) => {
         }}
         helperText="Por favor, seleccione la cuenta desde la cual quiere pagar el préstamo"
       >
-                   <option value="">
-            Selecciona una Cuenta
-          </option>
+        <option value="">Selecciona una Cuenta</option>
         {accounts.map((option) => (
           <option key={option.id} value={option.iban}>
             {option.iban}

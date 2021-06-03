@@ -76,6 +76,9 @@ const LoansPage = () => {
 
                   <TableCell align="center">{row.durationMonths} </TableCell>
                   <TableCell align="center">{row.interestType}</TableCell>
+                  <TableCell align="center">{row.accountIncome.iban}</TableCell>
+                  <TableCell align="center">{row.accountPayment.iban}</TableCell>
+
                 </TableRow>
               ))}
             </TableBody>

@@ -80,7 +80,7 @@ const LoanForm = (props) => {
         autoFocus
         id="quantity"
         type="number"
-        label="quantity"
+        label="cantidad"
         name="quantity"
         margin="normal"
         autoComplete="current-password"
@@ -98,7 +98,7 @@ const LoanForm = (props) => {
       <TextField
         id="duration"
         select
-        label="duration"
+        label="duración"
         value={duration}
         onChange={handleChange}
         SelectProps={{

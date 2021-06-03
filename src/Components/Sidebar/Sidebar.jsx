@@ -114,7 +114,7 @@ const mainMenuList = [
   },
   {
     text: "Préstamos",
-    path: "/loans",
+    path: "/prestamos",
     icon: "HOME",
   },
 ];

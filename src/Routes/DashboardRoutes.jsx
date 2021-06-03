@@ -27,9 +27,9 @@ export default function DashboardRoutes() {
         <Route path={`${path}/login`} component={LoginPage} />
         <Route path={`${path}/movimientos`} component={MovementsPage} />
         <Route path={`${path}/registro`} component={RegisterPage} />
-        <Route path={`${path}/loans`} component={LoansPage} />
-        <Route path={`${path}/loans-form`} component={LoansFormPage} />
-        <Route path={`${path}/calculate-share`} component={CalculateSharePage} />
+        <Route path={`${path}/prestamos`} component={LoansPage} />
+        <Route path={`${path}/prestamos-form`} component={LoansFormPage} />
+        <Route path={`${path}/cuota`} component={CalculateSharePage} />
 
       </Switch>
     </div>

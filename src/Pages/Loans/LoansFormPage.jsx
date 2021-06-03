@@ -24,7 +24,7 @@ const LoansFormPage = () => {
 
   const calcularCuotas = (loan) => {
     history.push({
-      pathname: "/dashboard/calculate-share",
+      pathname: "/dashboard/cuota",
       state: { loan: loan },
     });
   };
@@ -41,7 +41,7 @@ const LoansFormPage = () => {
       width: "100%",
     },
     submit: {
-      margin: theme.spacing(3, 0, 2),
+      margin: theme.spacing(3, 0, 2)
     },
     avatar: {
       backgroundColor: theme.palette.secondary.main,
@@ -58,7 +58,7 @@ const LoansFormPage = () => {
         duration: 0,
         accountReceive: [],
         accountPay: [],
-        interest: "fixed",
+        interest: "FIJO",
       }}
       onSubmit={(values, { setSubmitting }) => {
         if (values) {
@@ -68,7 +68,7 @@ const LoansFormPage = () => {
             duration: values.duration,
             accountReceive: values.accountReceiveLoan,
             accountPay: values.accountPayment,
-            interest: "fixed",
+            interest: "FIJO",
           };
           calcularCuotas(loan);
         }

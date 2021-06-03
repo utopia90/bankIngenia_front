@@ -1,8 +1,7 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import { makeStyles } from '@material-ui/core/styles';
-
+import { makeStyles } from "@material-ui/core/styles";
 
 import { Container, Grid, Paper, Typography } from "@material-ui/core";
 
@@ -22,17 +21,16 @@ const CalculateShare = () => {
     setShare(share);
   };
 
+  const submitLoan = () => {
+      
+  }
+
   useEffect(() => {
     setLoan(location.state.loan);
     CalculateShares();
-
   }, [location]);
 
-
- 
- 
-
-  console.log("share", share)
+  console.log("share", share);
   return (
     <div>
       <h1>CALCULA TU CUOTA</h1>
@@ -76,8 +74,10 @@ const CalculateShare = () => {
                   al mes, y la duración de tu préstamo es de
                   <span className="pink-color"> {loan.duration}</span> meses
                 </h2>
-                <div className="loan-btns-container">   <button className="add-loan-btn">Acepto el préstamo</button>
-                <button className="add-loan-btn">Cancelo el préstamo</button></div>
+                <div className="loan-btns-container">
+                  <button className="add-loan-btn" onClick={submitLoan}>Acepto el préstamo</button>
+                  <button className="add-loan-btn">Cancelo el préstamo</button>
+                </div>
               </Paper>
             </Grid>
           </Grid>

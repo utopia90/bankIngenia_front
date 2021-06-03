@@ -47,7 +47,7 @@ const LoansPage = () => {
   return (
     <div>
       <div>
-         <div className="top-container"><h1>Loans</h1> <div className="btn-div"><button onClick={() => history.push("/dashboard/loans-form")} className="add-loan-btn">Añadir préstamo</button></div></div> 
+         <div className="top-container"><h1>Préstamos</h1> <div className="btn-div"><button onClick={() => history.push("/dashboard/prestamos-form")} className="add-loan-btn">Añadir préstamo</button></div></div> 
         <TableContainer component={Paper}>
           <Table className={classes.table} aria-label="simple table">
             <TableHead>

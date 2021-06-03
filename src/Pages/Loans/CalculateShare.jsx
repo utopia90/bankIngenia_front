@@ -1,10 +1,10 @@
 import React from "react";
 import { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 
 import axios from "axios";
-
 
 import { Container, Grid, Paper, Typography } from "@material-ui/core";
 
@@ -16,8 +16,10 @@ const CalculateShare = () => {
   const [accountIncome, setAccountIncome] = useState([]);
   const [accountPayment, setAccountPayment] = useState([]);
 
-
   const userLoan = location.state.loan;
+
+  let history = useHistory();
+
 
   const CalculateShares = () => {
     let quantity = userLoan.quantity;
@@ -28,46 +30,54 @@ const CalculateShare = () => {
     setShare(share);
   };
 
-  const submitLoan = () => {
+  const cancelLoan = () => {
 
+    window.alert("hemos cancelado su préstamo");
+    history.push("/");
+  };
+
+  const submitLoan = () => {
     const loan = {
-        interestType: userLoan.interest,
-        durationMonths: Number(userLoan.duration),
-        cantidad: userLoan.quantity,
-        accountIncome:  accountIncome,
-        accountPayment: accountPayment
-    }
-    console.log(loan)
-        axios.post("https://projectbankingenia.herokuapp.com/api/prestam", loan)
+      interestType: userLoan.interest,
+      durationMonths: Number(userLoan.duration),
+      cantidad: userLoan.quantity,
+      accountIncome: accountIncome,
+      accountPayment: accountPayment,
+    };
+    if(userLoan.quantity <= accountPayment.currentGlobalBalance){
+    axios.post("https://projectbankingenia.herokuapp.com/api/prestam", loan);
+
+    window.alert("El préstamo se ha procesado correctamente");
+  }else{
+      window.alert("Lo siento, no tiene fondos suficientes para solicitar este préstamo")
   }
+}
 
   const getIncomeAccount = () => {
-    
     const incomeIban = userLoan.accountReceive;
     axios
-    .get(
-      `https://projectbankingenia.herokuapp.com/api/accountbyiban/${incomeIban}`
-    )
-    .then((res) => {
-      const incomeAccount = res.data;
-      console.log(incomeAccount);
-      setAccountIncome(incomeAccount);
-    });
-  }
+      .get(
+        `https://projectbankingenia.herokuapp.com/api/accountbyiban/${incomeIban}`
+      )
+      .then((res) => {
+        const incomeAccount = res.data;
+        console.log(incomeAccount);
+        setAccountIncome(incomeAccount);
+      });
+  };
 
   const getPaymentAccount = () => {
-    
     const paymentIban = userLoan.accountPay;
     axios
-    .get(
-      `https://projectbankingenia.herokuapp.com/api/accountbyiban/${paymentIban}`
-    )
-    .then((res) => {
-      const paymentAccount = res.data;
-      console.log(paymentAccount);
-      setAccountPayment(paymentAccount);
-    });
-  }
+      .get(
+        `https://projectbankingenia.herokuapp.com/api/accountbyiban/${paymentIban}`
+      )
+      .then((res) => {
+        const paymentAccount = res.data;
+        console.log(paymentAccount);
+        setAccountPayment(paymentAccount);
+      });
+  };
 
   useEffect(() => {
     CalculateShares();
@@ -91,7 +101,9 @@ const CalculateShare = () => {
 
                 <Typography fontSize="28px" className="flexi">
                   <h6>Cantidad de tu prestamo:</h6>
-                  <span className="account-balance-txt">{userLoan.quantity}</span>
+                  <span className="account-balance-txt">
+                    {userLoan.quantity} €
+                  </span>
                 </Typography>
                 <Typography fontSize="28px" className="flexi">
                   <h6>Duración de tu prestamo:</h6>
@@ -107,7 +119,9 @@ const CalculateShare = () => {
                 </Typography>
                 <Typography fontSize="28px" className="flexi">
                   <h6>Cuenta de pago del préstamo:</h6>
-                  <span className="account-balance-txt">{userLoan.accountPay}</span>
+                  <span className="account-balance-txt">
+                    {userLoan.accountPay}
+                  </span>
                 </Typography>
               </Paper>
             </Grid>
@@ -123,8 +137,12 @@ const CalculateShare = () => {
                   <span className="pink-color"> {userLoan.duration}</span> meses
                 </h2>
                 <div className="loan-btns-container">
-                  <button className="add-loan-btn" onClick={submitLoan}>Acepto el préstamo</button>
-                  <button className="add-loan-btn">Cancelo el préstamo</button>
+                  <button className="add-loan-btn" onClick={submitLoan}>
+                    Acepto el préstamo
+                  </button>
+                  <button className="add-loan-btn" onClick={cancelLoan}>
+                    Cancelo el préstamo
+                  </button>
                 </div>
               </Paper>
             </Grid>

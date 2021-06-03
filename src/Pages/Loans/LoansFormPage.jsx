@@ -61,7 +61,7 @@ const LoansFormPage = () => {
         interest: "FIJO",
       }}
       onSubmit={(values, { setSubmitting }) => {
-        if (values&&values.accountPay!==""&&values.accountReceive!=="") {
+        if (values&&values.accountPay!==""&&values.accountReceive!==""&&values.quantity!==0&&values.duration!==0) {
           console.log(values);
           let loan = {
             quantity: values.quantity,
@@ -72,7 +72,6 @@ const LoansFormPage = () => {
           };
           calcularCuotas(loan);
         }
-
         setSubmitting(false);
       }}
       //**************Uso de YUP validacion de campos */

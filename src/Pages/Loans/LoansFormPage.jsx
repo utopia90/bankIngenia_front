@@ -61,7 +61,7 @@ const LoansFormPage = () => {
         interest: "fixed",
       }}
       onSubmit={(values, { setSubmitting }) => {
-        if (values) {
+        if (values&&values.accountPay!==""&&values.accountReceive!=="") {
           console.log(values);
           let loan = {
             quantity: values.quantity,

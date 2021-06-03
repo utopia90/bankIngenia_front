@@ -96,6 +96,7 @@ const LoansFormPage = () => {
         return (
           <Container component="main" maxWidth="xs">
             <CssBaseline />
+            <h2>Registro de Préstamo</h2>
             <div className={classes.paper}>
               <LoanForm
                 values={values}

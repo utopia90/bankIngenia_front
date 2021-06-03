@@ -11,11 +11,33 @@ import { Container, Grid, Paper, Typography } from "@material-ui/core";
 import "./CalculateShare.scss";
 import { InsertInvitationTwoTone } from "@material-ui/icons";
 
+const useStyles = makeStyles((theme) => ({
+  container: {
+    display: "flex",
+  },
+  btnsContainer: {
+    display: "flex",
+    justifyContent: "space-between",
+    textAlign: "center",
+    paddingTop: 4,
+    fontSize: 12,
+  },
+  paper: {
+    padding: theme.spacing(3),
+    textAlign: "center",
+    color: theme.palette.text.secondary,
+    whiteSpace: "nowrap",
+    marginBottom: theme.spacing(1),
+    width: "max-content",
+  },
+}));
+
 const CalculateShare = () => {
   const location = useLocation();
   const [share, setShare] = useState([]);
   const [accountIncome, setAccountIncome] = useState([]);
   const [accountPayment, setAccountPayment] = useState([]);
+  const classes = useStyles();
 
   const userLoan = location.state.loan;
 
@@ -44,34 +66,30 @@ const CalculateShare = () => {
       accountPayment: accountPayment,
     };
 
-    if (userLoan.quantity <= accountPayment.currentGlobalBalance) {
-      axios.post("https://projectbankingenia.herokuapp.com/api/prestam", loan);
+    axios.post("https://projectbankingenia.herokuapp.com/api/prestam", loan);
 
-      startLoanPayments()
-      window.alert("El préstamo se ha procesado correctamente");
-    } else {
-      window.alert(
-        "Lo siento, no tiene fondos suficientes para solicitar este préstamo"
-      );
-    }
+    startLoanPayments();
+    window.alert("El préstamo se ha procesado correctamente");
   };
 
   const startLoanPayments = () => {
-    const movement = {
-      operationType: "REST",
-      paymentType: "ACCOUNT",
-      timestamp: new Date().toISOString(),
-      date: new Date().toLocaleDateString(),
-      account: accountPayment,
-      quantity: Number(share),
-      categoryType: "PAID",
-    };
-    console.log(movement)
-    setInterval(async () => {
-    axios.post(
-      "https://projectbankingenia.herokuapp.com/api/movement",
-      movement
-    )}, 1000);
+    setInterval(() => {
+      const movement = {
+        operationType: "REST",
+        paymentType: "ACCOUNT",
+        timestamp: new Date().toISOString(),
+        date: new Date().toLocaleDateString(),
+        account: accountPayment,
+        quantity: Number(share),
+        categoryType: "PAID",
+      };
+      console.log("movement before axios", movement);
+
+      axios.post(
+        "https://projectbankingenia.herokuapp.com/api/movement",
+        movement
+      );
+    }, 1000);
   };
 
   const getIncomeAccount = () => {
@@ -82,7 +100,6 @@ const CalculateShare = () => {
       )
       .then((res) => {
         const incomeAccount = res.data;
-        console.log(incomeAccount);
         setAccountIncome(incomeAccount);
       });
   };
@@ -95,7 +112,6 @@ const CalculateShare = () => {
       )
       .then((res) => {
         const paymentAccount = res.data;
-        console.log(paymentAccount);
         setAccountPayment(paymentAccount);
       });
   };
@@ -109,37 +125,36 @@ const CalculateShare = () => {
     getPaymentAccount();
   }, []);
 
-  console.log("share", share);
   return (
     <div>
-      <h1>CALCULA TU CUOTA</h1>
+      <h1>CALCULE SU CUOTA</h1>
       <div className="top-container">
-        <Container>
+        <Container className={classes.container}>
           <Grid container spacing={3}>
-            <Grid item xs={12} md={3} lg={6} className="card-container">
+            <Grid item xs={12} md={6} lg={8} className="card-container">
               <Paper>
-                <h4>Datos de tu préstamo:</h4>
+                <h4>Datos de su préstamo:</h4>
 
                 <Typography fontSize="28px" className="flexi">
-                  <h6>Cantidad de tu prestamo:</h6>
+                  <h5>Cantidad del prestamo:</h5>
                   <span className="account-balance-txt">
                     {userLoan.quantity} €
                   </span>
                 </Typography>
                 <Typography fontSize="28px" className="flexi">
-                  <h6>Duración de tu prestamo:</h6>
+                  <h5>Duración del prestamo:</h5>
                   <span className="account-balance-txt">
                     {userLoan.duration} meses
                   </span>
                 </Typography>
                 <Typography fontSize="28px" className="flexi">
-                  <h6>Cuenta de ingreso del préstamo:</h6>
+                  <h5>Cuenta de ingreso del préstamo:</h5>
                   <span className="account-balance-txt">
                     {userLoan.accountReceive}
                   </span>
                 </Typography>
                 <Typography fontSize="28px" className="flexi">
-                  <h6>Cuenta de pago del préstamo:</h6>
+                  <h5>Cuenta de pago del préstamo:</h5>
                   <span className="account-balance-txt">
                     {userLoan.accountPay}
                   </span>
@@ -150,21 +165,21 @@ const CalculateShare = () => {
         </Container>
         <Container>
           <Grid container spacing={3}>
-            <Grid item xs={12} md={3} lg={6} className="card-container">
-              <Paper>
+            <Grid item xs={12} md={6} lg={4} className="card-container">
+              <Paper className={classes.paper}>
                 <h2>
-                  Tu cuota es de <span className="pink-color">{share} </span>€
-                  al mes, y la duración de tu préstamo es de
+                  Su cuota es de <span className="pink-color">{share} </span>€
+                  al mes, y la duración de su préstamo es de
                   <span className="pink-color"> {userLoan.duration}</span> meses
                 </h2>
-                <div className="loan-btns-container">
-                  <button className="add-loan-btn" onClick={submitLoan}>
-                    Acepto el préstamo
-                  </button>
+                <Container className={classes.btnsContainer}>
                   <button className="add-loan-btn" onClick={cancelLoan}>
                     Cancelo el préstamo
                   </button>
-                </div>
+                  <button className="add-loan-btn" onClick={submitLoan}>
+                    Acepto el préstamo
+                  </button>
+                </Container>
               </Paper>
             </Grid>
           </Grid>

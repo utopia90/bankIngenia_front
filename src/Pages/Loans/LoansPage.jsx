@@ -78,9 +78,9 @@ const LoansPage = () => {
             <TableBody>
               {loans.map((row) => (
                 <TableRow key={row.id}>
-                  <TableCell align="center">{row.cantidad}</TableCell>
+                  <TableCell align="center">{row.cantidad} €</TableCell>
 
-                  <TableCell align="center">{row.durationMonths} </TableCell>
+                  <TableCell align="center">{row.durationMonths} meses</TableCell>
                   <TableCell align="center">{row.interestType}</TableCell>
                   <TableCell align="center">{row.accountIncome.iban}</TableCell>
                   <TableCell align="center">

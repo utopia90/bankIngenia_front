@@ -122,7 +122,7 @@ const LoanForm = (props) => {
         }}
         helperText="Por favor, seleccione la cuenta donde desea recibir el préstamo"
       >
-        <option value="">Selecciona una Cuenta</option>
+        <option value="">Seleccione cuenta de ingreso</option>
 
         {accounts.map((option) => (
           <option key={option.id} value={option.iban}>
@@ -141,7 +141,7 @@ const LoanForm = (props) => {
         }}
         helperText="Por favor, seleccione la cuenta desde la cual quiere pagar el préstamo"
       >
-        <option value="">Selecciona una Cuenta</option>
+        <option value="">Seleccione cuenta de pago</option>
         {accounts.map((option) => (
           <option key={option.id} value={option.iban}>
             {option.iban}

@@ -1,0 +1,29 @@
+.top-container{
+    display: flex;
+}
+
+.pink-color{
+    color: #d01e69;
+}
+.add-loan-btn{
+    background-color: #d01e69;
+    color: white;
+    border: none;
+    min-width: 10rem;
+    min-height: 3rem;
+    border-radius: 0.7rem;
+    cursor: pointer;
+
+    &:hover{
+        background-color: white;
+        border: 1px solid #d01e69;
+        color: #d01e69;
+    }
+}
+
+.loan-btns-container{
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+    padding-top: 4rem;
+}

@@ -9,6 +9,11 @@ import BankcardPage from "../Pages/Bankcards/BankcardPage";
 import LoginPage from "../Pages/Login/LoginPage";
 import MovementsPage from "../Pages/Movements/MovementsPage";
 import RegisterPage from "../Pages/Register/RegisterPage";
+import LoansPage from "../Pages/Loans/LoansPage";
+import LoansFormPage from "../Pages/Loans/LoansFormPage";
+import CalculateSharePage from "../Pages/Loans/CalculateShare";
+
+
 
 export default function DashboardRoutes() {
   const { path } = useRouteMatch();
@@ -22,6 +27,10 @@ export default function DashboardRoutes() {
         <Route path={`${path}/login`} component={LoginPage} />
         <Route path={`${path}/movimientos`} component={MovementsPage} />
         <Route path={`${path}/registro`} component={RegisterPage} />
+        <Route path={`${path}/loans`} component={LoansPage} />
+        <Route path={`${path}/loans-form`} component={LoansFormPage} />
+        <Route path={`${path}/calculate-share`} component={CalculateSharePage} />
+
       </Switch>
     </div>
   );

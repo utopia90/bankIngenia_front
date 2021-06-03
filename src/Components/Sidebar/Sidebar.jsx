@@ -112,6 +112,11 @@ const mainMenuList = [
     path: "/balance",
     icon: "BALANCE",
   },
+  {
+    text: "Préstamos",
+    path: "/loans",
+    icon: "HOME",
+  },
 ];
 
 const Sidebar = (props) => {

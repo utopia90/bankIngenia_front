@@ -13,8 +13,6 @@ import LoansPage from "../Pages/Loans/LoansPage";
 import LoansFormPage from "../Pages/Loans/LoansFormPage";
 import CalculateSharePage from "../Pages/Loans/CalculateShare";
 
-
-
 export default function DashboardRoutes() {
   const { path } = useRouteMatch();
   return (
@@ -30,7 +28,6 @@ export default function DashboardRoutes() {
         <Route path={`${path}/prestamos`} component={LoansPage} />
         <Route path={`${path}/prestamos-form`} component={LoansFormPage} />
         <Route path={`${path}/cuota`} component={CalculateSharePage} />
-
       </Switch>
     </div>
   );

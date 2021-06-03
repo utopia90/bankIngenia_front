@@ -9,6 +9,7 @@ import axios from "axios";
 import { Container, Grid, Paper, Typography } from "@material-ui/core";
 
 import "./CalculateShare.scss";
+import { InsertInvitationTwoTone } from "@material-ui/icons";
 
 const CalculateShare = () => {
   const location = useLocation();
@@ -20,7 +21,6 @@ const CalculateShare = () => {
 
   let history = useHistory();
 
-
   const CalculateShares = () => {
     let quantity = userLoan.quantity;
     let duration = Number(userLoan.duration);
@@ -31,7 +31,6 @@ const CalculateShare = () => {
   };
 
   const cancelLoan = () => {
-
     window.alert("hemos cancelado su préstamo");
     history.push("/");
   };
@@ -44,14 +43,36 @@ const CalculateShare = () => {
       accountIncome: accountIncome,
       accountPayment: accountPayment,
     };
-    if(userLoan.quantity <= accountPayment.currentGlobalBalance){
-    axios.post("https://projectbankingenia.herokuapp.com/api/prestam", loan);
 
-    window.alert("El préstamo se ha procesado correctamente");
-  }else{
-      window.alert("Lo siento, no tiene fondos suficientes para solicitar este préstamo")
-  }
-}
+    if (userLoan.quantity <= accountPayment.currentGlobalBalance) {
+      axios.post("https://projectbankingenia.herokuapp.com/api/prestam", loan);
+
+      startLoanPayments()
+      window.alert("El préstamo se ha procesado correctamente");
+    } else {
+      window.alert(
+        "Lo siento, no tiene fondos suficientes para solicitar este préstamo"
+      );
+    }
+  };
+
+  const startLoanPayments = () => {
+    const movement = {
+      operationType: "REST",
+      paymentType: "ACCOUNT",
+      timestamp: new Date().toISOString(),
+      date: new Date().toLocaleDateString(),
+      account: accountPayment,
+      quantity: Number(share),
+      categoryType: "PAID",
+    };
+    console.log(movement)
+    setInterval(async () => {
+    axios.post(
+      "https://projectbankingenia.herokuapp.com/api/movement",
+      movement
+    )}, 1000);
+  };
 
   const getIncomeAccount = () => {
     const incomeIban = userLoan.accountReceive;

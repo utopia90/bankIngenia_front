@@ -70,8 +70,9 @@ const CalculateShare = () => {
 console.log(loan)
     console.log(".................................................")
     axios.post("https://projectbankingenia.herokuapp.com/api/prestam", loan);
+    console.log("okkkkk peticion prestamo")
+    startLoanPayments();
 
-    //startLoanPayments();
     window.alert("El préstamo se ha procesado correctamente");
   };
 

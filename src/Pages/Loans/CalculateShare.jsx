@@ -65,7 +65,10 @@ const CalculateShare = () => {
       accountIncome: accountIncome,
       accountPayment: accountPayment,
     };
-
+    console.log(".................................................")
+    console.log("prueba submit")
+console.log(loan)
+    console.log(".................................................")
     axios.post("https://projectbankingenia.herokuapp.com/api/prestam", loan);
 
     startLoanPayments();

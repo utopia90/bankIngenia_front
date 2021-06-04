@@ -61,7 +61,7 @@ const CalculateShare = () => {
     const loan = {
       interestType: userLoan.interest,
       durationMonths: Number(userLoan.duration),
-      cantidad: 600.0,
+      cantidad: userLoan.quantity,
       accountIncome: accountIncome,
       accountPayment: accountPayment,
     };

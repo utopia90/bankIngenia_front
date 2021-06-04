@@ -9,12 +9,15 @@ import RegisterPage from './Pages/Register/RegisterPage';
 function App() {
   //TODO para pruebas 
 
-  const [loggedIn, setLoggedIn] = useState([sessionStorage.getItem('logged')]);
+ /* const [loggedIn, setLoggedIn] = useState([sessionStorage.getItem('logged')]);
   useEffect(() => {
 let sesion = sessionStorage.getItem('logged')
 setLoggedIn(sesion)
   }, [sessionStorage.getItem('logged')])
-
+*/
+let loggedIn= true;
+localStorage.setItem("userName", "PRueba prueb");
+localStorage.setItem("userId", 1);
   return (
     
    <Router>

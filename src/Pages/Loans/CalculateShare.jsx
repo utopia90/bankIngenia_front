@@ -50,6 +50,8 @@ const CalculateShare = () => {
     let share = (quantity / duration).toFixed(2);
 
     setShare(share);
+
+ 
   };
 
   const cancelLoan = () => {
@@ -64,28 +66,26 @@ const CalculateShare = () => {
       cantidad: userLoan.quantity,
       accountIncome: accountIncome,
       accountPayment: accountPayment,
+     
     };
+
+    console.log("loan before axios", loan)
 
     axios.post("https://projectbankingenia.herokuapp.com/api/prestam", loan);
 
     startLoanPayments();
+
+    // startLoanPayments();
     window.alert("El préstamo se ha procesado correctamente");
   };
 
   const startLoanPayments = () => {
   //  setInterval(() => {
-      const movement = {
-        operationType: "REST",
-        paymentType: "ACCOUNT",
-        account: accountPayment,
-        quantity: Number(share),
-        categoryType: "PAID",
-      };
-      console.log("movement before axios", movement);
+    const paymentIban = userLoan.accountPay;
 
-      axios.post(
-        "https://projectbankingenia.herokuapp.com/api/movement",
-        movement
+     
+      axios.get(
+        `https://projectbankingenia.herokuapp.com/api/collect-loan?iban=${paymentIban}&cantidad=${userLoan.quantity}`
       );
    // }, 10000);
   };
@@ -110,6 +110,7 @@ const CalculateShare = () => {
       )
       .then((res) => {
         const paymentAccount = res.data;
+
         setAccountPayment(paymentAccount);
       });
   };
@@ -122,6 +123,7 @@ const CalculateShare = () => {
     getIncomeAccount();
     getPaymentAccount();
   }, []);
+
 
   return (
     <div>

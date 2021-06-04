@@ -77,8 +77,6 @@ const CalculateShare = () => {
       const movement = {
         operationType: "REST",
         paymentType: "ACCOUNT",
-        timestamp: new Date().toISOString(),
-        date: new Date().toLocaleDateString(),
         account: accountPayment,
         quantity: Number(share),
         categoryType: "PAID",

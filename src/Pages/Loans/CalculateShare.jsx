@@ -73,7 +73,7 @@ const CalculateShare = () => {
   };
 
   const startLoanPayments = () => {
-    setInterval(() => {
+  //  setInterval(() => {
       const movement = {
         operationType: "REST",
         paymentType: "ACCOUNT",
@@ -87,7 +87,7 @@ const CalculateShare = () => {
         "https://projectbankingenia.herokuapp.com/api/movement",
         movement
       );
-    }, 10000);
+   // }, 10000);
   };
 
   const getIncomeAccount = () => {
@@ -183,6 +183,8 @@ const CalculateShare = () => {
           </Grid>
         </Container>
       </div>
+
+      <button onClick={()=>startLoanPayments()}>peticion</button>
     </div>
   );
 };

@@ -71,7 +71,7 @@ console.log(loan)
     console.log(".................................................")
     axios.post("https://projectbankingenia.herokuapp.com/api/prestam", loan);
 
-    startLoanPayments();
+    //startLoanPayments();
     window.alert("El préstamo se ha procesado correctamente");
   };
 

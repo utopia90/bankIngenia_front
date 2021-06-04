@@ -89,7 +89,7 @@ const CalculateShare = () => {
         "https://projectbankingenia.herokuapp.com/api/movement",
         movement
       );
-    }, 1000);
+    }, 10000);
   };
 
   const getIncomeAccount = () => {

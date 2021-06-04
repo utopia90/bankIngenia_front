@@ -177,6 +177,7 @@ const CalculateShare = () => {
                   <button className="add-loan-btn" onClick={submitLoan}>
                     Acepto el préstamo
                   </button>
+                  <button onClick={()=>startLoanPayments()}>peticion</button>
                 </Container>
               </Paper>
             </Grid>
@@ -184,7 +185,7 @@ const CalculateShare = () => {
         </Container>
       </div>
 
-      <button onClick={()=>startLoanPayments()}>peticion</button>
+      
     </div>
   );
 };

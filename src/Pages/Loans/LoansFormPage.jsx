@@ -64,7 +64,7 @@ const LoansFormPage = () => {
         if (values&&values.accountPay!==""&&values.accountReceive!==""&&values.quantity!==0&&values.duration!==0) {
           console.log(values);
           let loan = {
-            quantity: values.quantity,
+            quantity: 200.0,
             duration: values.duration,
             accountReceive: values.accountReceiveLoan,
             accountPay: values.accountPayment,

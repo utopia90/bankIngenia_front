@@ -33,6 +33,15 @@ const LoanForm = (props) => {
   const [accountPay, setAccountPay] = useState([]);
   const [duration, setDuration] = useState([]);
 
+  const handleChangeDuracion = (event) => {
+    setDuration(event.target.value);
+  };
+  const handleChangeRecive = (event) => {
+    setAccountReceive(event.target.value);
+  };
+  const handleChangePayment = (event) => {
+    setAccountPay(event.target.value);
+  };
   const monthsData = [
     {
       value: "",
@@ -98,7 +107,7 @@ const LoanForm = (props) => {
         select
         label="duración"
         value={duration}
-        onChange={handleChange}
+        onChange={handleChangeDuracion}
         SelectProps={{
           native: true,
         }}
@@ -115,7 +124,7 @@ const LoanForm = (props) => {
         id="accountReceiveLoan"
         select
         label=""
-        onChange={handleChange}
+        onChange={handleChangeRecive}
         value={accountReceive}
         SelectProps={{
           native: true,
@@ -134,7 +143,7 @@ const LoanForm = (props) => {
         id="accountPayment"
         select
         label=""
-        onChange={handleChange}
+        onChange={handleChangePayment}
         value={accountPay}
         SelectProps={{
           native: true,
@@ -159,7 +168,7 @@ const LoanForm = (props) => {
         disabled={isSubmitting}
         className={classes.submit}
       >
-        Ver mis cuotas
+        Crear Prestamo
       </Button>
       <Grid container></Grid>
     </form>

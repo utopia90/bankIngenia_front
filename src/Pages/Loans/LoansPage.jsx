@@ -24,7 +24,7 @@ const LoansPage = () => {
       )
       .then((res) => {
         const prestams = res.data;
-        console.log(prestams);
+
         setLoans(prestams);
       });
   };

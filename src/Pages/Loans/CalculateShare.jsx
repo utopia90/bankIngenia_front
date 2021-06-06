@@ -68,26 +68,22 @@ const CalculateShare = () => {
       accountPayment: accountPayment,
      
     };
-    console.log(".................................................")
-    console.log("prueba submit")
-console.log(loan)
-    console.log(".................................................")
+
     axios.post("https://projectbankingenia.herokuapp.com/api/prestam", loan);
-    console.log("okkkkk peticion prestamo")
     startLoanPayments();
 
     window.alert("El préstamo se ha procesado correctamente");
   };
 
   const startLoanPayments = () => {
-  //  setInterval(() => {
+  setInterval(() => {
     const paymentIban = userLoan.accountPay;
 
      
       axios.get(
         `https://projectbankingenia.herokuapp.com/api/collect-loan?iban=${paymentIban}&cantidad=${userLoan.quantity}`
       );
-   // }, 10000);
+  }, 10000);
   };
 
   const getIncomeAccount = () => {
@@ -179,7 +175,6 @@ console.log(loan)
                   <button className="add-loan-btn" onClick={submitLoan}>
                     Acepto el préstamo
                   </button>
-                  <button onClick={()=>startLoanPayments()}>peticion</button>
                 </Container>
               </Paper>
             </Grid>

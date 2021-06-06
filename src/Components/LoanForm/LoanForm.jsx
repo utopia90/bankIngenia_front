@@ -34,10 +34,10 @@ const LoanForm = (props) => {
   const [duration, setDuration] = useState([]);
 
   const handleChangeDuracion = (event) => {
-    setDuration(event.target.value);
+   setDuration(event.target.value);
   };
   const handleChangeRecive = (event) => {
-    setAccountReceive(event.target.value);
+   setAccountReceive(event.target.value);
   };
   const handleChangePayment = (event) => {
     setAccountPay(event.target.value);

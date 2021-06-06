@@ -24,9 +24,6 @@ const LoanForm = (props) => {
     isSubmitting,
     handleChange,
     handleBlur,
-    handleChangeDuracion,
-    handleChangeRecive,
-    handleChangePayment,
     handleSubmit,
     classes,
   } = props;
@@ -35,7 +32,6 @@ const LoanForm = (props) => {
   const [accountReceive, setAccountReceive] = useState([]);
   const [accountPay, setAccountPay] = useState([]);
   const [duration, setDuration] = useState([]);
-
 
   const monthsData = [
     {
@@ -89,7 +85,6 @@ const LoanForm = (props) => {
         variant="outlined"
         placeholder="Indique la cantidad del préstamo"
         value={values.quantity}
-        onChange={handleChange}
         onBlur={handleBlur}
         className={errors.quantity && touched.quantity && "error"}
       ></TextField>
@@ -102,7 +97,6 @@ const LoanForm = (props) => {
         select
         label="duración"
         value={duration}
-        onChange={handleChangeDuracion}
         SelectProps={{
           native: true,
         }}
@@ -119,7 +113,6 @@ const LoanForm = (props) => {
         id="accountReceiveLoan"
         select
         label=""
-        onChange={handleChangeRecive}
         value={accountReceive}
         SelectProps={{
           native: true,
@@ -138,7 +131,6 @@ const LoanForm = (props) => {
         id="accountPayment"
         select
         label=""
-        onChange={handleChangePayment}
         value={accountPay}
         SelectProps={{
           native: true,

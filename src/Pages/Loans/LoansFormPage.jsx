@@ -50,15 +50,6 @@ const LoansFormPage = () => {
   }));
 
   const classes = useStyles();
-  const handleChangeDuracion = (event) => {
-    setDuration(event.target.value);
-   };
-   const handleChangeRecive = (event) => {
-    setAccountReceive(event.target.value);
-   };
-   const handleChangePayment = (event) => {
-     setAccountPay(event.target.value);
-   };
   return (
     <Formik
       initialValues={{
@@ -92,9 +83,6 @@ const LoansFormPage = () => {
           touched,
           errors,
           isSubmitting,
-          handleChangeDuracion,
-          handleChangeRecive,
-          handleChangePayment,
           handleChange,
           handleBlur,
           handleSubmit,
@@ -113,9 +101,6 @@ const LoansFormPage = () => {
                 values={values}
                 touched={touched}
                 errors={errors}
-                handleChangeDuracion={handleChangeDuracion}
-                handleChangeRecive={handleChangeRecive}
-                handleChangePayment={handleChangePayment}
                 isSubmitting={isSubmitting}
                 handleChange={handleChange}
                 handleBlur={handleBlur}

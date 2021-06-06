@@ -61,8 +61,7 @@ const LoansFormPage = () => {
         interest: "FIJO",
       }}
       onSubmit={(values, { setSubmitting }) => {
-        console.log("antes del if")
-        if (values) {
+        if (values&&values.accountPay!==""&&values.accountReceive!==""&&values.quantity!==0&&values.duration!==0) {
           console.log(values);
           let loan = {
             quantity: 200.0,

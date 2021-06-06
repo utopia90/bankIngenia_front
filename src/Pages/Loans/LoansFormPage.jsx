@@ -60,10 +60,13 @@ const LoansFormPage = () => {
         interest: "FIJO",
       }}
       onSubmit={(values, { setSubmitting }) => {
+        console.log("---------------")
+        console.log(values);
+        console.log("---------------")
         if (values&&values.accountPay!==""&&values.accountReceive!==""&&values.quantity!==0&&values.duration!==0) {
           console.log(values);
           let loan = {
-            quantity: 200.0,
+            quantity: values.quantity,
             duration: values.duration,
             accountReceive: values.accountReceiveLoan,
             accountPay: values.accountPayment,
@@ -83,7 +86,6 @@ const LoansFormPage = () => {
           touched,
           errors,
           isSubmitting,
-          handleChange,
           handleBlur,
           handleSubmit,
         } = props;
@@ -102,7 +104,6 @@ const LoansFormPage = () => {
                 touched={touched}
                 errors={errors}
                 isSubmitting={isSubmitting}
-                handleChange={handleChange}
                 handleBlur={handleBlur}
                 handleSubmit={handleSubmit}
                 classes={classes}

@@ -24,6 +24,9 @@ const LoanForm = (props) => {
     isSubmitting,
     handleChange,
     handleBlur,
+    handleChangeDuracion,
+    handleChangeRecive,
+    handleChangePayment,
     handleSubmit,
     classes,
   } = props;
@@ -33,15 +36,7 @@ const LoanForm = (props) => {
   const [accountPay, setAccountPay] = useState([]);
   const [duration, setDuration] = useState([]);
 
-  const handleChangeDuracion = (event) => {
-   setDuration(event.target.value);
-  };
-  const handleChangeRecive = (event) => {
-   setAccountReceive(event.target.value);
-  };
-  const handleChangePayment = (event) => {
-    setAccountPay(event.target.value);
-  };
+
   const monthsData = [
     {
       value: "",

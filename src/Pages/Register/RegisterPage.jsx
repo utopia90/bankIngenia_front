@@ -50,7 +50,7 @@ const RegisterPage = () => {
 
   const Registro = (user) => {
     axios
-      .post(`https://projectbankingenia.herokuapp.com/auth/registro`, user)
+      .post(`http://localhost:8080/auth/registro`, user)
       .then((res) => {
         history.push("/login");
       });

@@ -20,7 +20,7 @@ const LoansPage = () => {
 
     axios
       .get(
-        `https://projectbankingenia.herokuapp.com/api/prestam-user-id/${idUser}`
+        `http://localhost:8080/api/prestam-user-id/${idUser}`
       )
       .then((res) => {
         const prestams = res.data;
@@ -39,6 +39,7 @@ const LoansPage = () => {
   });
   const classes = useStyles();
   let history = useHistory();
+  
 
   return (
     <div>

@@ -22,9 +22,7 @@ const LoanForm = (props) => {
     touched,
     errors,
     isSubmitting,
-    handleChangeDuracion,
-    handleChangeRecive,
-    handleChangePayment,
+    handleChange,
     handleBlur,
     handleSubmit,
     classes,
@@ -34,7 +32,6 @@ const LoanForm = (props) => {
   const [accountReceive, setAccountReceive] = useState([]);
   const [accountPay, setAccountPay] = useState([]);
   const [duration, setDuration] = useState([]);
-
 
   const monthsData = [
     {
@@ -63,7 +60,7 @@ const LoanForm = (props) => {
     let idUser = localStorage.getItem("userId");
 
     axios
-      .get(`https://projectbankingenia.herokuapp.com/api/user/${idUser}`)
+      .get(`http://localhost:8080/api/user/${idUser}`)
       .then((res) => {
         const accoun = res.data.accounts;
         setAccounts(accoun);
@@ -88,6 +85,7 @@ const LoanForm = (props) => {
         variant="outlined"
         placeholder="Indique la cantidad del préstamo"
         value={values.quantity}
+        onChange={handleChange}
         onBlur={handleBlur}
         className={errors.quantity && touched.quantity && "error"}
       ></TextField>
@@ -99,8 +97,8 @@ const LoanForm = (props) => {
         id="duration"
         select
         label="duración"
-        value={values.duration}
-        onChange={handleChangeDuracion}
+        value={duration}
+        onChange={handleChange}
         SelectProps={{
           native: true,
         }}
@@ -117,8 +115,8 @@ const LoanForm = (props) => {
         id="accountReceiveLoan"
         select
         label=""
-        onChange={handleChangeRecive}
-        value={values.accountReceive}
+        onChange={handleChange}
+        value={accountReceive}
         SelectProps={{
           native: true,
         }}
@@ -136,8 +134,8 @@ const LoanForm = (props) => {
         id="accountPayment"
         select
         label=""
-        onChange={handleChangePayment}
-        value={values.accountPayment}
+        onChange={handleChange}
+        value={accountPay}
         SelectProps={{
           native: true,
         }}
@@ -161,7 +159,7 @@ const LoanForm = (props) => {
         disabled={isSubmitting}
         className={classes.submit}
       >
-        Crear Prestamo
+        Ver mis cuotas
       </Button>
       <Grid container></Grid>
     </form>

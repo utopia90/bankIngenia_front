@@ -50,6 +50,7 @@ const LoansFormPage = () => {
   }));
 
   const classes = useStyles();
+
   return (
     <Formik
       initialValues={{
@@ -60,9 +61,6 @@ const LoansFormPage = () => {
         interest: "FIJO",
       }}
       onSubmit={(values, { setSubmitting }) => {
-        console.log("---------------")
-        console.log(values);
-        console.log("---------------")
         if (values&&values.accountPay!==""&&values.accountReceive!==""&&values.quantity!==0&&values.duration!==0) {
           console.log(values);
           let loan = {
@@ -86,9 +84,7 @@ const LoansFormPage = () => {
           touched,
           errors,
           isSubmitting,
-          handleChangeDuracion,
-    handleChangeRecive,
-    handleChangePayment,
+          handleChange,
           handleBlur,
           handleSubmit,
         } = props;
@@ -107,10 +103,8 @@ const LoansFormPage = () => {
                 touched={touched}
                 errors={errors}
                 isSubmitting={isSubmitting}
+                handleChange={handleChange}
                 handleBlur={handleBlur}
-                handleChangeDuracion={handleChangeDuracion}
-                handleChangeRecive={handleChangeRecive}
-                handleChangePayment={handleChangePayment}
                 handleSubmit={handleSubmit}
                 classes={classes}
               />

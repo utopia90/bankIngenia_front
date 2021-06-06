@@ -52,7 +52,7 @@ const LoginPage = () => {
 
   const Login = (user) => {
     axios
-      .post(`https://projectbankingenia.herokuapp.com/auth/login`, user)
+      .post(`http://localhost:8080/auth/login`, user)
       .then((res) => {
         const token = res.data.jwt;
         sessionStorage.setItem("logged", token);
@@ -64,7 +64,7 @@ const LoginPage = () => {
   const traerUsuarioporNombreUsu = (nomUsu) => {
     console.log(nomUsu);
     axios
-      .get("https://projectbankingenia.herokuapp.com/api/user-mail/" + nomUsu)
+      .get("http://localhost:8080/api/user-mail/" + nomUsu)
       .then((res) => {
         const usu = res.data;
         localStorage.setItem("userName", usu.name + " " + usu.surname);

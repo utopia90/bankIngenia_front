@@ -20,7 +20,7 @@ const LoansPage = () => {
 
     axios
       .get(
-        `http://localhost:8080/api/prestam-user-id/${idUser}`
+        `https://projectbankingenia.herokuapp.com/api/prestam-user-id/${idUser}`
       )
       .then((res) => {
         const prestams = res.data;

@@ -25,7 +25,7 @@ export default function MovementsPage() {
   const getMovements = () => {
     axios
       .get(
-        `http://localhost:8080/api/movement/userId/${idUser}`
+        `https://projectbankingenia.herokuapp.com/api/movement/userId/${idUser}`
       )
       .then((res) => {
         const movens = res.data;

@@ -37,7 +37,7 @@ const AccountPage = () => {
   const getAcccountsByUserID = () => {
     axios
       .get(
-        `http://localhost:8080/api/user/${idUser}`
+        `https://projectbankingenia.herokuapp.com/api/user/${idUser}`
       )
       .then((res) => {
         const accoun = res.data.accounts;

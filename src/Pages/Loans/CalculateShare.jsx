@@ -69,7 +69,7 @@ const CalculateShare = () => {
      
     };
 
-    axios.post("http://localhost:8080/api/prestam", loan);
+    axios.post("https://projectbankingenia.herokuapp.com/api/prestam", loan);
     startLoanPayments();
 
     window.alert("El préstamo se ha procesado correctamente");
@@ -81,7 +81,7 @@ const CalculateShare = () => {
 
      
       axios.get(
-        `http://localhost:8080/api/collect-loan?iban=${paymentIban}&cantidad=${userLoan.quantity}`
+        `https://projectbankingenia.herokuapp.com/api/collect-loan?iban=${paymentIban}&cantidad=${userLoan.quantity}`
       );
   }, 10000);
   };
@@ -90,7 +90,7 @@ const CalculateShare = () => {
     const incomeIban = userLoan.accountReceive;
     axios
       .get(
-        `http://localhost:8080/api/accountbyiban/${incomeIban}`
+        `https://projectbankingenia.herokuapp.com/api/accountbyiban/${incomeIban}`
       )
       .then((res) => {
         const incomeAccount = res.data;
@@ -102,7 +102,7 @@ const CalculateShare = () => {
     const paymentIban = userLoan.accountPay;
     axios
       .get(
-        `http://localhost:8080/api/accountbyiban/${paymentIban}`
+        `https://projectbankingenia.herokuapp.com/api/accountbyiban/${paymentIban}`
       )
       .then((res) => {
         const paymentAccount = res.data;

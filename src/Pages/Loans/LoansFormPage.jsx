@@ -86,6 +86,9 @@ const LoansFormPage = () => {
           touched,
           errors,
           isSubmitting,
+          handleChangeDuracion,
+    handleChangeRecive,
+    handleChangePayment,
           handleBlur,
           handleSubmit,
         } = props;
@@ -105,6 +108,9 @@ const LoansFormPage = () => {
                 errors={errors}
                 isSubmitting={isSubmitting}
                 handleBlur={handleBlur}
+                handleChangeDuracion={handleChangeDuracion}
+                handleChangeRecive={handleChangeRecive}
+                handleChangePayment={handleChangePayment}
                 handleSubmit={handleSubmit}
                 classes={classes}
               />

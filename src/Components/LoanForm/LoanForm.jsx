@@ -99,7 +99,7 @@ const LoanForm = (props) => {
         }}
         helperText="Por favor, seleccione la duración que desea que tenga el préstamo"
       >
-        <option value="">{values.duration}</option>
+        <option value="">{values.duration != 0 ? values.duration : null}</option>
 
         {monthsData.map((option) => (
           <option key={option.value} value={option.value}>

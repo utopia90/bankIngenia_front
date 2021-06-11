@@ -37,6 +37,8 @@ const CalculateShare = () => {
   const [share, setShare] = useState([]);
   const [accountIncome, setAccountIncome] = useState([]);
   const [accountPayment, setAccountPayment] = useState([]);
+  const [counter, setCounter] = useState(0);
+
   const classes = useStyles();
 
   const userLoan = location.state.loan;
@@ -50,8 +52,6 @@ const CalculateShare = () => {
     let share = (quantity / duration).toFixed(2);
 
     setShare(share);
-
- 
   };
 
   const cancelLoan = () => {
@@ -66,7 +66,6 @@ const CalculateShare = () => {
       cantidad: userLoan.quantity,
       accountIncome: accountIncome,
       accountPayment: accountPayment,
-     
     };
 
     axios.post("https://projectbankingenia.herokuapp.com/api/prestam", loan);
@@ -76,14 +75,19 @@ const CalculateShare = () => {
   };
 
   const startLoanPayments = () => {
-  setInterval(() => {
-    const paymentIban = userLoan.accountPay;
+    // if (counter <= Number(userLoan.durationMonths)) {
+         setInterval(() => {
+        const paymentIban = userLoan.accountPay;
 
-     
-      axios.get(
-        `https://projectbankingenia.herokuapp.com/api/collect-loan?iban=${paymentIban}&cantidad=${userLoan.quantity}`
-      );
-  }, 10000);
+        console.log(paymentIban);
+
+        axios.get(
+          `https://projectbankingenia.herokuapp.com/api/collect-loan?iban=${paymentIban}&cantidad=${userLoan.quantity}`
+        );
+      }, 2000);
+      // setCounter((counter = counter + 1));
+
+    // }
   };
 
   const getIncomeAccount = () => {
@@ -119,7 +123,6 @@ const CalculateShare = () => {
     getIncomeAccount();
     getPaymentAccount();
   }, []);
-
 
   return (
     <div>
@@ -181,8 +184,6 @@ const CalculateShare = () => {
           </Grid>
         </Container>
       </div>
-
-      
     </div>
   );
 };

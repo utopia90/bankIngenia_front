@@ -32,10 +32,8 @@ const LoanForm = (props) => {
   const [accountReceive, setAccountReceive] = useState([]);
   const [accountPay, setAccountPay] = useState([]);
   const [duration, setDuration] = useState([]);
-  
 
   const monthsData = [
-    
     {
       value: 3,
       label: "3 meses",
@@ -68,8 +66,6 @@ const LoanForm = (props) => {
     getAcccountsByUserID();
   }, []);
 
-
-
   return (
     <form onSubmit={handleSubmit} className={classes.form}>
       <TextField
@@ -96,7 +92,6 @@ const LoanForm = (props) => {
       <TextField
         id="duration"
         select
-        label="duración"
         value={duration}
         onChange={handleChange}
         SelectProps={{
@@ -104,7 +99,7 @@ const LoanForm = (props) => {
         }}
         helperText="Por favor, seleccione la duración que desea que tenga el préstamo"
       >
-              <option value="">{values.duration}</option>
+        <option value="">{values.duration}</option>
 
         {monthsData.map((option) => (
           <option key={option.value} value={option.value}>
@@ -138,7 +133,6 @@ const LoanForm = (props) => {
         label=""
         onChange={handleChange}
         value={accountPay}
-
         SelectProps={{
           native: true,
         }}
